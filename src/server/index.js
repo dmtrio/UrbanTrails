@@ -14,16 +14,17 @@ server.route({
   handler: (request, reply) => reply('hello world'),
 })
 
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: (request, reply) => reply('Hello, world!'),
-})
 
-server.route({
-  method: 'GET',
-  path: '/{name}',
-  handler: (request, reply) => reply(`Hello, ${encodeURIComponent(request.params.name)}!`),
+server.register(require('inert'), (err) => {
+  if (err) {
+    throw err
+  }
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, reply) => reply.file('./src/client/index.html'),
+  })
 })
 
 // Start the server
