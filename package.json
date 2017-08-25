@@ -2,11 +2,11 @@
   "name": "UrbanTrails",
   "version": "1.0.0",
   "description": "An awesome app for cyclists",
-  "eslintIgnore": ["build.js"],
   "main": "index.js",
   "repository": "github.com/UrbanTrails/UrbanTrails",
   "author": "Legion",
   "license": "MIT",
+  "eslintIgnore": ["build.js"],
   "scripts": {
     "start": "yarn | npm run vue:dev | npm run dev:start",
     "vue:dev": "webpack -d --watch",
