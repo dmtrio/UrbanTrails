@@ -27,6 +27,12 @@ server.register(require('inert'), (err) => {
   })
 })
 
+server.route({
+  method: 'GET',
+  path: '/dist/build.js',
+  handler: (request, reply) => reply.file('./src/client/dist/build.js'),
+})
+
 // Start the server
 server.start((err) => {
   if (err) {
