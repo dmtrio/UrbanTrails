@@ -10,9 +10,10 @@
     "build.js"
   ],
   "scripts": {
-    "start": "yarn && npm run vue:dev & npm run dev:start",
-    "vue:dev": "webpack -d --watch",
-    "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
+    "prestart": "yarn",
+    "start": "npm run dev:start & npm run dev:vue",
+    "dev:vue": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
+    "dev:start": "webpack -d --watch",
     "test": "yarn lint && jest --coverage",
     "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
     "prepush": "yarn test",
@@ -43,6 +44,7 @@
     "eslint-plugin-react": "^7.1.0",
     "nodemon": "^1.11.0",
     "vue-loader": "^13.0.4",
-    "webpack": "^3.5.5"
+    "webpack": "^3.5.5",
+    "webpack-shell-plugin": "^0.5.0"
   }
 }
