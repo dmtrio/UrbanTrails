@@ -30,6 +30,14 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.css$/,
+        loaders: ['css-loader', 'style-loader']
+      },
+      {
+        test: /\.sass$/,
+        loaders: ['css-loader', 'style-loader', 'sass-loader']
       }
     ]
   },

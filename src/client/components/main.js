@@ -1,6 +1,7 @@
 /* eslint-disable*/
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Map from './Map.vue'
 
 //main component
 import App from './App.vue'
@@ -22,6 +23,7 @@ const store = new Vuex.Store({
 
 //register component to be used globally including inside other components
 Vue.component('Home', Home)
+Vue.component('Map', Map)
 
 new Vue({
   // Passing down Vuex store to all child components
