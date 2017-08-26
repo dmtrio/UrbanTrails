@@ -19,6 +19,7 @@ const store = new Vuex.Store({
     }
   }
 })
+
 //register component to be used globally including inside other components
 Vue.component('Home', Home)
 
