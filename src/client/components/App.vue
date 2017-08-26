@@ -3,6 +3,7 @@
     <h1>HI</h1>
     <Home></Home>
     <p>{{ status }}</p>
+    <p>{{ count }}</p>
     <button @click="changeStatus">Change Status</button>
   </div>
 </template>
@@ -13,6 +14,11 @@
       return {
         msg: 'data message',
         status: 'In Progress'
+      }
+    },
+    computed: {
+      count() {
+        return this.$store.state.count
       }
     },
     methods: {
