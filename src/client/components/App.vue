@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>HI</h1>
+    <h1>HI222333</h1>
     <Home></Home>
     <p>{{ status }}</p>
     <p>{{ count }}</p>
