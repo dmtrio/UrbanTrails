@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>HI</h1>
+    <h1>Welcome</h1>
     <Home></Home>
-    <p>{{ status }}</p>
-    <p>{{ count }}</p>
-    <button @click="changeStatus">Change Status</button>
+    <!-- <p>{{ status }}</p> -->
+    <!-- <p>{{ count }}</p> -->
     <Map></Map>
+    <!-- <button @click="changeStatus">Change Status</button> -->
   </div>
 </template>
 
