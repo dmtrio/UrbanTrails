@@ -1,7 +1,7 @@
 /* eslint-disable*/
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as VueGoogleMaps from 'vue2-google-maps'
+import * as Vue2Leaflet from 'vue2-leaflet'
 
 //main component
 import App from './App.vue'
@@ -22,19 +22,12 @@ const store = new Vuex.Store({
   }
 })
 
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: 'AIzaSyBvWE_sIwKbWkiuJQOf8gSk9qzpO96fhfY',
-    libraries: 'places', // This is required if you use the Autocomplete plugin
-    // OR: libraries: 'places,drawing'
-    // OR: libraries: 'places,drawing,visualization'
-    // (as you require)
-  }
-})
-
 //register component to be used globally including inside other components
 Vue.component('Home', Home)
 Vue.component('Map', Map)
+Vue.component('v-map', Vue2Leaflet.Map);
+Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
+Vue.component('v-marker', Vue2Leaflet.Marker);
 
 new Vue({
   // Passing down Vuex store to all child components

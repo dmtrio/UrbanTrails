@@ -1,42 +1,25 @@
 <template>
-  <gmap-map
-    :center="center"
-    :zoom="7"
-    style="width: 500px; height: 300px"
-  >
-    <gmap-marker
-      :key="index"
-      v-for="(m, index) in markers"
-      :position="m.position"
-      :clickable="true"
-      :draggable="true"
-      @click="center=m.position"
-    ></gmap-marker>
-  </gmap-map>
+<div id="mapsi" style="height: 300px">
+  <!-- <h1 class="h1">Hello {{ zoom }}</h1> -->
+  <v-map :zoom="zoom" :center="center">
+      <v-tilelayer :url="url" :attribution="attribution"></v-tilelayer>
+      <v-marker :lat-lng="marker"></v-marker>
+  </v-map>
+</div>
 </template>
+
 <script>
-  /////////////////////////////////////////
-  // New in 0.4.0
-  import * as VueGoogleMaps from 'vue2-google-maps';
-  import Vue from 'vue';
-
-  Vue.use(VueGoogleMaps, {
-    load: {
-      key: 'AIzaSyDoNvS8Yfja-ej4IkUbluwPhdA1caXpnlA',
-      libraries: 'places', //// If you need to use place input
-    }
-  });
-
-  export default {
-    data () {
-      return {
-        center: {lat: 10.0, lng: 10.0},
-        markers: [{
-          position: {lat: 10.0, lng: 10.0}
-        }, {
-          position: {lat: 11.0, lng: 11.0}
-        }]
-      }
-    }
-  }
+ export default {
+   data() {
+     return {
+       zoom: 13,
+       center: [47.413220, -1.219482],
+       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+       marker: L.latLng(47.413220, -1.219482),
+     }
+   }
+ }
 </script>
+<style>
+<style>
