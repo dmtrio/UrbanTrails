@@ -1,95 +1,42 @@
 <template>
-  <svg width="500" height="300"></svg>
+  <gmap-map
+    :center="center"
+    :zoom="7"
+    style="width: 500px; height: 300px"
+  >
+    <gmap-marker
+      :key="index"
+      v-for="(m, index) in markers"
+      :position="m.position"
+      :clickable="true"
+      :draggable="true"
+      @click="center=m.position"
+    ></gmap-marker>
+  </gmap-map>
 </template>
-
 <script>
-const d3 = require('d3');
-export default {
-  mounted: function() {
-    var svg = d3.select(this.$el);
-    var width = +svg.attr('width');
-    var height = +svg.attr('height');
-    var data = [
-      {name: 'one', val: 100},
-      {name: 'two', val: 150},
-      {name: 'three', val: 200}
-    ];
-    var x = d3.scaleBand()
-      .rangeRound([0, width]).padding(0.1)
-      .domain(data.map(d => d.name));
-    var y = d3.scaleLinear()
-      .rangeRound([height * 0.3 - 20, 0])
-      .domain([0, d3.max(data, d => d.val)])
-    function addRectsWithName(elem, name) {
-      elem
-        .append('text')
-        .text(name)
-        .attr('x', width / 2)
-        .attr('y', 5)
-        .attr('text-anchor', 'middle');
-      elem.selectAll('rect')
-        .data(data)
-        .enter()
-          .append('rect')
-          // We add attr here
-          .attr('x', d => x(d.name))
-          .attr('class', d => d.name)
-          .attr('y', d =>  y(d.val))
-          .attr('width', x.bandwidth())
-          .attr('height', d => y.range()[0] - y(d.val))
+  /////////////////////////////////////////
+  // New in 0.4.0
+  import * as VueGoogleMaps from 'vue2-google-maps';
+  import Vue from 'vue';
+
+  Vue.use(VueGoogleMaps, {
+    load: {
+      key: 'AIzaSyDoNvS8Yfja-ej4IkUbluwPhdA1caXpnlA',
+      libraries: 'places', //// If you need to use place input
     }
-    svg
-      .append('g')
-      .attr('id', 'bars-style')
-      .attr('transform', `translate(0, 20)`)
-      .call(addRectsWithName, 'Basic styles');
-    // vue loader will substitute data attribute for styles
-    var STYLE_MODULE_NAME = this.$el.attributes[0].name;
-    svg
-      .append('g')
-      .attr('transform', `translate(0, ${height * 0.3 + 20})`)
-      .call(addRectsWithName, 'Scoped styles')
-      .selectAll('rect')
-      .attr(STYLE_MODULE_NAME, '')
-    svg
-      .append('g')
-      .attr('id', 'bars-style-sass')
-      .attr('transform', `translate(0, ${height * 0.6 + 20})`)
-      .call(addRectsWithName, 'Sass styles');
+  });
+
+  export default {
+    data () {
+      return {
+        center: {lat: 10.0, lng: 10.0},
+        markers: [{
+          position: {lat: 10.0, lng: 10.0}
+        }, {
+          position: {lat: 11.0, lng: 11.0}
+        }]
+      }
+    }
   }
-}
 </script>
-
-<style>
-#bars-style .one {
-  fill: #ffc300
-}
-#bars-style .two {
-  fill: #c70039
-}
-#bars-style .three {
-  fill: #571845
-}
-</style>
-
-<style scoped>
-.one {
-  fill: #154890
-}
-.two {
-  fill: #e1d4c0
-}
-.three {
-  fill: #ff6600
-}
-</style>
-
-<style lang="sass">
-#bars-style-sass
-  .one
-    fill: #AA5C39
-  .two
-    fill: #5B9632
-  .three
-    fill: #2A4F6E
-</style>
