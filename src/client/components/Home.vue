@@ -4,7 +4,6 @@
     <p>other {{ countTwo }}</p>
   </div>
 </template>
-
 <script>
   export default {
     computed: {
