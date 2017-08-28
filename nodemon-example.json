@@ -1,0 +1,8 @@
+//replace 'replaceWithYourName' for a custom subdomain at replaceWithYourName.localtunnel.me to test on your phone
+// rename file nodemon.json
+{
+  "events": {
+    "start": "lt --port 8000 --subdomain replaceWithYourName",
+    "restart": "lt --port 8000 --subdomain replaceWithYourName"
+  }
+}

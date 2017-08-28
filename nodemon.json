@@ -1,6 +1,6 @@
 {
   "events": {
-    "start": "lt --port 8000 --subdomain replaceWithYourName",
-    "restart": "lt --port 8000 --subdomain replaceWithYourName"
+    "start": "lt --port 8000 --subdomain demetrio",
+    "restart": "lt --port 8000 --subdomain demetrio"
   }
 }
