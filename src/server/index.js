@@ -1,20 +1,16 @@
 const Hapi = require('hapi')
+const path = require('path')
 
 // Create a server with a host and port
 const server = new Hapi.Server()
+
 server.connection({
   host: 'localhost',
   port: 8000,
 })
 
+
 // Add the route
-server.route({
-  method: 'GET',
-  path: '/hello',
-  handler: (request, reply) => reply('hello world'),
-})
-
-
 server.register(require('inert'), (err) => {
   if (err) {
     throw err
@@ -22,15 +18,19 @@ server.register(require('inert'), (err) => {
 
   server.route({
     method: 'GET',
-    path: '/',
-    handler: (request, reply) => reply.file('./src/client/index.html'),
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: path.join(__dirname, '../client/')
+      }
+    }
   })
 })
 
 server.route({
   method: 'GET',
-  path: '/dist/build.js',
-  handler: (request, reply) => reply.file('./src/client/dist/build.js'),
+  path: '/hello',
+  handler: (request, reply) => reply('hello world'),
 })
 
 // Start the server

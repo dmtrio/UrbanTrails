@@ -8,7 +8,7 @@ import App from './App.vue'
 //other components
 import Home from './Home.vue'
 import Map from './Map.vue'
-
+import leafletMap from './leafletMap.vue'
 //VUEX STORE FOR ALL COMPONENTS
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -25,6 +25,7 @@ const store = new Vuex.Store({
 //register component to be used globally including inside other components
 Vue.component('Home', Home)
 Vue.component('Map', Map)
+Vue.component('leafletMap', leafletMap)
 Vue.component('v-map', Vue2Leaflet.Map);
 Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
 Vue.component('v-marker', Vue2Leaflet.Marker);
