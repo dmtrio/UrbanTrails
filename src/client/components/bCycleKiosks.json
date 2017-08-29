@@ -1,0 +1,714 @@
+{
+  "meta" : {
+    "view" : {
+      "id" : "qd73-bsdg",
+      "name" : "Austin B-Cycle Kiosk Locations",
+      "attribution" : "City of Austin Transportation Department + Austin B-Cycle",
+      "averageRating" : 0,
+      "createdAt" : 1485196256,
+      "description" : "This dataset contains information about the location of the Austin B-Cycle bicycle rental kiosks.\r\n\r\nYou may also be interested in Austin B-Cycle trip data, available here:https://data.austintexas.gov/dataset/Austin-B-Cycle-Trip-Data/tyfh-5r8s/data\r\n\r\n\r\nMore information about Austin B-Cycle is available here:\r\nhttp://austinbcycle.com/",
+      "displayType" : "table",
+      "downloadCount" : 3300,
+      "hideFromCatalog" : false,
+      "hideFromDataJson" : false,
+      "indexUpdatedAt" : 1502822042,
+      "licenseId" : "PUBLIC_DOMAIN",
+      "newBackend" : false,
+      "numberOfComments" : 0,
+      "oid" : 26165457,
+      "provenance" : "official",
+      "publicationAppendEnabled" : false,
+      "publicationDate" : 1497206623,
+      "publicationGroup" : 14005681,
+      "publicationStage" : "published",
+      "rowIdentifierColumnId" : 306355014,
+      "rowsUpdatedAt" : 1502822037,
+      "rowsUpdatedBy" : "8t3r-wq64",
+      "tableId" : 14261036,
+      "totalTimesRated" : 0,
+      "viewCount" : 73,
+      "viewLastModified" : 1497206623,
+      "viewType" : "tabular",
+      "columns" : [ {
+        "id" : -1,
+        "name" : "sid",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":sid",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : -1,
+        "name" : "id",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":id",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : -1,
+        "name" : "position",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":position",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : -1,
+        "name" : "created_at",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":created_at",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : -1,
+        "name" : "created_meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":created_meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : -1,
+        "name" : "updated_at",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":updated_at",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : -1,
+        "name" : "updated_meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":updated_meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : -1,
+        "name" : "meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { },
+        "flags" : [ "hidden" ]
+      }, {
+        "id" : 306355014,
+        "name" : "kiosk_id",
+        "dataTypeName" : "text",
+        "fieldName" : "kiosk_id",
+        "position" : 1,
+        "renderTypeName" : "text",
+        "tableColumnId" : 42870360,
+        "width" : 196,
+        "cachedContents" : {
+          "largest" : "3687",
+          "non_null" : 72,
+          "null" : 0,
+          "top" : [ {
+            "item" : "2566",
+            "count" : 20
+          }, {
+            "item" : "2542",
+            "count" : 19
+          }, {
+            "item" : "2576",
+            "count" : 18
+          }, {
+            "item" : "2707",
+            "count" : 17
+          }, {
+            "item" : "2571",
+            "count" : 16
+          }, {
+            "item" : "1004",
+            "count" : 15
+          }, {
+            "item" : "2500",
+            "count" : 14
+          }, {
+            "item" : "3455",
+            "count" : 13
+          }, {
+            "item" : "2550",
+            "count" : 12
+          }, {
+            "item" : "2575",
+            "count" : 11
+          }, {
+            "item" : "2562",
+            "count" : 10
+          }, {
+            "item" : "2570",
+            "count" : 9
+          }, {
+            "item" : "3513",
+            "count" : 8
+          }, {
+            "item" : "2504",
+            "count" : 7
+          }, {
+            "item" : "2503",
+            "count" : 6
+          }, {
+            "item" : "2541",
+            "count" : 5
+          }, {
+            "item" : "2561",
+            "count" : 4
+          }, {
+            "item" : "1005",
+            "count" : 3
+          }, {
+            "item" : "2712",
+            "count" : 2
+          }, {
+            "item" : "2565",
+            "count" : 1
+          } ],
+          "smallest" : "1001"
+        },
+        "format" : { }
+      }, {
+        "id" : 306355015,
+        "name" : "kiosk_name",
+        "dataTypeName" : "text",
+        "fieldName" : "kiosk_name",
+        "position" : 2,
+        "renderTypeName" : "text",
+        "tableColumnId" : 42870361,
+        "width" : 220,
+        "cachedContents" : {
+          "largest" : "Zilker Park West",
+          "non_null" : 72,
+          "null" : 0,
+          "top" : [ {
+            "item" : "Pfluger Bridge @ W 2nd Street",
+            "count" : 20
+          }, {
+            "item" : "Plaza Saltillo",
+            "count" : 19
+          }, {
+            "item" : "Rainey @ River St",
+            "count" : 18
+          }, {
+            "item" : "Rainey St @ Cummings",
+            "count" : 17
+          }, {
+            "item" : "Red River & 8th Street",
+            "count" : 16
+          }, {
+            "item" : "Red River & LBJ Library",
+            "count" : 15
+          }, {
+            "item" : "Republic Square",
+            "count" : 14
+          }, {
+            "item" : "Republic Square @ Federal Courthouse Plaza",
+            "count" : 13
+          }, {
+            "item" : "Republic Square @ Guadalupe & 4th St.",
+            "count" : 12
+          }, {
+            "item" : "Riverside @ S. Lamar",
+            "count" : 11
+          }, {
+            "item" : "San Jacinto & 8th Street",
+            "count" : 10
+          }, {
+            "item" : "South Congress & Academy",
+            "count" : 9
+          }, {
+            "item" : "South Congress & Barton Springs at the Austin American-Statesman",
+            "count" : 8
+          }, {
+            "item" : "South Congress & Elizabeth",
+            "count" : 7
+          }, {
+            "item" : "South Congress & James",
+            "count" : 6
+          }, {
+            "item" : "State Capitol @ 14th & Colorado",
+            "count" : 5
+          }, {
+            "item" : "State Capitol Visitors Garage @ San Jacinto & 12th",
+            "count" : 4
+          }, {
+            "item" : "State Parking Garage @ Brazos & 18th",
+            "count" : 3
+          }, {
+            "item" : "Toomey Rd @ South Lamar",
+            "count" : 2
+          }, {
+            "item" : "Trinity & 6th Street",
+            "count" : 1
+          } ],
+          "smallest" : "11th & San Jacinto"
+        },
+        "format" : { }
+      }, {
+        "id" : 306355016,
+        "name" : "kiosk_status",
+        "dataTypeName" : "text",
+        "fieldName" : "kiosk_status",
+        "position" : 3,
+        "renderTypeName" : "text",
+        "tableColumnId" : 42886566,
+        "width" : 100,
+        "cachedContents" : {
+          "largest" : "moved",
+          "non_null" : 72,
+          "null" : 0,
+          "top" : [ {
+            "item" : "active",
+            "count" : 20
+          }, {
+            "item" : "moved",
+            "count" : 19
+          }, {
+            "item" : "closed",
+            "count" : 18
+          }, {
+            "item" : "ACL only",
+            "count" : 17
+          } ],
+          "smallest" : "ACL only"
+        },
+        "format" : { }
+      }, {
+        "id" : 306355017,
+        "name" : "latitude",
+        "dataTypeName" : "number",
+        "fieldName" : "latitude",
+        "position" : 4,
+        "renderTypeName" : "number",
+        "tableColumnId" : 44673484,
+        "width" : 100,
+        "cachedContents" : {
+          "largest" : "30.28576",
+          "non_null" : 72,
+          "average" : "30.26682152777778",
+          "null" : 0,
+          "top" : [ {
+            "item" : "30.26717",
+            "count" : 20
+          }, {
+            "item" : "30.26217",
+            "count" : 19
+          }, {
+            "item" : "30.25802",
+            "count" : 18
+          }, {
+            "item" : "30.25579",
+            "count" : 17
+          }, {
+            "item" : "30.26854",
+            "count" : 16
+          }, {
+            "item" : "30.2848",
+            "count" : 15
+          }, {
+            "item" : "30.26751",
+            "count" : 14
+          }, {
+            "item" : "30.26753",
+            "count" : 13
+          }, {
+            "item" : "30.26774",
+            "count" : 12
+          }, {
+            "item" : "30.26446",
+            "count" : 11
+          }, {
+            "item" : "30.26912",
+            "count" : 10
+          }, {
+            "item" : "30.25226",
+            "count" : 9
+          }, {
+            "item" : "30.25839",
+            "count" : 8
+          }, {
+            "item" : "30.24891",
+            "count" : 7
+          }, {
+            "item" : "30.25103",
+            "count" : 6
+          }, {
+            "item" : "30.27654",
+            "count" : 5
+          }, {
+            "item" : "30.27336",
+            "count" : 4
+          }, {
+            "item" : "30.27907",
+            "count" : 3
+          }, {
+            "item" : "30.26304",
+            "count" : 2
+          }, {
+            "item" : "30.26735",
+            "count" : 1
+          } ],
+          "smallest" : "30.24891",
+          "sum" : "2179.21115"
+        },
+        "format" : { }
+      }, {
+        "id" : 306355018,
+        "name" : "longitude",
+        "dataTypeName" : "number",
+        "fieldName" : "longitude",
+        "position" : 5,
+        "renderTypeName" : "number",
+        "tableColumnId" : 44673485,
+        "width" : 100,
+        "cachedContents" : {
+          "largest" : "-97.71002",
+          "non_null" : 72,
+          "average" : "-97.74293652777778",
+          "null" : 0,
+          "top" : [ {
+            "item" : "-97.75484",
+            "count" : 20
+          }, {
+            "item" : "-97.72743",
+            "count" : 19
+          }, {
+            "item" : "-97.7391",
+            "count" : 18
+          }, {
+            "item" : "-97.73982",
+            "count" : 17
+          }, {
+            "item" : "-97.73646",
+            "count" : 16
+          }, {
+            "item" : "-97.72756",
+            "count" : 15
+          }, {
+            "item" : "-97.74802",
+            "count" : 14
+          }, {
+            "item" : "-97.74805",
+            "count" : 13
+          }, {
+            "item" : "-97.74692",
+            "count" : 12
+          }, {
+            "item" : "-97.75665",
+            "count" : 11
+          }, {
+            "item" : "-97.73986",
+            "count" : 10
+          }, {
+            "item" : "-97.74854",
+            "count" : 9
+          }, {
+            "item" : "-97.74592",
+            "count" : 8
+          }, {
+            "item" : "-97.75019",
+            "count" : 7
+          }, {
+            "item" : "-97.74926",
+            "count" : 6
+          }, {
+            "item" : "-97.74155",
+            "count" : 5
+          }, {
+            "item" : "-97.73805",
+            "count" : 4
+          }, {
+            "item" : "-97.73715",
+            "count" : 3
+          }, {
+            "item" : "-97.75824",
+            "count" : 2
+          }, {
+            "item" : "-97.73933",
+            "count" : 1
+          } ],
+          "smallest" : "-97.7712",
+          "sum" : "-7037.49143"
+        },
+        "format" : { }
+      }, {
+        "id" : 306355019,
+        "name" : "location",
+        "dataTypeName" : "location",
+        "fieldName" : "location",
+        "position" : 6,
+        "renderTypeName" : "location",
+        "tableColumnId" : 42870362,
+        "width" : 196,
+        "cachedContents" : {
+          "largest" : {
+            "latitude" : "30.26406",
+            "longitude" : "-97.76385"
+          },
+          "non_null" : 72,
+          "null" : 0,
+          "top" : [ {
+            "item" : {
+              "latitude" : "30.26717",
+              "longitude" : "-97.75484"
+            },
+            "count" : 20
+          }, {
+            "item" : {
+              "latitude" : "30.26217",
+              "longitude" : "-97.72743"
+            },
+            "count" : 19
+          }, {
+            "item" : {
+              "latitude" : "30.25802",
+              "longitude" : "-97.7391"
+            },
+            "count" : 18
+          }, {
+            "item" : {
+              "latitude" : "30.25579",
+              "longitude" : "-97.73982"
+            },
+            "count" : 17
+          }, {
+            "item" : {
+              "latitude" : "30.26854",
+              "longitude" : "-97.73646"
+            },
+            "count" : 16
+          }, {
+            "item" : {
+              "latitude" : "30.2848",
+              "longitude" : "-97.72756"
+            },
+            "count" : 15
+          }, {
+            "item" : {
+              "latitude" : "30.26751",
+              "longitude" : "-97.74802"
+            },
+            "count" : 14
+          }, {
+            "item" : {
+              "latitude" : "30.26753",
+              "longitude" : "-97.74805"
+            },
+            "count" : 13
+          }, {
+            "item" : {
+              "latitude" : "30.26774",
+              "longitude" : "-97.74692"
+            },
+            "count" : 12
+          }, {
+            "item" : {
+              "latitude" : "30.26446",
+              "longitude" : "-97.75665"
+            },
+            "count" : 11
+          }, {
+            "item" : {
+              "latitude" : "30.26912",
+              "longitude" : "-97.73986"
+            },
+            "count" : 10
+          }, {
+            "item" : {
+              "latitude" : "30.25226",
+              "longitude" : "-97.74854"
+            },
+            "count" : 9
+          }, {
+            "item" : {
+              "latitude" : "30.25839",
+              "longitude" : "-97.74592"
+            },
+            "count" : 8
+          }, {
+            "item" : {
+              "latitude" : "30.24891",
+              "longitude" : "-97.75019"
+            },
+            "count" : 7
+          }, {
+            "item" : {
+              "latitude" : "30.25103",
+              "longitude" : "-97.74926"
+            },
+            "count" : 6
+          }, {
+            "item" : {
+              "latitude" : "30.27654",
+              "longitude" : "-97.74155"
+            },
+            "count" : 5
+          }, {
+            "item" : {
+              "latitude" : "30.27336",
+              "longitude" : "-97.73805"
+            },
+            "count" : 4
+          }, {
+            "item" : {
+              "latitude" : "30.27907",
+              "longitude" : "-97.73715"
+            },
+            "count" : 3
+          }, {
+            "item" : {
+              "latitude" : "30.26304",
+              "longitude" : "-97.75824"
+            },
+            "count" : 2
+          }, {
+            "item" : {
+              "latitude" : "30.26735",
+              "longitude" : "-97.73933"
+            },
+            "count" : 1
+          } ],
+          "smallest" : {
+            "latitude" : "30.27193",
+            "longitude" : "-97.73854"
+          }
+        },
+        "format" : { },
+        "subColumnTypes" : [ "human_address", "latitude", "longitude", "machine_address", "needs_recoding" ]
+      } ],
+      "grants" : [ {
+        "inherited" : false,
+        "type" : "viewer",
+        "flags" : [ "public" ]
+      } ],
+      "license" : {
+        "name" : "Public Domain"
+      },
+      "metadata" : {
+        "rdfSubject" : "0",
+        "custom_fields" : {
+          "Additional Information" : {
+            "Department" : "Austin Transportation",
+            "Frequency" : "As Needed"
+          }
+        },
+        "rowLabel" : "kiosk",
+        "availableDisplayTypes" : [ "table", "fatrow", "page" ],
+        "renderTypeConfig" : {
+          "visible" : {
+            "table" : true
+          }
+        },
+        "rowIdentifier" : 306355014
+      },
+      "owner" : {
+        "id" : "8t3r-wq64",
+        "displayName" : "Austin Transportation",
+        "profileImageUrlLarge" : "/api/users/8t3r-wq64/profile_images/LARGE",
+        "profileImageUrlMedium" : "/api/users/8t3r-wq64/profile_images/THUMB",
+        "profileImageUrlSmall" : "/api/users/8t3r-wq64/profile_images/TINY",
+        "roleName" : "editor_stories",
+        "screenName" : "Austin Transportation",
+        "rights" : [ "create_datasets", "view_domain", "create_pages", "view_goals", "view_dashboards", "create_story", "edit_story_title_desc", "create_story_copy", "delete_story", "manage_story_collaborators", "manage_story_visibility", "manage_story_public_version", "edit_story", "view_unpublished_story", "view_story", "view_stories_stats" ]
+      },
+      "query" : { },
+      "rights" : [ "read" ],
+      "tableAuthor" : {
+        "id" : "8t3r-wq64",
+        "displayName" : "Austin Transportation",
+        "profileImageUrlLarge" : "/api/users/8t3r-wq64/profile_images/LARGE",
+        "profileImageUrlMedium" : "/api/users/8t3r-wq64/profile_images/THUMB",
+        "profileImageUrlSmall" : "/api/users/8t3r-wq64/profile_images/TINY",
+        "roleName" : "editor_stories",
+        "screenName" : "Austin Transportation",
+        "rights" : [ "create_datasets", "view_domain", "create_pages", "view_goals", "view_dashboards", "create_story", "edit_story_title_desc", "create_story_copy", "delete_story", "manage_story_collaborators", "manage_story_visibility", "manage_story_public_version", "edit_story", "view_unpublished_story", "view_story", "view_stories_stats" ]
+      },
+      "tags" : [ "transportation", "bicycles", "mobility", "transit", "b-cycle", "bcycle" ],
+      "flags" : [ "default", "restorable", "restorePossibleForType" ]
+    }
+  },
+  "data" : [ [ 64, "4E22411C-478C-4258-B57A-026D060DA3E3", 64, 1489264049, "916180", 1502822036, "916180", null, "2537", "West & 6th St.", "active", "30.27041", "-97.75046", [ null, "30.27041", "-97.75046", null, false ] ]
+, [ 16, "5A22233D-F6DA-49E5-AAAF-49918F0FC73C", 16, 1489264049, "916180", 1502822036, "916180", null, "2572", "Barton Springs Pool", "active", "30.26452", "-97.7712", [ null, "30.26452", "-97.7712", null, false ] ]
+, [ 12, "4BFBE694-64B5-4298-AE01-7DB9705CE0E7", 12, 1489264049, "916180", 1502822036, "916180", null, "2545", "ACC - Rio Grande & 12th", "closed", "30.27595", "-97.74739", [ null, "30.27595", "-97.74739", null, false ] ]
+, [ 47, "0B3058DA-8053-4073-987B-C0E130361F07", 47, 1489264049, "916180", 1502822036, "916180", null, "1004", "Red River & LBJ Library", "closed", "30.2848", "-97.72756", [ null, "30.2848", "-97.72756", null, false ] ]
+, [ 38, "B06F03A6-C690-49F5-82B8-563CDC077B07", 38, 1489264049, "916180", 1502822036, "916180", null, "1008", "Nueces @ 3rd", "moved", "30.26694", "-97.74939", [ null, "30.26694", "-97.74939", null, false ] ]
+, [ 48, "5DE7A429-7BB6-4EE3-B787-15BE281B4CE2", 48, 1489264049, "916180", 1502822036, "916180", null, "2500", "Republic Square", "moved", "30.26751", "-97.74802", [ null, "30.26751", "-97.74802", null, false ] ]
+, [ 59, "EC08DD46-7486-4358-98D5-EA0F59D424DF", 59, 1489264049, "916180", 1502822036, "916180", null, "1005", "State Parking Garage @ Brazos & 18th", "closed", "30.27907", "-97.73715", [ null, "30.27907", "-97.73715", null, false ] ]
+, [ 56, "2BA5F651-5B93-42C9-9974-54045CF173E8", 56, 1489264049, "916180", 1502822036, "916180", null, "2503", "South Congress & James", "active", "30.25103", "-97.74926", [ null, "30.25103", "-97.74926", null, false ] ]
+, [ 62, "ACF104CE-71F8-4570-9C6D-D813535148CF", 62, 1489264049, "916180", 1502822036, "916180", null, "2548", "UT West Mall @ Guadalupe", "active", "30.28576", "-97.74181", [ null, "30.28576", "-97.74181", null, false ] ]
+, [ 58, "5ADF29FC-7FC8-4B70-BBC1-F5747686C977", 58, 1489264049, "916180", 1502822036, "916180", null, "2561", "State Capitol Visitors Garage @ San Jacinto & 12th", "active", "30.27336", "-97.73805", [ null, "30.27336", "-97.73805", null, false ] ]
+, [ 61, "F0FCAAFE-6765-43AF-955C-D99E4E0FBC1E", 61, 1489264049, "916180", 1502822036, "916180", null, "2565", "Trinity & 6th Street", "active", "30.26735", "-97.73933", [ null, "30.26735", "-97.73933", null, false ] ]
+, [ 42, "237E3DA5-B90E-46E6-A242-2249EDA0761F", 42, 1489264049, "916180", 1502822036, "916180", null, "2566", "Pfluger Bridge @ W 2nd Street", "active", "30.26717", "-97.75484", [ null, "30.26717", "-97.75484", null, false ] ]
+, [ 46, "0BF0BCD8-3825-4C97-935E-7F2F8E11ADFE", 46, 1489264049, "916180", 1502822036, "916180", null, "2571", "Red River & 8th Street", "active", "30.26854", "-97.73646", [ null, "30.26854", "-97.73646", null, false ] ]
+, [ 65, "2858409B-BF09-40E9-AEE2-78E1E40366A1", 65, 1489264049, "916180", 1502822036, "916180", null, "2574", "Zilker Park", "active", "30.2659", "-97.76822", [ null, "30.2659", "-97.76822", null, false ] ]
+, [ 44, "6755C371-155A-4B83-B5A3-8BB7E6F7B964", 44, 1489264049, "916180", 1502822036, "916180", null, "2576", "Rainey @ River St", "closed", "30.25802", "-97.7391", [ null, "30.25802", "-97.7391", null, false ] ]
+, [ 45, "889C667A-41BB-449C-8B76-5C654A2B5EAA", 45, 1489264049, "916180", 1502822036, "916180", null, "2707", "Rainey St @ Cummings", "active", "30.25579", "-97.73982", [ null, "30.25579", "-97.73982", null, false ] ]
+, [ 60, "DD254B3E-DCBC-44BA-AB78-9A47B9389971", 60, 1489264049, "916180", 1502822036, "916180", null, "2712", "Toomey Rd @ South Lamar", "closed", "30.26304", "-97.75824", [ null, "30.26304", "-97.75824", null, false ] ]
+, [ 55, "910808C6-D2B1-4E22-8CD7-59D3DAE16CB7", 55, 1489264049, "916180", 1502822036, "916180", null, "2504", "South Congress & Elizabeth", "active", "30.24891", "-97.75019", [ null, "30.24891", "-97.75019", null, false ] ]
+, [ 63, "43094C3F-7887-4CBA-8C14-76AD34D5492C", 63, 1489264049, "916180", 1502822036, "916180", null, "2536", "Waller & 6th St.", "closed", "30.26461", "-97.73049", [ null, "30.26461", "-97.73049", null, false ] ]
+, [ 43, "8F1B176A-BC56-4BAC-BA15-94B41D70C6CE", 43, 1489264049, "916180", 1502822036, "916180", null, "2542", "Plaza Saltillo", "active", "30.26217", "-97.72743", [ null, "30.26217", "-97.72743", null, false ] ]
+, [ 33, "9AD5422F-F85F-4B50-BF0C-5118CB07E491", 33, 1489264049, "916180", 1502822036, "916180", null, "3294", "Guadalupe & 6th", "active", "30.26911", "-97.7462", [ null, "30.26911", "-97.7462", null, false ] ]
+, [ 36, "56A8B9D9-145A-4015-A252-33808DB45301", 36, 1489264049, "916180", 1502822036, "916180", null, "3377", "MoPac Pedestrian Bridge @ Veterans Drive", "active", "30.27466", "-97.77028", [ null, "30.27466", "-97.77028", null, false ] ]
+, [ 54, "4FC178A0-AC67-40BF-8CA0-BA65CE2D8F89", 54, 1489264049, "916180", 1502822036, "916180", null, "3513", "South Congress & Barton Springs at the Austin American-Statesman", "active", "30.25839", "-97.74592", [ null, "30.25839", "-97.74592", null, false ] ]
+, [ 37, "B0121160-196B-4C10-BE5A-628CB80BD02B", 37, 1489264049, "916180", 1502822036, "916180", null, "3621", "Nueces & 3rd", "active", "30.26697", "-97.74929", [ null, "30.26697", "-97.74929", null, false ] ]
+, [ 70, "A2CE9453-09E7-4E7B-B8FF-F18CBEB4051E", 70, 1502264710, "916180", 1502822037, "916180", null, "3684", "Congress & Cesar Chavez", "active", "30.26332", "-97.74508", [ null, "30.26332", "-97.74508", null, false ] ]
+, [ 71, "25D69C5B-DEDC-4108-B27A-CC4175643548", 71, 1502264710, "916180", 1502822037, "916180", null, "3685", "Henderson & 9th", "active", "30.27217", "-97.75246", [ null, "30.27217", "-97.75246", null, false ] ]
+, [ 72, "E01904DF-6502-454E-9DEE-CC29A5B2910E", 72, 1502264711, "916180", 1502822037, "916180", null, "3686", "Sterzing at Barton Springs", "active", "30.26406", "-97.76385", [ null, "30.26406", "-97.76385", null, false ] ]
+, [ 18, "4B9E9BA6-B487-4F65-ADD9-F31E6A780A7B", 18, 1489264049, "916180", 1502822036, "916180", null, "2538", "Bullock Museum @ Congress & MLK", "active", "30.28039", "-97.73809", [ null, "30.28039", "-97.73809", null, false ] ]
+, [ 2, "F04AF70C-0252-4360-A2E9-582AE66BDE0D", 2, 1489264049, "916180", 1502822036, "916180", null, "2540", "17th & Guadalupe", "active", "30.27974", "-97.74254", [ null, "30.27974", "-97.74254", null, false ] ]
+, [ 32, "1572788F-7DB1-4649-8AE6-7ABDF5FFA8FD", 32, 1489264049, "916180", 1502822036, "916180", null, "2547", "Guadalupe & 21st", "moved", "30.28395", "-97.74198", [ null, "30.28395", "-97.74198", null, false ] ]
+, [ 50, "680B744C-E746-4E37-8FBF-DA868320AEFF", 50, 1489264049, "916180", 1502822036, "916180", null, "2550", "Republic Square @ Guadalupe & 4th St.", "moved", "30.26774", "-97.74692", [ null, "30.26774", "-97.74692", null, false ] ]
+, [ 52, "FE2D3256-244A-48FC-85BA-621612D66589", 52, 1489264049, "916180", 1502822036, "916180", null, "2562", "San Jacinto & 8th Street", "active", "30.26912", "-97.73986", [ null, "30.26912", "-97.73986", null, false ] ]
+, [ 53, "771476B9-7474-4867-A3A5-3216682AE23B", 53, 1489264049, "916180", 1502822036, "916180", null, "2570", "South Congress & Academy", "active", "30.25226", "-97.74854", [ null, "30.25226", "-97.74854", null, false ] ]
+, [ 51, "04A3DD6C-A29D-4E71-A5A3-4008378F7F75", 51, 1489264049, "916180", 1502822036, "916180", null, "2575", "Riverside @ S. Lamar", "active", "30.26446", "-97.75665", [ null, "30.26446", "-97.75665", null, false ] ]
+, [ 34, "40EB54BF-3DD4-42AD-8349-2466896B49C0", 34, 1489264049, "916180", 1502822036, "916180", null, "1007", "Lavaca & 6th", "active", "30.26889", "-97.74525", [ null, "30.26889", "-97.74525", null, false ] ]
+, [ 29, "3FB907B8-4D97-4B3C-91E0-587BFADA01C4", 29, 1489264049, "916180", 1502822036, "916180", null, "2544", "East 6th & Pedernales St.", "active", "30.25895", "-97.71475", [ null, "30.25895", "-97.71475", null, false ] ]
+, [ 30, "33A1DC3E-5224-4AC5-ADCF-7854DFA8EEB1", 30, 1489264049, "916180", 1502822036, "916180", null, "2822", "East 6th at Robert Martinez", "active", "30.26032", "-97.71899", [ null, "30.26032", "-97.71899", null, false ] ]
+, [ 19, "41F7F244-A2F1-4150-BACC-D80CADD93EED", 19, 1489264049, "916180", 1502822036, "916180", null, "2823", "Capital Metro HQ - East 5th at Broadway", "active", "30.2563", "-97.71007", [ null, "30.2563", "-97.71007", null, false ] ]
+, [ 1, "0FB6C760-4E4A-41E4-957B-5CA9358F69FE", 1, 1489264049, "916180", 1502822036, "916180", null, "3291", "11th & San Jacinto", "active", "30.27193", "-97.73854", [ null, "30.27193", "-97.73854", null, false ] ]
+, [ 28, "5D250EA8-F752-45CE-BA0F-BF2BC35ECF0D", 28, 1489264049, "916180", 1502822036, "916180", null, "3292", "East 4th & Chicon", "active", "30.25987", "-97.72373", [ null, "30.25987", "-97.72373", null, false ] ]
+, [ 27, "3CA88057-35AF-4804-89EF-91082E4317B8", 27, 1489264049, "916180", 1502822036, "916180", null, "3293", "East 2nd & Pedernales", "active", "30.25542", "-97.71665", [ null, "30.25542", "-97.71665", null, false ] ]
+, [ 31, "1B0137DC-5BCE-40A6-BD53-F0E8C3CB7004", 31, 1489264049, "916180", 1502822036, "916180", null, "3381", "East 7th & Pleasant Valley", "closed", "30.26025", "-97.71002", [ null, "30.26025", "-97.71002", null, false ] ]
+, [ 17, "C65CE50A-2FB2-4AB7-9773-D3D2A47A26BE", 17, 1489264049, "916180", 1502822036, "916180", null, "3390", "Brazos & 6th", "active", "30.26754", "-97.74154", [ null, "30.26754", "-97.74154", null, false ] ]
+, [ 49, "D86689DB-E3DA-4C70-A787-8A7742550220", 49, 1489264049, "916180", 1502822036, "916180", null, "3455", "Republic Square @ Federal Courthouse Plaza", "active", "30.26753", "-97.74805", [ null, "30.26753", "-97.74805", null, false ] ]
+, [ 8, "FB01CC51-031F-4B76-8C84-F54B7F873D75", 8, 1489264049, "916180", 1502822036, "916180", null, "3619", "6th & Congress", "active", "30.26822", "-97.74285", [ null, "30.26822", "-97.74285", null, false ] ]
+, [ 67, "7CE67349-4594-4B2D-8AB8-CCA46528A8E2", 67, 1489444176, "916180", 1502822036, "916180", null, "3635", "13th & San Antonio", "active", "30.27616", "-97.74488", [ null, "30.27616", "-97.74488", null, false ] ]
+, [ 69, "30FB7669-A7AA-4443-B9B1-460369BAA738", 69, 1497623313, "916180", 1502822037, "916180", null, "3687", "Boardwalk West", "active", "30.25457", "-97.74258", [ null, "30.25457", "-97.74258", null, false ] ]
+, [ 9, "09C43BA2-E06A-466F-AEDD-9B39F86FA31D", 9, 1489264049, "916180", 1502822036, "916180", null, "1002", "6th & Navasota St.", "closed", "30.26383", "-97.72864", [ null, "30.26383", "-97.72864", null, false ] ]
+, [ 11, "0BCC4B86-32AD-4476-9B10-9085B01DFEAF", 11, 1489264049, "916180", 1502822036, "916180", null, "1003", "8th & Guadalupe", "closed", "30.27106", "-97.74563", [ null, "30.27106", "-97.74563", null, false ] ]
+, [ 66, "67F66F39-5DC2-43E4-BF5B-81A3D2324D6F", 66, 1489264049, "916180", 1502822036, "916180", null, "1006", "Zilker Park West", "ACL only", "30.26587", "-97.76826", [ null, "30.26587", "-97.76826", null, false ] ]
+, [ 10, "672F6993-E96F-4B61-81DF-98E0752253CF", 10, 1489264049, "916180", 1502822036, "916180", null, "2496", "8th & Congress", "active", "30.2698", "-97.74186", [ null, "30.2698", "-97.74186", null, false ] ]
+, [ 20, "184F7F63-D8A4-4261-B08F-DA76DD25625D", 20, 1489264049, "916180", 1502822036, "916180", null, "2497", "Capitol Station / Congress & 11th", "active", "30.2726", "-97.74127", [ null, "30.2726", "-97.74127", null, false ] ]
+, [ 21, "DA4D5ACF-D0B0-4F15-B4D4-34E18B9B2613", 21, 1489264049, "916180", 1502822036, "916180", null, "2499", "City Hall / Lavaca & 2nd", "active", "30.26476", "-97.74678", [ null, "30.26476", "-97.74678", null, false ] ]
+, [ 35, "A1A8D698-292C-43C4-8A9B-C08C0E27358C", 35, 1489264049, "916180", 1502822036, "916180", null, "2549", "Long Center @ South 1st & Riverside", "active", "30.25941", "-97.74971", [ null, "30.25941", "-97.74971", null, false ] ]
+, [ 41, "F0AD1C35-5E32-4478-A099-DB2D3AB67BE9", 41, 1489264049, "916180", 1502822036, "916180", null, "3464", "Pease Park", "active", "30.28118", "-97.75219", [ null, "30.28118", "-97.75219", null, false ] ]
+, [ 39, "3C7F550E-248D-4701-AE2A-D6E72A539B64", 39, 1489264049, "916180", 1502822036, "916180", null, "1001", "OFFICE/Main/Shop/Repair", "active", "30.27186", "-97.73997", [ null, "30.27186", "-97.73997", null, false ] ]
+, [ 40, "FA4C42D6-6049-4211-B92F-AD47B95048DA", 40, 1489264049, "916180", 1502822036, "916180", null, "2567", "Palmer Auditorium", "active", "30.25971", "-97.75346", [ null, "30.25971", "-97.75346", null, false ] ]
+, [ 68, "FF6E6CEA-8334-4780-93DB-465E2A727FBC", 68, 1489444176, "916180", 1502822037, "916180", null, "3660", "Medina & East 6th", "active", "30.26455", "-97.73165", [ null, "30.26455", "-97.73165", null, false ] ]
+, [ 23, "4DC6B12A-3013-41EB-A3E7-63B12E23BEA6", 23, 1489264049, "916180", 1502822036, "916180", null, "2498", "Convention Center / 4th St. @ MetroRail", "active", "30.26483", "-97.739", [ null, "30.26483", "-97.739", null, false ] ]
+, [ 22, "469D03FF-D9AC-4DAF-B95B-B4DFF0C13B06", 22, 1489264049, "916180", 1502822036, "916180", null, "2539", "Convention Center / 3rd & Trinity", "active", "30.26426", "-97.74023", [ null, "30.26426", "-97.74023", null, false ] ]
+, [ 24, "7D4C1831-46FD-4377-A5C9-0B0C5BFF92AE", 24, 1489264049, "916180", 1502822036, "916180", null, "2563", "Davis at Rainey Street", "active", "30.26019", "-97.73845", [ null, "30.26019", "-97.73845", null, false ] ]
+, [ 26, "F6514140-218E-4DD9-90A0-B09CF18FA30B", 26, 1489264049, "916180", 1502822036, "916180", null, "2568", "East 11th St. at Victory Grill", "active", "30.26896", "-97.72843", [ null, "30.26896", "-97.72843", null, false ] ]
+, [ 25, "E50D4F78-BFFD-44AF-A79E-24AB4089EA01", 25, 1489264049, "916180", 1502822036, "916180", null, "2569", "East 11th St. & San Marcos", "active", "30.26968", "-97.73074", [ null, "30.26968", "-97.73074", null, false ] ]
+, [ 14, "AB18E5A6-D5AD-47B2-A3AA-E6103DA12385", 14, 1489264049, "916180", 1502822036, "916180", null, "2502", "Barton Springs & Riverside", "active", "30.2587", "-97.74872", [ null, "30.2587", "-97.74872", null, false ] ]
+, [ 13, "0C7FEF80-F56D-4CF2-8759-512BA0864DD3", 13, 1489264049, "916180", 1502822036, "916180", null, "2546", "ACC - West & 12th Street", "closed", "30.27624", "-97.74831", [ null, "30.27624", "-97.74831", null, false ] ]
+, [ 15, "EDCFF6CA-383B-45E7-99F6-30589751CFEC", 15, 1489264049, "916180", 1502822036, "916180", null, "2711", "Barton Springs @ Kinney Ave", "active", "30.262", "-97.76118", [ null, "30.262", "-97.76118", null, false ] ]
+, [ 3, "1C4A2709-FC9F-4B91-8F1E-B875EB03ECA4", 3, 1489264049, "916180", 1502822036, "916180", null, "2494", "2nd & Congress", "active", "30.26408", "-97.74355", [ null, "30.26408", "-97.74355", null, false ] ]
+, [ 5, "2F54157B-A6CF-4663-B9EA-DB96540840DA", 5, 1489264049, "916180", 1502822036, "916180", null, "2495", "4th & Congress", "active", "30.26634", "-97.74378", [ null, "30.26634", "-97.74378", null, false ] ]
+, [ 4, "B47F2C60-C98F-414B-8204-8ECDD3BD2BD6", 4, 1489264049, "916180", 1502822036, "916180", null, "2552", "3rd & West", "active", "30.2678", "-97.75189", [ null, "30.2678", "-97.75189", null, false ] ]
+, [ 6, "AAE9E34F-5D38-43AA-944B-A829670617E2", 6, 1489264049, "916180", 1502822036, "916180", null, "2501", "5th & Bowie", "active", "30.2696", "-97.75332", [ null, "30.2696", "-97.75332", null, false ] ]
+, [ 7, "AB9EC42E-E5AE-45AA-B417-FF96B9B49D3A", 7, 1489264049, "916180", 1502822036, "916180", null, "2564", "5th & San Marcos", "moved", "30.26416", "-97.73289", [ null, "30.26416", "-97.73289", null, false ] ]
+, [ 57, "919A5B22-FB27-452E-A769-46E0BE22AE5B", 57, 1489264049, "916180", 1502822036, "916180", null, "2541", "State Capitol @ 14th & Colorado", "active", "30.27654", "-97.74155", [ null, "30.27654", "-97.74155", null, false ] ]
+ ]
+}

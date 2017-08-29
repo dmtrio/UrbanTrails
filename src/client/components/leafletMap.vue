@@ -1,11 +1,12 @@
 <template>
- <div id="mapid"></div>
+  <div id="mapid"></div>
 </template>
 
 <script>
 import * as L from 'leaflet';
 import fixit from '../data/fixit.json'
 import AustinTrails from '../data/AustinTrails.geojson'
+import bCycleKiosks from './bCycleKiosks.json'
 var mymap = undefined;
 export default {
   data() {
@@ -14,6 +15,8 @@ export default {
       data: fixit.data,
       w: 700,
       h: 580,
+      fixit: fixit.data,
+      kiosks: bCycleKiosks.data
     };
   },
 
@@ -41,7 +44,19 @@ export default {
          let marker = L.marker([lat, lon]).addTo(mymap);
          marker.bindPopup(`<b>${name}</b><br>${address}`)
        })
+        
+       this.$data.kiosks.forEach((chunk) => {
+        if (chunk[10] === 'active') {
+          let address = chunk[9]
+          let lat = chunk[11]
+          let lon = chunk[12]
+          let marker = L.marker([lat, lon]).addTo(mymap);
+          marker.bindPopup(`${address} Bicycle Kiosk`)
+        }
+      })
+       
        L.geoJSON(AustinTrails).addTo(mymap);
+       
        function onLocationFound(e) {
          var radius = e.accuracy / 2;
          L.marker(e.latlng).addTo(mymap)
