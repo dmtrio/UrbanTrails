@@ -4,7 +4,7 @@
     <Home></Home>
     <!-- <p>{{ status }}</p> -->
     <!-- <p>{{ count }}</p> -->
-    <Map></Map>
+    <leafletMap></leafletMap>
     <!-- <button @click="changeStatus">Change Status</button> -->
   </div>
 </template>

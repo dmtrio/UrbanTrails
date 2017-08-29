@@ -9,6 +9,8 @@ import App from './App.vue'
 import Home from './Home.vue'
 import Map from './Map.vue'
 
+import leafletMap from './leafletMap.vue'
+
 //VUEX STORE FOR ALL COMPONENTS
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -28,6 +30,7 @@ Vue.component('Map', Map)
 Vue.component('v-map', Vue2Leaflet.Map);
 Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
 Vue.component('v-marker', Vue2Leaflet.Marker);
+Vue.component('leafletMap', leafletMap)
 
 new Vue({
   // Passing down Vuex store to all child components
