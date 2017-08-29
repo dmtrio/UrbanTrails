@@ -6227,7 +6227,8 @@ vue2-google-maps@^0.8.0:
     babel-plugin-transform-runtime "^6.15.0"
     babel-runtime "^5.8.0"
     marker-clusterer-plus "^2.1.4"
-vue2-leaflet@^0.0.51:
+
+vue2-leaflet@0.0.51:
   version "0.0.51"
   resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-0.0.51.tgz#c56f400e24ae4b2934a6a8fec8dc3734ee7b5a28"
   dependencies:
