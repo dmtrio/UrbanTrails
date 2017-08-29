@@ -2,6 +2,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as Vue2Leaflet from 'vue2-leaflet'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 //main component
 import App from './App.vue'
@@ -9,6 +11,9 @@ import App from './App.vue'
 import Home from './Home.vue'
 import Map from './Map.vue'
 import leafletMap from './leafletMap.vue'
+
+//VUEAXIOS LIBRARY FOR INTEGRATING VUE WITH AXIOS
+Vue.use(VueAxios, axios)
 
 //VUEX STORE FOR ALL COMPONENTS
 Vue.use(Vuex)

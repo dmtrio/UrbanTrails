@@ -29,8 +29,32 @@ server.register(require('inert'), (err) => {
 
 server.route({
   method: 'GET',
-  path: '/hello',
-  handler: (request, reply) => reply('hello world'),
+  path: '/kiosks',
+  handler: {
+    file: {
+      path: path.join(__dirname, '../client/data/bCycleKiosks.json')
+    }
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/fixits',
+  handler: {
+    file: {
+      path: path.join(__dirname, '../client/data/fixit.json')
+    }
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/trails',
+  handler: {
+    file: {
+      path: path.join(__dirname, '../client/data/AustinTrails.geojson')
+    }
+  }
 })
 
 // Start the server
