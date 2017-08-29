@@ -1,0 +1,10 @@
+./src/client/data/*.json
+./src/client/data/*.geojson
+
+./src/client/*.json
+*.json
+*.yml
+
+webpack.config.js
+
+./src/client/dist/*.js

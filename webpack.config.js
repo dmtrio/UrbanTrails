@@ -41,6 +41,10 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
