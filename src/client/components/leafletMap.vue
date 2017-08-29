@@ -4,8 +4,8 @@
 
 <script>
 import * as L from 'leaflet';
-import fixit from './fixit.json'
-import AustinTrails from './AustinTrails.geojson'
+import fixit from '../data/fixit.json'
+import AustinTrails from '../data/AustinTrails.geojson'
 var mymap = undefined;
 export default {
   data() {
