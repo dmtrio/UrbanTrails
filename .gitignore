@@ -3,3 +3,5 @@
 src/client/dist/*
 nodemon.json
 .DS_Store
+/yarn.lock
+/package-lock.json
