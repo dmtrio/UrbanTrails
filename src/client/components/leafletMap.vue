@@ -21,7 +21,6 @@ export default {
   },
 
   mounted() {
-    console.log('is this mounted?')
     this.makeMap()
   },
   methods: {
