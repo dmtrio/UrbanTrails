@@ -1,7 +1,6 @@
 {
-  "extends": ["airbnb", "plugin:vue/recommended"],
+  "extends": "airbnb",
   "rules": {
-    "vue/valid-v-if": "error",
     "semi": [2, "never"],
     "no-new": 0,
     "comma-dangle": 0,
