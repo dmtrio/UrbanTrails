@@ -11,21 +11,21 @@ const state = {
 }
 
 const actions = {
-  LOAD_KIOSKS: function ({ commit }) {
+  LOAD_KIOSKS: ({ commit }) => {
     axios.get('/kiosks').then((response) => {
       commit('SET_KIOSKS', { kiosks: response.data.data })
     }, (err) => {
       console.log(err)
     })
   },
-  LOAD_FIXITS: function ({ commit }) {
+  LOAD_FIXITS: ({ commit }) => {
     axios.get('/fixits').then((response) => {
       commit('SET_FIXITS', { fixits: response.data.data })
     }, (err) => {
       console.log(err)
     })
   },
-  LOAD_TRAILS: function ({ commit }) {
+  LOAD_TRAILS: ({ commit }) => {
     axios.get('/trails').then((response) => {
       commit('SET_TRAILS', { trails: response.data.features })
     }, (err) => {
@@ -35,13 +35,13 @@ const actions = {
 }
 
 const mutations = {
-  SET_KIOSKS (state, { kiosks }) {
+  SET_KIOSKS(state, { kiosks }) {
     state.kiosks = kiosks
   },
-  SET_FIXITS (state, { fixits }) {
+  SET_FIXITS(state, { fixits }) {
     state.fixits = fixits
   },
-  SET_TRAILS (state, { trails }) {
+  SET_TRAILS(state, { trails }) {
     state.trails = trails
   }
 }

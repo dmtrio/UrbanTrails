@@ -5,6 +5,8 @@
     "no-new": 0,
     "comma-dangle": 0,
     "no-console": 0,
-    "no-unexpected-multiline": 2
+    "no-unexpected-multiline": 2,
+    "no-shadow": 0,
+    "no-param-reassign": 0
   }
 }
