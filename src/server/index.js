@@ -1,6 +1,12 @@
 const Hapi = require('hapi')
 const path = require('path')
 
+const knex = require('knex')({
+  client: 'sqlite3',
+  connection: {
+    filename: './src/urban-trails-info.sqlite3'
+  }
+})
 // Create a server with a host and port
 const server = new Hapi.Server()
 
@@ -54,6 +60,17 @@ server.route({
     file: {
       path: path.join(__dirname, '../client/data/AustinTrails.geojson')
     }
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/trailblazers',
+  handler: (request, reply) => {
+    knex('users').select('*')
+      .then((usernames) => {
+        reply(usernames)
+      })
   }
 })
 
