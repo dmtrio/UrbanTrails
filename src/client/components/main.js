@@ -6,22 +6,21 @@ import store from '../vuex/store'
 // main component
 import App from './App.vue'
 // other components
-import Map from './Map.vue'
 import leafletMap from './leafletMap.vue'
 import areaReporting from './areaReporting.vue'
-import Home from './Home.vue'
+import Dropdown from './Dropdown.vue'
+
 
 Vue.use(VueAsyncData)
 
 // register component to be used globally including inside other components
-Vue.component('Map', Map)
 Vue.component('App', App)
-Vue.component('Home', Home)
 Vue.component('leafletMap', leafletMap)
 Vue.component('v-map', Vue2Leaflet.Map)
 Vue.component('v-tilelayer', Vue2Leaflet.TileLayer)
 Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('areaReporting', areaReporting)
+Vue.component('Dropdown', Dropdown)
 
 new Vue({
   // inject store into all components
