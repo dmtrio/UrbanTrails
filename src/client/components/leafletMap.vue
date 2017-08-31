@@ -95,7 +95,7 @@
         })
 
         this.$data.trailsLayer = L.geoJSON()
-        
+
         this.$data.fixitsLayer = L.layerGroup('')
 
         this.$data.kiosksLayer = L.layerGroup('')
