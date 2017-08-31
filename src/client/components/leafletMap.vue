@@ -34,17 +34,12 @@ export default {
         kiosksLayer: null,
       };
     },
-    // beforeCreate() {
-    //   this.$store.dispatch('LOAD_KIOSKS')
-    //   this.$store.dispatch('LOAD_TRAILS')
-    //   this.$store.dispatch('LOAD_FIXITS')
-    // },
-    mounted() {
-      this.makeMap()
+    beforeCreate() {
       this.$store.dispatch('LOAD_KIOSKS')
       this.$store.dispatch('LOAD_TRAILS')
       this.$store.dispatch('LOAD_FIXITS')
     },
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> dropdown working
   mounted() {
@@ -141,50 +136,74 @@ export default {
       this.map.on('locationfound', onLocationFound.bind(this)).bind
      },
 =======
+=======
+    mounted() {
+      this.makeMap()
+    },
+    watch: {
+      fixits: function() {
+        this.fixitMarkers()
+      },
+      kiosks: function() {
+        this.kioskMarkers()
+      },
+      trails: function(){
+        this.addTrails()
+      },
+    },
+>>>>>>> merging
     computed: {
+      kiosks: function() {
+        return this.$store.getters.kiosks
+      },
+      trails: function() {
+        return this.$store.getters.trails
+      },
+      fixits: function() {
+        return this.$store.getters.fixits
+      }
     },
     methods: {
+      fixitMarkers() {
+        this.fixits.forEach((chunk) => {
+          let lat = chunk[11][1]
+          let lon = chunk[11][2]
+          let name = chunk[8]
+          let address = JSON.parse(chunk[11][0]).address
+          let marker = L.marker([lat, lon])
+          marker.bindPopup(`<b>${name} Fixit Station</b><br>${address}`)
+          this.$data.fixitsLayer.addLayer(marker)
+        })
+      },
+      kioskMarkers() {
+        this.kiosks.forEach((chunk) => {
+          if (chunk[10] === 'active') {
+            let address = chunk[9]
+            let lat = chunk[11]
+            let lon = chunk[12]
+            let marker = L.marker([lat, lon])
+            marker.bindPopup(`${address} Bicycle Kiosk`)
+            this.$data.kiosksLayer.addLayer(marker)
+          }
+        })
+      },
+      addTrails() {
+        this.$data.trailsLayer.addData(this.trails)
+      },
       makeMap() {
-        //layers
-        //Main
+        //layers including empty
+
         this.$data.mainLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
           maxZoom: 18,
           id: 'mapbox.streets'
         })
-        //trails
-        this.$data.trailsLayer = L.geoJSON()
-        this.$store.watch((state) => state.trails, () => {
-          this.$data.trailsLayer.addData(this.$store.getters.trails)
-        })
-        //fixits
-        this.$data.fixitsLayer = L.layerGroup('')
-        this.$store.watch((state) => state.fixits, () =>{
-          this.$store.getters.fixits.forEach((chunk) => {
-            let lat = chunk[11][1]
-            let lon = chunk[11][2]
-            let name = chunk[8]
-            let address = JSON.parse(chunk[11][0]).address
-            let marker = L.marker([lat, lon])
-            marker.bindPopup(`<b>${name}</b><br>${address}`)
-            this.$data.fixitsLayer.addLayer(marker)
-          })
-        })
-        //kiosks
-        this.$data.kiosksLayer = L.layerGroup('')
-        this.$store.watch((state) => state.kiosks, () => {
-          this.$store.getters.kiosks.forEach((chunk) => {
-            if (chunk[10] === 'active') {
-              let address = chunk[9]
-              let lat = chunk[11]
-              let lon = chunk[12]
-              let marker = L.marker([lat, lon])
-              marker.bindPopup(`${address} Bicycle Kiosk`)
-              this.$data.kiosksLayer.addLayer(marker)
-            }
-          })
-        })
 
-        //map creation
+        this.$data.trailsLayer = L.geoJSON()
+
+        this.$data.fixitsLayer = L.layerGroup('')
+
+        this.$data.kiosksLayer = L.layerGroup('')
+
         var mymap = L.map('mapid', {
           center: [51.505, -0.09],
           zoom: 13,
@@ -228,8 +247,5 @@ export default {
 </script>
 
 <style>
-  #mapid {
-    height: 500px;
-    // z-index: 10;
-  }
+  #mapid {height: 500px;}
 </style>
