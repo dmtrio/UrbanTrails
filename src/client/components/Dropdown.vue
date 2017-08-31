@@ -44,7 +44,6 @@
   #dropdown-list {
     position: relative;
     width: 200px;
-    // height: 0px;
     float: right;
     background-color: #9E9E9E;
     top: -20px;

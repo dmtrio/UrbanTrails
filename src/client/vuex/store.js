@@ -19,11 +19,13 @@ const actions = {
     })
   },
   LOAD_FIXITS: ({ commit }) => {
-    axios.get('/fixits').then((response) => {
-      commit('SET_FIXITS', { fixits: response.data.data })
-    }, (err) => {
-      console.log(err)
-    })
+    setTimeout(()=>{
+      axios.get('/fixits').then((response) => {
+        commit('SET_FIXITS', { fixits: response.data.data })
+      }, (err) => {
+        console.log(err)
+      })
+    }, 8000)
   },
   LOAD_TRAILS: ({ commit }) => {
     axios.get('/trails').then((response) => {
