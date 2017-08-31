@@ -22,6 +22,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "coveralls": "^2.13.1",
+    "css-base": "^1.0.0",
     "css-loader": "^0.28.5",
     "d3": "^4.10.0",
     "eslint": "^3.19.0 || ^4.3.0",
@@ -30,6 +31,7 @@
     "inert": "^4.2.1",
     "jQuery": "^1.7.4",
     "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
     "knex": "^0.13.0",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
@@ -37,14 +39,16 @@
     "style-loader": "^0.18.2",
     "topojson": "^3.0.0",
     "vue": "^2.4.2",
+    "vue-async-data": "^1.0.2",
     "vue-axios": "^2.0.2",
     "vue-google-autocomplete": "^1.0.12",
     "vue-template-compiler": "^2.4.2",
     "vue2-google-maps": "^0.8.0",
     "vue2-leaflet": "0.0.51",
-    "vuex": "^2.3.1"
+    "vuex": "^2.4.0"
   },
   "devDependencies": {
+    "avoriaz": "^4.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -58,12 +62,24 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-vue": "beta",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
+    "jest-vue-preprocessor": "^1.1.0",
     "nodemon": "^1.11.0",
     "vue-loader": "^13.0.4",
-    "vue2-leaflet": "^0.0.51",
+    "vue-server-renderer": "^2.4.2",
     "webpack": "^3.5.5",
     "webpack-shell-plugin": "^0.5.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "./node_modules/babel-jest",
+      ".*\\.(vue)$": "./node_modules/jest-vue-preprocessor"
+    }
   }
 }
