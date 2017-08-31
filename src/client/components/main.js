@@ -11,6 +11,7 @@ import App from './App.vue'
 import Home from './Home.vue'
 import Map from './Map.vue'
 import leafletMap from './leafletMap.vue'
+import areaReporting from './areaReporting.vue'
 
 //VUEAXIOS LIBRARY FOR INTEGRATING VUE WITH AXIOS
 Vue.use(VueAxios, axios)
@@ -32,10 +33,11 @@ const store = new Vuex.Store({
 Vue.component('Home', Home)
 Vue.component('Map', Map)
 Vue.component('leafletMap', leafletMap)
-Vue.component('v-map', Vue2Leaflet.Map);
-Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
-Vue.component('v-marker', Vue2Leaflet.Marker);
+Vue.component('v-map', Vue2Leaflet.Map)
+Vue.component('v-tilelayer', Vue2Leaflet.TileLayer)
+Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('leafletMap', leafletMap)
+Vue.component('areaReporting', areaReporting)
 
 new Vue({
   // Passing down Vuex store to all child components

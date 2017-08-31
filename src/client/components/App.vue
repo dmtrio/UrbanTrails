@@ -5,6 +5,7 @@
     <!-- <p>{{ status }}</p> -->
     <!-- <p>{{ count }}</p> -->
     <leafletMap></leafletMap>
+    <areaReporting></areaReporting>
     <!-- <button @click="changeStatus">Change Status</button> -->
   </div>
 </template>
