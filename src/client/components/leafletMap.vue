@@ -4,6 +4,7 @@
 
 <script>
 import * as L from 'leaflet';
+import * as Pin from 'leaflet.marker.pin'
 export default {
   data() {
     return {
@@ -71,7 +72,15 @@ export default {
     },
     
     makeMap() {
-      
+    
+        var myInterface = L.marker.pin.interface ( );
+        
+        myInterface.UserLanguage = 'en';
+        
+        myInterface.addDefaultCategories ( );
+        
+        myInterface.setCallbackFunction ( function ( ) { history.pushState ( { index : "bar" } , "page", '?pin=' + myInterface.stringifyPins ( ) ); });
+
       const mymap = L.map('mapid').setView([51.505, -0.09], 13)
       this.map = mymap
       this.map.locate({setView: true, zoom: 10});
@@ -80,9 +89,15 @@ export default {
        maxZoom: 18,
        id: 'mapbox.streets'
        }).addTo(this.map);
+       
+       let marker = L.marker([51.505, -0.09]).addTo(this.map);
+       marker.bindPopup('Configuring your location...').openPopup()
 
-      let marker = L.marker([51.505, -0.09]).addTo(this.map);
-       marker.bindPopup('Configuring your location...').openPopup();
+       this.map.on ( 'click', function ( Event ) { myInterface.newPin ( mymap, Event.latlng )} );
+       this.map.on ( 'contextmenu', function ( Event ) { myInterface.newPin ( mymap, Event.latlng )} ); 
+
+       var Search = decodeURI ( window.location.search );
+       if ( 0 <= Search.indexOf ( 'pin=' ) ) { myInterface.parsePins ( Search.substr ( Search.indexOf ( 'pin=' ) + 4 ), this.map );}
  
       function onLocationFound(e) {
          var radius = e.accuracy / 2;
