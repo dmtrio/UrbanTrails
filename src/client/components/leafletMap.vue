@@ -1,8 +1,11 @@
 <template>
-  <div id="mapid"></div>
+  <div id="mapid">
+    <Dropdown></Dropdown>
+  </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import * as L from 'leaflet';
 import * as Pin from 'leaflet.marker.pin'
 export default {
@@ -18,6 +21,21 @@ export default {
     this.$store.dispatch('LOAD_TRAILS')
     this.$store.dispatch('LOAD_FIXITS')
   },
+=======
+  import * as L from 'leaflet';
+  export default {
+    data() {
+      return {
+        w: 700,
+        h: 580,
+      };
+    },
+    beforeCreate() {
+      this.$store.dispatch('LOAD_KIOSKS')
+      this.$store.dispatch('LOAD_TRAILS')
+      this.$store.dispatch('LOAD_FIXITS')
+    },
+>>>>>>> dropdown working
   mounted() {
     this.makeMap()
   },
@@ -117,5 +135,8 @@ export default {
 </script>
 
 <style>
-#mapid { height: 500px; }
+  #mapid {
+    height: 500px;
+    // z-index: 10;
+  }
 </style>
