@@ -1,7 +1,11 @@
 <template>
   <div id="mapid">
+<<<<<<< HEAD
     <Dropdown></Dropdown>
     <areaReporting></areaReporting>
+=======
+    <Dropdown :toggleLayer="toggleLayer"></Dropdown>
+>>>>>>> hamburger slide in added
   </div>
 </template>
 
@@ -54,9 +58,18 @@
       },
       fixits: function() {
           return this.$store.getters.fixits
+      },
+      allLayers: function() {
+        let layers = [ this.$data.mainLayer, this.$data.trailsLayer, this.$data.fixitsLayer, this.$data.kiosksLayer ]
+        return layers
       }
+
     },
     methods: {
+      toggleLayer(layer) {
+        hamburger.toggleLayer(layer, this, this.$data.map)
+      },
+
       makeMap() {
 
         //layers including empty
@@ -70,6 +83,9 @@
         this.$data.fixitsLayer = L.layerGroup('')
 
         this.$data.kiosksLayer = L.layerGroup('')
+
+        // let kiosksLayer = L.layerGroup('')
+
         //end layers
 
         //map creation
@@ -121,7 +137,7 @@
         //end map location
 
         // layer control
-        hamburger.addControl(this, mymap)
+        // hamburger.addControl(this, mymap)
         //end layer control
 
         function getHandlerForFeature(feat) {  // A function...
@@ -129,17 +145,28 @@
             console.log(feat);  // ...that has a closure over the value.
           }
         }
+<<<<<<< HEAD
         function click (e) {
           console.log('One, ah ah ah');
         }
+=======
+        
+>>>>>>> hamburger slide in added
         function doubleClick (e) {
           console.log('TWO, AH AH AH');
           let pos = [e.latlng.lat, e.latlng.lng]
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
         }
+<<<<<<< HEAD
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
+=======
+        mymap.on('dblclick', doubleClick.bind(this))
+
+        // mymap.on('dblclick', () => {hamburger.toggleLayer(this, mymap, 'kiosksLayer')})
+
+>>>>>>> hamburger slide in added
       },
     }
   }
