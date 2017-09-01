@@ -57,13 +57,6 @@
     },
     methods: {
       makeMap() {
-        // var myInterface = L.marker.pin.interface ( );
-        //
-        // myInterface.UserLanguage = 'en';
-        //
-        // myInterface.addDefaultCategories ( );
-        //
-        // myInterface.setCallbackFunction ( function ( ) { history.pushState ( { index : "bar" } , "page", '?pin=' + myInterface.stringifyPins ( ) ); });
 
         //layers including empty
         this.$data.mainLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
@@ -130,40 +123,17 @@
         hamburger.addControl(this, mymap)
         //end layer control
 
-
-
-        // mymap.on ( 'click', function ( Event ) { myInterface.newPin ( mymap, Event.latlng )} );
-        // mymap.on ( 'contextmenu', function ( Event ) { myInterface.newPin ( mymap, Event.latlng )} );
-        //
-        // var Search = decodeURI ( window.location.search );
-        // if ( 0 <= Search.indexOf ( 'pin=' ) ) { myInterface.parsePins ( Search.substr ( Search.indexOf ( 'pin=' ) + 4 ), mymap );}
-        //
         function getHandlerForFeature(feat) {  // A function...
           return function(ev) {   // ...that returns a function...
             console.log(feat);  // ...that has a closure over the value.
           }
         }
 
-        mymap.on('popupopen', function(){
-          L.DomEvent.on(
-            document.getElementById('mybutton'),
-            'click',
-            getHandlerForFeature("hi guys!!") // The result of this call is the event handler func.
-          );
-        });
-
         function doubleClick (e) {
-          let myFunc = function myFunc() {
-            console.log('hello everyone')
-          }
-
-          function doubleClick (e) {
-            var popup = L.popup.call(this)
-            .setLatLng([e.latlng.lat, e.latlng.lng])
-            .setContent("<button id='mybutton'>Foo!</button>")
-            .openOn(mymap);
-          }
-
+          console.log('hello');
+          let pos = [e.latlng.lat, e.latlng.lng]
+          var reports = document.getElementsByClassName('reporting');
+          reports[0].setAttribute('id', 'selected');
         }
         mymap.on('dblclick', doubleClick.bind(this))
       },
