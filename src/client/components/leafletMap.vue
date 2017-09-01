@@ -150,9 +150,36 @@
 
         var Search = decodeURI ( window.location.search );
         if ( 0 <= Search.indexOf ( 'pin=' ) ) { myInterface.parsePins ( Search.substr ( Search.indexOf ( 'pin=' ) + 4 ), mymap );}
+
+      function getHandlerForFeature(feat) {  // A function...
+        return function(ev) {   // ...that returns a function...
+          console.log(feat);  // ...that has a closure over the value.
+        }
+      } 
+
+        // The button doesn't exist in the DOM until the popup has been opened, so
+        this.map.on('popupopen', function(){
+          L.DomEvent.on( 
+            document.getElementById('mybutton'), 
+            'click',
+            getHandlerForFeature("hi guys!!") // The result of this call is the event handler func.
+          );
+        });
+        
+        function doubleClick (e) {
+          let myFunc = function myFunc() {
+            console.log('hello everyone')
+          }
+
+          var popup = L.popup.call(this)
+              .setLatLng([e.latlng.lat, e.latlng.lng])
+              .setContent("<button id='mybutton'>Foo!</button>")
+              .openOn(mymap);
+        }
+        
+        this.map.on('dblclick', doubleClick.bind(this))     
+
       },
-        // let marker = L.marker([51.505, -0.09]).addTo(mymap);
-        // marker.bindPopup('Configuring your location...').openPopup();
     },
   };
 </script>
