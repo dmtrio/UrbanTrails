@@ -143,7 +143,6 @@
             console.log(feat);  // ...that has a closure over the value.
           }
         }
-      }
 
         mymap.on('popupopen', function(){
           L.DomEvent.on(
@@ -165,11 +164,11 @@
             .openOn(mymap);
           }
 
-          mymap.on('dblclick', doubleClick.bind(this))
-
+        }
+        mymap.on('dblclick', doubleClick.bind(this))
       },
-    },
-  };
+    }
+  }
 </script>
 
 <style>
