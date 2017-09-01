@@ -114,19 +114,32 @@
         //end map creation
 
         //map location
+        let clientlng = navigator.geolocation.watchPosition((position) => position.coords.longitude )
+        let clientlat = navigator.geolocation.watchPosition((position) => position.coords.latitude )
         let marker = L.marker([51.505, -0.09]).addTo(mymap);
         marker.bindPopup('Configuring your location...').openPopup()
+        var circle = L.circle([51.505, -0.09], 0).addTo(mymap)
 
-        mymap.locate({setView: true, zoom: 10})
 
         function onLocationFound(e) {
-            var radius = e.accuracy / 2;
-          L.marker(e.latlng)
-          .addTo(mymap)
-          .bindPopup("You are within " + radius + " meters from this point").openPopup();
-          L.circle(e.latlng, radius).addTo(mymap);
+          if (circle) {
+            mymap.removeLayer(circle)
+          }
+          var radius = e.accuracy / 2
+          var latln = {lat: e.latitude, lng: e.longitude}
+          mymap.setView(latln, 18)
+          marker.setLatLng(latln).closePopup()
+          .bindPopup("You are within " + radius + " meters from this point").openPopup()
+          circle = L.circle(latln, radius).addTo(mymap)
         }
-        mymap.on('locationfound', onLocationFound);
+        mymap.on('locationfound', onLocationFound)
+
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition((position) => {
+            onLocationFound(position.coords)
+        })
+        }
+        mymap.locate()
         //end map location
 
         // layer control
@@ -155,17 +168,17 @@
         return function(ev) {   // ...that returns a function...
           console.log(feat);  // ...that has a closure over the value.
         }
-      } 
+      }
 
         // The button doesn't exist in the DOM until the popup has been opened, so
         this.map.on('popupopen', function(){
-          L.DomEvent.on( 
-            document.getElementById('mybutton'), 
+          L.DomEvent.on(
+            document.getElementById('mybutton'),
             'click',
             getHandlerForFeature("hi guys!!") // The result of this call is the event handler func.
           );
         });
-        
+
         function doubleClick (e) {
           let myFunc = function myFunc() {
             console.log('hello everyone')
@@ -176,8 +189,8 @@
               .setContent("<button id='mybutton'>Foo!</button>")
               .openOn(mymap);
         }
-        
-        this.map.on('dblclick', doubleClick.bind(this))     
+
+        this.map.on('dblclick', doubleClick.bind(this))
 
       },
     },
