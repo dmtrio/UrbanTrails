@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import { Routing } from "leaflet-routing-machine"
-  import * as L from 'leaflet';
+    import { Routing } from "leaflet-routing-machine"
+import "leaflet-control-geocoder"
+  import * as L from 'leaflet'
   import meth from './leafletMethods/leafletMethods.js'
   import loadLayer from './leafletMethods/methLoadLayer.js'
   import customPopup from './leafletMethods/methPopup.js'
@@ -74,7 +75,7 @@ import { Routing } from "leaflet-routing-machine"
             id: 'mapbox.streets'
         })
 
-        this.$data.trailsLayer = L.geoJSON()
+          this.$data.trailsLayer = L.geoJSON()
 
         this.$data.fixitsLayer = L.layerGroup('')
 
@@ -94,6 +95,7 @@ import { Routing } from "leaflet-routing-machine"
         });
         this.$data.map = mymap
         //end map creation
+          L.Control.geocoder({position: "topleft"}).addTo(this.map);
 
         //map location
 
@@ -124,12 +126,13 @@ import { Routing } from "leaflet-routing-machine"
         }
         mymap.locate()
 
-          L.Routing.control({
-              waypoints: [
-                  L.latLng(57.74, 11.94),
-                  L.latLng(57.6792, 11.949)
-              ]
-          }).addTo(this.map);
+          // L.Routing.control({
+          //     waypoints: [
+          //         L.latLng(57.74, 11.94),
+          //         L.latLng(57.6792, 11.949)
+          //     ],
+          //     geocoder: L.Control.Geocoder.nominatim()
+          // }).addTo(this.map);
         //add to here later
         //mLocation.locate(this, mymap)
 
@@ -167,5 +170,5 @@ import { Routing } from "leaflet-routing-machine"
 </script>
 
 <style>
-  #mapid {height: 100%;}
+#mapid {height: 100%;}
 </style>
