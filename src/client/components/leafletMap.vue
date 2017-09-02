@@ -6,8 +6,9 @@
 </template>
 
 <script>
+  import Routing from "leaflet-routing-machine"
   import * as L from 'leaflet';
-  import * as Pin from 'leaflet.marker.pin';
+  // require 'leaflet-routing-machine'  
   import meth from './leafletMethods/leafletMethods.js'
   import loadLayer from './leafletMethods/methLoadLayer.js'
   import customPopup from './leafletMethods/methPopup.js'
@@ -126,7 +127,12 @@
         }
         mymap.locate()
 
-
+          L.Routing.control({
+              waypoints: [
+                  L.latLng(57.74, 11.94),
+                  L.latLng(57.6792, 11.949)
+              ]
+          }).addTo(this.map);
         //add to here later
         //mLocation.locate(this, mymap)
 
