@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable max-len */
 export default {
   locate: (context, mymap) => {
     // const clientlng = navigator.geolocation.watchPosition((position) => position.coords.longitude )
