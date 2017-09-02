@@ -1,6 +1,5 @@
 <template>
-    <leafletMap></leafletMap>
-    <!-- <button @click="changeStatus">Change Status</button> -->
+  <leafletMap></leafletMap>
 </template>
 
 <script>
