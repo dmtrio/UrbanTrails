@@ -1,3 +1,7 @@
+html, body, body > div{
+  height: 100%
+}
+
 #selected {
   position: absolute;
   border-top: 2px solid grey;
