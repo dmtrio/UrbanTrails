@@ -6,9 +6,8 @@
 </template>
 
 <script>
-  import Routing from "leaflet-routing-machine"
+  import { Routing } from "leaflet-routing-machine"
   import * as L from 'leaflet';
-  // require 'leaflet-routing-machine'  
   import meth from './leafletMethods/leafletMethods.js'
   import loadLayer from './leafletMethods/methLoadLayer.js'
   import customPopup from './leafletMethods/methPopup.js'
@@ -80,8 +79,6 @@
         this.$data.fixitsLayer = L.layerGroup('')
 
         this.$data.kiosksLayer = L.layerGroup('')
-
-        // let kiosksLayer = L.layerGroup('')
 
         //end layers
 
