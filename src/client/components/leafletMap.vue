@@ -26,6 +26,7 @@
       };
     },
     beforeCreate() {
+      this.$store.dispatch('FIND_LOCATION')
       this.$store.dispatch('LOAD_KIOSKS')
       this.$store.dispatch('LOAD_TRAILS')
       this.$store.dispatch('LOAD_FIXITS')
@@ -35,6 +36,9 @@
       this.makeMap()
     },
     watch: {
+      location: function() {
+        console.log(this.$store.getters.location)
+      },
       fixits: function() {
         loadLayer.fixitMarkers(this)
       },
@@ -46,6 +50,9 @@
       },
     },
     computed: {
+      location: function() {
+          return this.$store.getters.location
+      },
       kiosks: function() {
           return this.$store.getters.kiosks
       },

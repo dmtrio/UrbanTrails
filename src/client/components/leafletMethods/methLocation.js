@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
-import findAccuratePosition from './accuratePosition'
+import accuratePosition from './accuratePosition'
+
 export default {
   locate: (context, mymap) => {
     const marker = L.marker([51.505, -0.09]).addTo(mymap)
@@ -21,13 +22,13 @@ export default {
         .bindPopup(`You are within ${radius} meters from this point`).openPopup()
       circle = L.circle(latln, radius).addTo(mymap)
     }
-    mymap.on('accuratepositionfound', onLocationFound)
+    mymap.on('locationFound', onLocationFound)
 
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition((position) => {
         onLocationFound(position.coords)
       })
     }
-    mymap.findAccuratePosition({maxWait: 15000, desiredAccuracy: 20})
+    accuratePosition.findAccuratePosition.bind(this,{ maxWait: 15000, desiredAccuracy: 10, enableHighAccuracy: true })
   }
 }

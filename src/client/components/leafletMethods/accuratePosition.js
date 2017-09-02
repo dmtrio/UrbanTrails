@@ -1,20 +1,14 @@
-/**
- * Leaflet.AccuratePosition aims to provide an accurate device location when simply calling map.locate() doesn’t.
- * https://github.com/m165437/Leaflet.AccuratePosition
- *
- * Greg Wilson's getAccurateCurrentPosition() forked to be a Leaflet plugin
- * https://github.com/gwilson/getAccurateCurrentPosition
- *
- * Copyright (C) 2013 Greg Wilson, 2014 Michael Schmidt-Voigt
- */
+/* eslint-disable */
+/* eslint-disable max-len */
 export default {
-    findAccuratePosition: function (options) {
-      if (!navigator.geolocation) {
-        this._handleAccuratePositionError({
+    findAccuratePosition: (options) => {
+      if ( !navigator.geolocation ) {
+        this._handleAccuratePositionError(
+        {
           code: 0,
           message: 'Geolocation not supported.'
-        });
-        return this;
+        })
+        return this
       }
 
       this._accuratePositionEventCount = 0;
