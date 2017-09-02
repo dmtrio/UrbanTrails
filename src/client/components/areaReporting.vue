@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="reporting">
-      <button v-on:click="toReportType(1)" id="reportSelection">Issues</button>
-      <button v-on:click="toReportType(2)" id="reportSelection">Recommendations</button>
+      <button v-on:click="toReportType(1)" class="button" id="reportIssue">Issues</button>
+      <button v-on:click="toReportType(2)" class="button" id="reportRecommendation">Recommendations</button>
     </div>
 
     <div class="issues">
-      <button id="pothole">Pothole</button>
-      <button id="sidewalks">Sidewalks</button>
-      <button id="vagrants">Vagrants</button>
-      <button id="other">Other</button>
+      <button class="button" id="pothole">Pothole</button>
+      <button class="button" id="sidewalks">Sidewalks</button>
+      <button class="button" id="vagrants">Vagrants</button>
+      <button class="button" id="other">Other</button>
       <!--Set of options based on report type-->
       <!--on click send data to server, mark as icon on map for temporary time (2 weeks?)-->
     </div>

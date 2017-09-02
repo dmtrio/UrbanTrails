@@ -1,35 +1,44 @@
 #selected {
   position: absolute;
-  height: 20%;
+  border-top: 2px solid grey;
+  height: 30%;
   width: 100%;
-  top: 80%;
+  top: 70%;
   display: block;
+  z-index: 401;
 }
 
-.reporting, .issues, .recommendations {
-  font-size: 40px;
+.reporting, .issues, .recommendations {display: none}
+
+#reportIssue {
+  background: radial-gradient(#777777, #AA5555);
+}
+#reportRecommendation {background: radial-gradient(#777777, #55AA55);}
+
+.reporting {background: linear-gradient(0deg, #999999, #444444);}
+.issues {background-color: #AA5555;}
+.recommendations {background-color: #55AA55;}
+
+.button {
+  margin: 1%;
+  font-size: 30px;
   font-weight: bold;
-  text-align: center;
-  display: none;
+  border-radius: 10px;
+  border: none;
+  display:inline-block;
+  top: 50%;
 }
 
-.reporting {
-  background-color: blue;
-  color: orange;
+.reporting .button {
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 45%;
+  height: 90%;
 }
 
-.issues {
-  background-color: green;
-  color: purple;
-}
-.recommendations {
-  background-color: yellow;
-  color: red;
-}
-
-#pothole, #sidewalks, #other, #vagrants {
+.issues .button {
   width: 22.5%;
-  height: 100%;
+  height: 90%;
   display: inline-block;
 }
 

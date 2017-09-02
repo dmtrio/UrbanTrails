@@ -1,6 +1,7 @@
 <template>
   <div id="mapid">
     <Dropdown></Dropdown>
+    <areaReporting></areaReporting>
   </div>
 </template>
 
@@ -128,14 +129,17 @@
             console.log(feat);  // ...that has a closure over the value.
           }
         }
-
+        function click (e) {
+          console.log('One, ah ah ah');
+        }
         function doubleClick (e) {
-          console.log('hello');
+          console.log('TWO, AH AH AH');
           let pos = [e.latlng.lat, e.latlng.lng]
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
         }
-        mymap.on('dblclick', doubleClick.bind(this))
+        mymap.on('dblclick', doubleClick.bind(this));
+        mymap.on('click', click.bind(this));
       },
     }
   }
