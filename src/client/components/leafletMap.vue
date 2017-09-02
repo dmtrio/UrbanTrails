@@ -1,16 +1,7 @@
 <template>
   <div id="mapid">
-<<<<<<< HEAD
-    <Dropdown></Dropdown>
-    <areaReporting></areaReporting>
-=======
     <Dropdown :toggleLayer="toggleLayer"></Dropdown>
-<<<<<<< HEAD
->>>>>>> hamburger slide in added
-=======
     <areaReporting></areaReporting>
-
->>>>>>> linter fixes
   </div>
 </template>
 
@@ -107,7 +98,38 @@
         //end map creation
 
         //map location
-        mLocation.locate(this, mymap)
+
+        let clientlng = navigator.geolocation.watchPosition((position) => position.coords.longitude )
+        let clientlat = navigator.geolocation.watchPosition((position) => position.coords.latitude )
+        let marker = L.marker([51.505, -0.09]).addTo(mymap);
+        marker.bindPopup('Configuring your location...').openPopup()
+        var circle = L.circle([51.505, -0.09], 0).addTo(mymap)
+
+
+        function onLocationFound(e) {
+          if (circle) {
+            mymap.removeLayer(circle)
+          }
+          var radius = e.accuracy / 2
+          var latln = {lat: e.latitude, lng: e.longitude}
+          mymap.setView(latln, 18)
+          marker.setLatLng(latln).closePopup()
+          .bindPopup("You are within " + radius + " meters from this point").openPopup()
+          circle = L.circle(latln, radius).addTo(mymap)
+        }
+        mymap.on('locationfound', onLocationFound)
+
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition((position) => {
+            onLocationFound(position.coords)
+          })
+        }
+        mymap.locate()
+
+
+        //add to here later
+        //mLocation.locate(this, mymap)
+
         //end map location
 
         // layer control
@@ -119,32 +141,23 @@
             console.log(feat);  // ...that has a closure over the value.
           }
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         function click (e) {
           console.log('One, ah ah ah');
         }
-=======
-        
->>>>>>> hamburger slide in added
-=======
 
->>>>>>> linter fixes
         function doubleClick (e) {
           console.log('TWO, AH AH AH');
           let pos = [e.latlng.lat, e.latlng.lng]
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
         }
-<<<<<<< HEAD
+
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
-=======
-        mymap.on('dblclick', doubleClick.bind(this))
 
         // mymap.on('dblclick', () => {hamburger.toggleLayer(this, mymap, 'kiosksLayer')})
 
->>>>>>> hamburger slide in added
       },
     }
   }
