@@ -1,6 +1,7 @@
 <template>
   <div id="mapid">
-    <Dropdown></Dropdown>
+    <Dropdown :toggleLayer="toggleLayer"></Dropdown>
+    <areaReporting></areaReporting>
   </div>
 </template>
 
@@ -53,17 +54,19 @@
       },
       fixits: function() {
           return this.$store.getters.fixits
+      },
+      allLayers: function() {
+        let layers = [ this.$data.mainLayer, this.$data.trailsLayer, this.$data.fixitsLayer, this.$data.kiosksLayer ]
+        return layers
       }
+
     },
     methods: {
+      toggleLayer(layer) {
+        hamburger.toggleLayer(layer, this, this.$data.map)
+      },
+
       makeMap() {
-        // var myInterface = L.marker.pin.interface ( );
-        //
-        // myInterface.UserLanguage = 'en';
-        //
-        // myInterface.addDefaultCategories ( );
-        //
-        // myInterface.setCallbackFunction ( function ( ) { history.pushState ( { index : "bar" } , "page", '?pin=' + myInterface.stringifyPins ( ) ); });
 
         //layers including empty
         this.$data.mainLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
@@ -76,6 +79,9 @@
         this.$data.fixitsLayer = L.layerGroup('')
 
         this.$data.kiosksLayer = L.layerGroup('')
+
+        // let kiosksLayer = L.layerGroup('')
+
         //end layers
 
         //map creation
@@ -99,50 +105,36 @@
         //end map location
 
         // layer control
-        hamburger.addControl(this, mymap)
+        // hamburger.addControl(this, mymap)
         //end layer control
 
-
-
-        // mymap.on ( 'click', function ( Event ) { myInterface.newPin ( mymap, Event.latlng )} );
-        // mymap.on ( 'contextmenu', function ( Event ) { myInterface.newPin ( mymap, Event.latlng )} );
-        //
-        // var Search = decodeURI ( window.location.search );
-        // if ( 0 <= Search.indexOf ( 'pin=' ) ) { myInterface.parsePins ( Search.substr ( Search.indexOf ( 'pin=' ) + 4 ), mymap );}
-        //
         function getHandlerForFeature(feat) {  // A function...
           return function(ev) {   // ...that returns a function...
             console.log(feat);  // ...that has a closure over the value.
           }
         }
 
-        mymap.on('popupopen', function(){
-          L.DomEvent.on(
-            document.getElementById('mybutton'),
-            'click',
-            getHandlerForFeature("hi guys!!") // The result of this call is the event handler func.
-          );
-        });
+        function click (e) {
+          console.log('One, ah ah ah');
+        }
 
         function doubleClick (e) {
-          let myFunc = function myFunc() {
-            console.log('hello everyone')
-          }
-
-          function doubleClick (e) {
-            var popup = L.popup.call(this)
-            .setLatLng([e.latlng.lat, e.latlng.lng])
-            .setContent("<button id='mybutton'>Foo!</button>")
-            .openOn(mymap);
-          }
-
+          console.log('TWO, AH AH AH');
+          let pos = [e.latlng.lat, e.latlng.lng]
+          var reports = document.getElementsByClassName('reporting');
+          reports[0].setAttribute('id', 'selected');
         }
-        mymap.on('dblclick', doubleClick.bind(this))
+
+        mymap.on('dblclick', doubleClick.bind(this));
+        mymap.on('click', click.bind(this));
+
+        // mymap.on('dblclick', () => {hamburger.toggleLayer(this, mymap, 'kiosksLayer')})
+
       },
     }
   }
 </script>
 
 <style>
-  #mapid {height: 500px;}
+  #mapid {height: 100%;}
 </style>
