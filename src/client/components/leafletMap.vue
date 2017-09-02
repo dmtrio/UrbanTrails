@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import { Routing } from "leaflet-routing-machine"
+import { Routing } from "leaflet-routing-machine"
   import * as L from 'leaflet';
   import meth from './leafletMethods/leafletMethods.js'
   import loadLayer from './leafletMethods/methLoadLayer.js'
