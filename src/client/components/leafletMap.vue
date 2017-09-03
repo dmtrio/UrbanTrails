@@ -1,13 +1,17 @@
 <template>
-  <div id="mapid">
-    <Dropdown :toggleLayer="toggleLayer"></Dropdown>
+  <div>
+    <transition name="slide-fade">
+      <div id="mapid">
+      </div>
+    </transition>
+    <Sidepanel :transformMap="transformMap" :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
 </template>
 
 <script>
-    import { Routing } from "leaflet-routing-machine"
-import "leaflet-control-geocoder"
+  import { Routing } from "leaflet-routing-machine"
+  import "leaflet-control-geocoder"
   import * as L from 'leaflet'
   import meth from './leafletMethods/leafletMethods.js'
   import loadLayer from './leafletMethods/methLoadLayer.js'
@@ -17,8 +21,6 @@ import "leaflet-control-geocoder"
   export default {
     data() {
       return {
-        w: 700,
-        h: 580,
         map: 'blah',
         mainLayer: null,
         trailsLayer: null,
@@ -66,12 +68,24 @@ import "leaflet-control-geocoder"
       allLayers: function() {
         let layers = [ this.$data.mainLayer, this.$data.trailsLayer, this.$data.fixitsLayer, this.$data.kiosksLayer ]
         return layers
-      }
-
+      },
     },
     methods: {
       toggleLayer(layer) {
-        hamburger.toggleLayer(layer, this, this.$data.map)
+        return hamburger.toggleLayer(layer, this, this.$data.map)
+      },
+      transformMap(dir, percentage) {
+        document.getElementById("mapid").style[dir] = percentage
+        // this.$data.map.invalidateSize({
+        //   pan: true,
+        //   zoom: false
+        // })
+      },
+      closePanels() {
+        if (this.$store.state.sidePanelOpen) {
+          this.$store.commit('TOGGLE_SIDEPANEL')
+          this.transformMap('width', '100%')
+        }
       },
 
       makeMap() {
@@ -82,7 +96,7 @@ import "leaflet-control-geocoder"
             id: 'mapbox.streets'
         })
 
-          this.$data.trailsLayer = L.geoJSON()
+        this.$data.trailsLayer = L.geoJSON()
 
         this.$data.fixitsLayer = L.layerGroup('')
 
@@ -98,11 +112,13 @@ import "leaflet-control-geocoder"
             this.$data.mainLayer,
             this.$data.trailsLayer,
             this.$data.fixitsLayer,
-            this.$data.kiosksLayer]
+            this.$data.kiosksLayer,
+            //this.$data.menuButton
+            ]
         });
         this.$data.map = mymap
         //end map creation
-          L.Control.geocoder({position: "topleft"}).addTo(this.map);
+        L.Control.geocoder({position: "topleft"}).addTo(this.map);
 
         //map location
         // mLocation.locate()
@@ -116,20 +132,22 @@ import "leaflet-control-geocoder"
         }
 
         function click (e) {
+          this.closePanels()
+
           console.log('One, ah ah ah');
         }
 
         function doubleClick (e) {
           console.log('TWO, AH AH AH');
+          this.transformMap('height', '70%')
           let pos = [e.latlng.lat, e.latlng.lng]
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
         }
 
+
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
-
-        // mymap.on('dblclick', () => {hamburger.toggleLayer(this, mymap, 'kiosksLayer')})
 
       },
     }
@@ -137,5 +155,12 @@ import "leaflet-control-geocoder"
 </script>
 
 <style>
-#mapid {height: 100%;}
+  #mapid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    float: left;
+    transition: width .5s, height .5s;
+  }
+
 </style>

@@ -1,5 +1,17 @@
-html, body{
+html, body, body > div, body > div > div{
   height: 100%
+}
+
+.overLeaflet /*, .application, .application:not(#mapid) */{
+  z-index: 1010 !important
+}
+
+.overEverything {
+  z-index: 1050 !important
+}
+
+.base { /*temporary until styles is set */
+  background-color: white;
 }
 
 #selected {

@@ -5,6 +5,8 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 const state = {
+  mobile: '',
+  sidePanelOpen: false,
   kiosks: [],
   fixits: [],
   trails: [],
@@ -45,6 +47,12 @@ const actions = {
 const mutations = {
   SET_LOCATION(state, { location }) {
     state.location = location
+  },
+  SET_MOBILE(state, mobile) {
+    state.mobile = mobile
+  },
+  TOGGLE_SIDEPANEL(state) {
+    state.sidePanelOpen = !state.sidePanelOpen
   },
   SET_KIOSKS(state, { kiosks }) {
     state.kiosks = kiosks

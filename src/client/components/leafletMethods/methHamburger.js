@@ -14,8 +14,10 @@ export default {
   toggleLayer: (layer, context, mymap) => {
     if (mymap.hasLayer(context.$data[layer])) {
       mymap.removeLayer(context.$data[layer])
+      return false
     } else {
       mymap.addLayer(context.$data[layer])
+      return true
     }
   }
 }
