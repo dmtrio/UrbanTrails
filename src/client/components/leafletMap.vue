@@ -1,9 +1,6 @@
 <template>
   <div>
-    <transition name="slide-fade">
-      <div id="mapid">
-      </div>
-    </transition>
+    <div id="mapid"></div>
     <Sidepanel :transformMap="transformMap" :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
@@ -13,10 +10,8 @@
   import { Routing } from "leaflet-routing-machine"
   import "leaflet-control-geocoder"
   import * as L from 'leaflet'
-  import meth from './leafletMethods/leafletMethods.js'
-  import loadLayer from './leafletMethods/methLoadLayer.js'
-  import customPopup from './leafletMethods/methPopup.js'
-  import hamburger from './leafletMethods/methHamburger.js'
+  import methods from './leafletMethods/methodSample.js'
+  import mLayers from './leafletMethods/methLayers.js'
   import mLocation from './leafletMethods/methLocation.js'
   export default {
     data() {
@@ -43,13 +38,13 @@
         console.log(this.$store.getters.location)
       },
       fixits: function() {
-        loadLayer.fixitMarkers(this)
+        mLayers.fixitMarkers(this)
       },
       kiosks: function() {
-        loadLayer.kioskMarkers(this)
+        mLayers.kioskMarkers(this)
       },
       trails: function(){
-        loadLayer.addTrails(this)
+        mLayers.addTrails(this)
       },
     },
     computed: {
@@ -72,7 +67,7 @@
     },
     methods: {
       toggleLayer(layer) {
-        return hamburger.toggleLayer(layer, this, this.$data.map)
+        return mLayers.toggleLayer(layer, this, this.$data.map)
       },
       transformMap(dir, percentage) {
         document.getElementById("mapid").style[dir] = percentage
@@ -95,13 +90,9 @@
             maxZoom: 18,
             id: 'mapbox.streets'
         })
-
         this.$data.trailsLayer = L.geoJSON()
-
         this.$data.fixitsLayer = L.layerGroup('')
-
         this.$data.kiosksLayer = L.layerGroup('')
-
         //end layers
 
         //map creation
@@ -113,7 +104,6 @@
             this.$data.trailsLayer,
             this.$data.fixitsLayer,
             this.$data.kiosksLayer,
-            //this.$data.menuButton
             ]
         });
         this.$data.map = mymap
@@ -133,7 +123,6 @@
 
         function click (e) {
           this.closePanels()
-
           console.log('One, ah ah ah');
         }
 
@@ -145,10 +134,9 @@
           reports[0].setAttribute('id', 'selected');
         }
 
-
+        //capture clicks on the map
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
-
       },
     }
   }
