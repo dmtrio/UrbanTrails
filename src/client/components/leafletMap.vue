@@ -1,26 +1,24 @@
 <template>
-  <div id="mapid">
-    <Dropdown :toggleLayer="toggleLayer"></Dropdown>
+  <div>
+    <div id="mapid"></div>
+    <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
 </template>
 
 <script>
-    import { Routing } from "leaflet-routing-machine"
-import "leaflet-control-geocoder"
+  import { Routing } from "leaflet-routing-machine"
+  import "leaflet-control-geocoder"
   import * as L from 'leaflet'
-  import meth from './leafletMethods/leafletMethods.js'
-  import loadLayer from './leafletMethods/methLoadLayer.js'
-  import customPopup from './leafletMethods/methPopup.js'
-  import hamburger from './leafletMethods/methHamburger.js'
+  import methods from './leafletMethods/methodSample.js'
+  import mLayers from './leafletMethods/methLayers.js'
   import mLocation from './leafletMethods/methLocation.js'
   export default {
     data() {
       return {
-        w: 700,
-        h: 580,
         map: 'blah',
-        mainLayer: null,
+        mainLightLayer: null,
+        mainDarkLayer: null,
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
@@ -41,13 +39,13 @@ import "leaflet-control-geocoder"
         console.log(this.$store.getters.location)
       },
       fixits: function() {
-        loadLayer.fixitMarkers(this)
+        mLayers.fixitMarkers(this)
       },
       kiosks: function() {
-        loadLayer.kioskMarkers(this)
+        mLayers.kioskMarkers(this)
       },
       trails: function(){
-        loadLayer.addTrails(this)
+        mLayers.addTrails(this)
       },
     },
     computed: {
@@ -63,31 +61,38 @@ import "leaflet-control-geocoder"
       fixits: function() {
           return this.$store.getters.fixits
       },
-      allLayers: function() {
-        let layers = [ this.$data.mainLayer, this.$data.trailsLayer, this.$data.fixitsLayer, this.$data.kiosksLayer ]
-        return layers
-      }
-
     },
     methods: {
       toggleLayer(layer) {
-        hamburger.toggleLayer(layer, this, this.$data.map)
+        return mLayers.toggleLayer(layer, this, this.$data.map)
+      },
+      // transformMap(dir, percentage) {
+      //   document.getElementById("mapid").style[dir] = percentage
+      //   this.$data.map.invalidateSize({
+      //     pan: true,
+      //     zoom: false
+      //   })
+      // },
+      closePanels() {
+        if (this.$store.state.sidePanelOpen) {
+          this.$store.commit('TOGGLE_SIDEPANEL')
+        }
       },
 
       makeMap() {
 
         //layers including empty
-        this.$data.mainLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
+        this.$data.mainLightLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
+          maxZoom: 18,
+          id: 'mapbox.streets'
+        })
+        this.$data.mainDarkLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
             maxZoom: 18,
             id: 'mapbox.streets'
         })
-
-          this.$data.trailsLayer = L.geoJSON()
-
+        this.$data.trailsLayer = L.geoJSON()
         this.$data.fixitsLayer = L.layerGroup('')
-
         this.$data.kiosksLayer = L.layerGroup('')
-
         //end layers
 
         //map creation
@@ -95,14 +100,16 @@ import "leaflet-control-geocoder"
             center: [51.505, -0.09],
             zoom: 13,
             layers: [
-            this.$data.mainLayer,
+            this.$data.mainLightLayer,
+            this.$data.mainDarkLayer,
             this.$data.trailsLayer,
             this.$data.fixitsLayer,
-            this.$data.kiosksLayer]
+            this.$data.kiosksLayer,
+            ]
         });
         this.$data.map = mymap
         //end map creation
-          L.Control.geocoder({position: "topleft"}).addTo(this.map);
+        L.Control.geocoder({position: "topleft"}).addTo(this.map);
 
         //map location
         // mLocation.locate()
@@ -116,6 +123,7 @@ import "leaflet-control-geocoder"
         }
 
         function click (e) {
+          this.closePanels()
           console.log('One, ah ah ah');
         }
 
@@ -126,16 +134,22 @@ import "leaflet-control-geocoder"
           reports[0].setAttribute('id', 'selected');
         }
 
+        //capture clicks on the map
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
-
-        // mymap.on('dblclick', () => {hamburger.toggleLayer(this, mymap, 'kiosksLayer')})
-
+        mymap.on('movestart', click.bind(this))
       },
     }
   }
 </script>
 
 <style>
-#mapid {height: 100%;}
+  #mapid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    float: left;
+    transition: width .5s, height .5s;
+  }
+
 </style>
