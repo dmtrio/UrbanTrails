@@ -64,13 +64,14 @@ server.route({
 })
 
 server.route({
-  method: 'GET',
-  path: '/trailblazers',
+  method: 'POST',
+  path: '/pothole',
   handler: (request, reply) => {
-    knex('users').select('*')
+    console.log(request.body);
+    /*knex('reports').insert({report_type: 'pothole', report_data: 'pothole', coordinates: })
       .then((usernames) => {
         reply(usernames)
-      })
+      })*/
   }
 })
 

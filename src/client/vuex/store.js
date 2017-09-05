@@ -24,6 +24,20 @@ const actions = {
       console.log(err)
     })
   },
+
+  POST_REPORT: (reportInfo) => {
+    axios.post('/' + reportInfo.reportType, {
+      userid: reportInfo.userid,
+      position: reportInfo.position
+    })
+    .then((response) => {
+      console.log(response);
+    }, (err) => {
+      console.log(err);
+    }),
+    console.log(commit);
+  },
+
   LOAD_KIOSKS: ({ commit }) => {
     axios.get('/kiosks').then((response) => {
       commit('SET_KIOSKS', { kiosks: response.data.data })
@@ -31,6 +45,7 @@ const actions = {
       console.log(err)
     })
   },
+
   LOAD_FIXITS: ({ commit }) => {
     axios.get('/fixits').then((response) => {
       commit('SET_FIXITS', { fixits: response.data.data })
@@ -38,6 +53,7 @@ const actions = {
       console.log(err)
     })
   },
+  
   LOAD_TRAILS: ({ commit }) => {
     axios.get('/trails').then((response) => {
       commit('SET_TRAILS', { trails: response.data.features })
