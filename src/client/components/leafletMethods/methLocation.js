@@ -29,6 +29,6 @@ export default {
         onLocationFound(position.coords)
       })
     }
-    accuratePosition.findAccuratePosition.bind(this,{ maxWait: 15000, desiredAccuracy: 10, enableHighAccuracy: true })
+    accuratePosition.findAccuratePosition.bind(this, { maxWait: 15000, desiredAccuracy: 10, enableHighAccuracy: true })
   }
 }
