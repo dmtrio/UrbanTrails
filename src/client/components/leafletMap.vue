@@ -6,8 +6,9 @@
 </template>
 
 <script>
-  import * as L from 'leaflet';
-  import * as Pin from 'leaflet.marker.pin';
+    import { Routing } from "leaflet-routing-machine"
+import "leaflet-control-geocoder"
+  import * as L from 'leaflet'
   import meth from './leafletMethods/leafletMethods.js'
   import loadLayer from './leafletMethods/methLoadLayer.js'
   import customPopup from './leafletMethods/methPopup.js'
@@ -74,13 +75,11 @@
             id: 'mapbox.streets'
         })
 
-        this.$data.trailsLayer = L.geoJSON()
+          this.$data.trailsLayer = L.geoJSON()
 
         this.$data.fixitsLayer = L.layerGroup('')
 
         this.$data.kiosksLayer = L.layerGroup('')
-
-        // let kiosksLayer = L.layerGroup('')
 
         //end layers
 
@@ -96,6 +95,7 @@
         });
         this.$data.map = mymap
         //end map creation
+          L.Control.geocoder({position: "topleft"}).addTo(this.map);
 
         //map location
 
@@ -126,7 +126,13 @@
         }
         mymap.locate()
 
-
+          // L.Routing.control({
+          //     waypoints: [
+          //         L.latLng(57.74, 11.94),
+          //         L.latLng(57.6792, 11.949)
+          //     ],
+          //     geocoder: L.Control.Geocoder.nominatim()
+          // }).addTo(this.map);
         //add to here later
         //mLocation.locate(this, mymap)
 
@@ -164,5 +170,5 @@
 </script>
 
 <style>
-  #mapid {height: 100%;}
+#mapid {height: 100%;}
 </style>
