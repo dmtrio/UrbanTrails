@@ -5,6 +5,9 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 const state = {
+  viewSignIn: true,
+  signedIn: false,
+  user: null,
   mobile: '',
   sidePanelOpen: false,
   kiosks: [],
@@ -54,6 +57,9 @@ const mutations = {
   TOGGLE_SIDEPANEL(state) {
     state.sidePanelOpen = !state.sidePanelOpen
   },
+  TOGGLE_SIGN_IN(state) {
+    state.viewSignIn = !state.viewSignIn
+  },
   SET_KIOSKS(state, { kiosks }) {
     state.kiosks = kiosks
   },
@@ -69,7 +75,8 @@ const getters = {
   location: state => state.location,
   kiosks: state => state.kiosks,
   fixits: state => state.fixits,
-  trails: state => state.trails
+  trails: state => state.trails,
+  // viewSignIn: state => state.viewSignIn || !state.signedIn,
 }
 
 export default new Vuex.Store({

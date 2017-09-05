@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="mapid"></div>
-    <Sidepanel :transformMap="transformMap" :toggleLayer="toggleLayer"></Sidepanel>
+    <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
 </template>
@@ -17,7 +17,8 @@
     data() {
       return {
         map: 'blah',
-        mainLayer: null,
+        mainLightLayer: null,
+        mainDarkLayer: null,
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
@@ -60,33 +61,33 @@
       fixits: function() {
           return this.$store.getters.fixits
       },
-      allLayers: function() {
-        let layers = [ this.$data.mainLayer, this.$data.trailsLayer, this.$data.fixitsLayer, this.$data.kiosksLayer ]
-        return layers
-      },
     },
     methods: {
       toggleLayer(layer) {
         return mLayers.toggleLayer(layer, this, this.$data.map)
       },
-      transformMap(dir, percentage) {
-        document.getElementById("mapid").style[dir] = percentage
-        // this.$data.map.invalidateSize({
-        //   pan: true,
-        //   zoom: false
-        // })
-      },
+      // transformMap(dir, percentage) {
+      //   document.getElementById("mapid").style[dir] = percentage
+      //   this.$data.map.invalidateSize({
+      //     pan: true,
+      //     zoom: false
+      //   })
+      // },
       closePanels() {
         if (this.$store.state.sidePanelOpen) {
           this.$store.commit('TOGGLE_SIDEPANEL')
-          this.transformMap('width', '100%')
+          // this.transformMap('width', '100%')
         }
       },
 
       makeMap() {
 
         //layers including empty
-        this.$data.mainLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
+        this.$data.mainLightLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
+          maxZoom: 18,
+          id: 'mapbox.streets'
+        })
+        this.$data.mainDarkLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
             maxZoom: 18,
             id: 'mapbox.streets'
         })
@@ -100,7 +101,8 @@
             center: [51.505, -0.09],
             zoom: 13,
             layers: [
-            this.$data.mainLayer,
+            this.$data.mainLightLayer,
+            this.$data.mainDarkLayer,
             this.$data.trailsLayer,
             this.$data.fixitsLayer,
             this.$data.kiosksLayer,
@@ -137,6 +139,7 @@
         //capture clicks on the map
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
+        mymap.on('movestart', click.bind(this))
       },
     }
   }
