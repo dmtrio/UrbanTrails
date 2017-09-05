@@ -76,7 +76,6 @@
       closePanels() {
         if (this.$store.state.sidePanelOpen) {
           this.$store.commit('TOGGLE_SIDEPANEL')
-          // this.transformMap('width', '100%')
         }
       },
 
