@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <leafletMap></leafletMap>
+    <SignInOrUp></SignInOrUp>
   </v-app>
 </template>
 

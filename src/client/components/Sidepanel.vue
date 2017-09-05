@@ -7,8 +7,7 @@
         <v-switch @click="changeBool('kiosks')" v-bind:label="`Kiosks`" v-model="kiosksBool" light></v-switch>
         <v-switch @click="changeBool('fixits')" v-bind:label="`Fixits`" v-model="fixitsBool" light></v-switch>
         <v-switch @click="changeBool('trails')" v-bind:label="`Trails`" v-model="trailsBool" light></v-switch>
-        <v-switch @click="changeBool('mainLight')" v-bind:label="`Light`" v-model="mainLightBool" light></v-switch>
-        <v-switch @click="changeBool('mainDark')" v-bind:label="`Dark`" v-model="mainDarkBool" light></v-switch>
+        <v-switch @click="toggleMainLayer()" v-bind:label="`Dark`" v-model="mainDarkBool" light></v-switch>
       </div>
     </transition>
   </div>
@@ -20,8 +19,7 @@
     data() {
       return {
         visible: false,
-        mainLightBool: true,
-        mainDarkBool: true,
+        mainDarkBool: false,
         kiosksBool: true,
         fixitsBool: true,
         trailsBool: true,
@@ -31,16 +29,16 @@
 
     },
     methods: {
+      toggleMainLayer(){
+        const layers = ['mainDark', 'mainLight']
+        for (let layer of layers) {
+          this.changeBool(layer)
+        }
+      },
       changeBool(layer) {
         this.$data[`${layer}Bool`] = this.toggleLayer(`${layer}Layer`)
       },
       toggleVisible(e) {
-        // if (this.$data.visible) {
-        //   this.transformMap('width', '100%')
-        // } else {
-        //   // const percentage = 100 * ((window.document.body.clientWidth - 250) / window.document.body.clientWidth)
-        //   // this.transformMap('width', `${percentage}%`)
-        // }
         this.$store.commit('TOGGLE_SIDEPANEL')
       },
     }
