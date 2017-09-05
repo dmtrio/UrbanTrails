@@ -16,11 +16,9 @@ Vue.use(VueAsyncData)
 // register component to be used globally including inside other components
 Vue.component('App', App)
 Vue.component('leafletMap', leafletMap)
-Vue.component('v-map', Vue2Leaflet.Map)
-Vue.component('v-tilelayer', Vue2Leaflet.TileLayer)
-Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('areaReporting', areaReporting)
 Vue.component('Dropdown', Dropdown)
+Vue.component('Vue2Leaflet', Vue2Leaflet)
 
 new Vue({
   // inject store into all components
