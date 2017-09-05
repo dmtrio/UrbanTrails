@@ -7,10 +7,18 @@ Vue.use(Vuex)
 const state = {
   kiosks: [],
   fixits: [],
-  trails: []
+  trails: [],
+  location: null
 }
 
 const actions = {
+  FIND_LOCATION: ({ commit }) => {
+    navigator.geolocation.watchPosition((position) => {
+      commit('SET_LOCATION', { location: [position.coords.latitude, position.coords.longitude] })
+    }, (err) => {
+      console.log(err)
+    })
+  },
   LOAD_KIOSKS: ({ commit }) => {
     axios.get('/kiosks').then((response) => {
       commit('SET_KIOSKS', { kiosks: response.data.data })
@@ -35,6 +43,9 @@ const actions = {
 }
 
 const mutations = {
+  SET_LOCATION(state, { location }) {
+    state.location = location
+  },
   SET_KIOSKS(state, { kiosks }) {
     state.kiosks = kiosks
   },
@@ -47,6 +58,7 @@ const mutations = {
 }
 
 const getters = {
+  location: state => state.location,
   kiosks: state => state.kiosks,
   fixits: state => state.fixits,
   trails: state => state.trails

@@ -27,6 +27,7 @@ import "leaflet-control-geocoder"
       };
     },
     beforeCreate() {
+      this.$store.dispatch('FIND_LOCATION')
       this.$store.dispatch('LOAD_KIOSKS')
       this.$store.dispatch('LOAD_TRAILS')
       this.$store.dispatch('LOAD_FIXITS')
@@ -36,6 +37,9 @@ import "leaflet-control-geocoder"
       this.makeMap()
     },
     watch: {
+      location: function() {
+        console.log(this.$store.getters.location)
+      },
       fixits: function() {
         loadLayer.fixitMarkers(this)
       },
@@ -47,6 +51,9 @@ import "leaflet-control-geocoder"
       },
     },
     computed: {
+      location: function() {
+          return this.$store.getters.location
+      },
       kiosks: function() {
           return this.$store.getters.kiosks
       },
@@ -98,49 +105,9 @@ import "leaflet-control-geocoder"
           L.Control.geocoder({position: "topleft"}).addTo(this.map);
 
         //map location
+        // mLocation.locate()
 
-        let clientlng = navigator.geolocation.watchPosition((position) => position.coords.longitude )
-        let clientlat = navigator.geolocation.watchPosition((position) => position.coords.latitude )
-        let marker = L.marker([51.505, -0.09]).addTo(mymap);
-        marker.bindPopup('Configuring your location...').openPopup()
-        var circle = L.circle([51.505, -0.09], 0).addTo(mymap)
-
-
-        function onLocationFound(e) {
-          if (circle) {
-            mymap.removeLayer(circle)
-          }
-          var radius = e.accuracy / 2
-          var latln = {lat: e.latitude, lng: e.longitude}
-          mymap.setView(latln, 18)
-          marker.setLatLng(latln).closePopup()
-          .bindPopup("You are within " + radius + " meters from this point").openPopup()
-          circle = L.circle(latln, radius).addTo(mymap)
-        }
-        mymap.on('locationfound', onLocationFound)
-
-        if (navigator.geolocation) {
-          navigator.geolocation.watchPosition((position) => {
-            onLocationFound(position.coords)
-          })
-        }
-        mymap.locate()
-
-          // L.Routing.control({
-          //     waypoints: [
-          //         L.latLng(57.74, 11.94),
-          //         L.latLng(57.6792, 11.949)
-          //     ],
-          //     geocoder: L.Control.Geocoder.nominatim()
-          // }).addTo(this.map);
-        //add to here later
-        //mLocation.locate(this, mymap)
-
-        //end map location
-
-        // layer control
-        // hamburger.addControl(this, mymap)
-        //end layer control
+        mLocation.locate(this, mymap)
 
         function getHandlerForFeature(feat) {  // A function...
           return function(ev) {   // ...that returns a function...
