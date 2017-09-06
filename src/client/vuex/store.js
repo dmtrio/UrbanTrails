@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import calculateDistance from './calculateDistance'
+import { getDistance } from 'geolib'
 
 Vue.use(Vuex)
 
@@ -8,6 +10,7 @@ const state = {
   kiosks: [],
   fixits: [],
   trails: [],
+  kiosksWithinLocation: [],
   location: null
 }
 
@@ -15,8 +18,13 @@ const actions = {
   FIND_LOCATION: ({ commit }) => {
     navigator.geolocation.watchPosition((position) => {
       commit('SET_LOCATION', { location: [position.coords.latitude, position.coords.longitude] })
-    }, (err) => {
-      console.log(err)
+      // axios.get('/kiosks').then((response) => {
+      //   commit('SET_KIOSKS_IN_LOC', { kiosksWithinLocation: response.data.data.filter(data => {
+      //      const lat = JSON.parse(data[11])
+      //      const long = JSON.parse(data[12])
+      //      getDistance({latitude: position.coords.latitude, longitude: position.coords.longitude}, {latitude: lat, longitude: long}) < 1000 })
+      //   })
+      // })
     })
   },
   LOAD_KIOSKS: ({ commit }) => {
@@ -55,13 +63,22 @@ const mutations = {
   SET_TRAILS(state, { trails }) {
     state.trails = trails
   }
+  // SET_KIOSKS_IN_LOC(state, { kiosksWithinLocation }) {
+  //   state.kiosksWithinLocation = kiosksWithinLocation
+  // }
 }
 
 const getters = {
   location: state => state.location,
   kiosks: state => state.kiosks,
   fixits: state => state.fixits,
-  trails: state => state.trails
+  trails: state => state.trails,
+  kiosksWithinLocation: state => state.kiosks.filter(data => {
+     const lat = JSON.parse(data[11])
+     const long = JSON.parse(data[12])
+     console.log(state.location)
+     getDistance({latitude: state.location[0], longitude: state.location[1]}, {latitude: lat, longitude: long}) < 1000
+  })
 }
 
 export default new Vuex.Store({
