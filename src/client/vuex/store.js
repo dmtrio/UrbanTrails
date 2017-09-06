@@ -25,7 +25,8 @@ const actions = {
     })
   },
 
-  POST_REPORT: (reportInfo) => {
+  POST_REPORT: (skipThisV, reportInfo) => {
+    console.log('REPINFO', reportInfo);
     axios.post('/' + reportInfo.reportType, {
       userid: reportInfo.userid,
       position: reportInfo.position
@@ -33,9 +34,8 @@ const actions = {
     .then((response) => {
       console.log(response);
     }, (err) => {
-      console.log(err);
-    }),
-    console.log(commit);
+      console.log('ERROR', err);
+    })
   },
 
   LOAD_KIOSKS: ({ commit }) => {
@@ -53,7 +53,7 @@ const actions = {
       console.log(err)
     })
   },
-  
+
   LOAD_TRAILS: ({ commit }) => {
     axios.get('/trails').then((response) => {
       commit('SET_TRAILS', { trails: response.data.features })

@@ -5,7 +5,8 @@ const knex = require('knex')({
   client: 'sqlite3',
   connection: {
     filename: './src/urban-trails-info.sqlite3'
-  }
+  },
+  useNullAsDefault: true
 })
 // Create a server with a host and port
 const server = new Hapi.Server()
@@ -67,11 +68,14 @@ server.route({
   method: 'POST',
   path: '/pothole',
   handler: (request, reply) => {
-    console.log(request.body);
-    /*knex('reports').insert({report_type: 'pothole', report_data: 'pothole', coordinates: })
-      .then((usernames) => {
-        reply(usernames)
-      })*/
+    console.log('Req body', request.payload)
+    knex('reports').insert({report_type: 'pothole', report_data: 'pothole', coordinates: request.payload.position, userid: request.payload.userid})
+    .then(function (report) {
+      console.log(report);
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
   }
 })
 

@@ -19,8 +19,15 @@
     </div>
   </div>
 </template>
+
 <script type="text/javascript">
   export default {
+    data() {
+      return {};
+    },
+    mounted() {
+      console.log(this)
+    },
     methods: {
       toReportType: (reportType) => {
         document.getElementsByClassName('reporting')[0].removeAttribute('id')
@@ -31,8 +38,9 @@
         }
       },
 
-      postReport: (reportName) => {
-        let reportInfo = {reportType: reportName, userid: 1, position: document.getElementsByClassName('reporting')[0].data};
+      postReport(reportName) {
+        console.log(reportName);
+        let reportInfo = {reportType: reportName, userid: 1, position: document.getElementsByClassName('reporting')[0].getAttribute('data')};
         this.$store.dispatch('POST_REPORT', reportInfo);
       }
     }
