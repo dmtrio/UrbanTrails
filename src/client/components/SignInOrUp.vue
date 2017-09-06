@@ -1,0 +1,56 @@
+<template>
+  <div id="signInOrUp">
+    <v-tabs v-model="active" dark fixed centered secondary >
+      <v-tabs-bar>
+        <v-tabs-slider class="yellow"></v-tabs-slider>
+        <v-tabs-item :key="1" :href="'#SignIn'">
+          <p >Sign in</p>
+        </v-tabs-item>
+        <v-tabs-item :key="2" :href="'#SignUp'">
+          <p >Sign up</p>
+        </v-tabs-item>
+      </v-tabs-bar>
+      <v-tabs-items>
+        <v-tabs-content :key="1" :id="'SignIn'" class="tab-content">
+          <SignInOrUpForm :key="1" :isSignIn="true"></SignInOrUpForm>
+        </v-tabs-content>
+        <v-tabs-content :key="2" :id="'SignUp'" class="tab-content">
+          <SignInOrUpForm :key="2" :isSignIn="false"></SignInOrUpForm>
+        </v-tabs-content>
+      </v-tabs-items>
+    </v-tabs>
+  </div>
+</template>
+
+  <script>
+    export default {
+      computed: {
+        active: {
+          get () {
+            return this.$store.state.SiouActive
+          },
+          set (value) {
+            this.$store.commit('TOGGLE_SIOU_ACTIVE', value)
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    #signInOrUp {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      position: relative;
+      bottom: 80%;
+      margin: auto;
+      z-index: 1200;
+      padding: 10px;
+    }
+    #signInOrUp > div {
+      background-color: white;
+    }
+    .tabs__content {
+      padding: 10px;
+    }
+  </style>

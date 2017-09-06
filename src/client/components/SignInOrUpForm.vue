@@ -1,0 +1,93 @@
+<template>
+  <div>
+    <v-card flat>
+      <v-form ref="form" >
+        <v-text-field
+          label="Enter your E-mail"
+          v-model="email"
+          :rules="emailRules"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-if="isSignIn"
+          label="Enter your password"
+          hint="At least 8 characters"
+          min="8"
+          :append-icon="nonVisible ? 'visibility_off' : 'visibility'"
+          :append-icon-cb="() => (nonVisible = !nonVisible)"
+          :type="nonVisible ? 'password' : 'text'"
+          v-model="password"
+          :rules="passwordRules"
+          required
+          counter
+        ></v-text-field>
+        <v-text-field
+          v-else
+          label="Set your password"
+          hint="At least 8 characters"
+          min="8"
+          :append-icon="nonVisible ? 'visibility_off' : 'visibility'"
+          :append-icon-cb="() => (nonVisible = !nonVisible)"
+          :type="nonVisible ? 'password' : 'text'"
+          v-model="password"
+          :rules="passwordRules"
+          required
+          counter
+        ></v-text-field>
+        <v-btn @click="submit">submit</v-btn>
+        <v-btn @click="clear">clear</v-btn>
+        <a href="#" @click.prevent="closeSignInOrUp">CLOSE</a>
+      </v-form>
+    </v-card>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: ['isSignIn'],
+    data() {
+      return {
+        nonVisible: true,
+        password: '',
+        email: '',
+        emailRules: [
+        (v) => !!v || 'E-mail is required',
+        (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+        ],
+        passwordRules: [
+        (v) => !!v || 'Password is required',
+        (v) => v.length >= 8 || 'Password must be at least 8 characters'
+        ]
+      }
+    },
+    computed: {
+      signInOrUp: function() {
+        return this.$data.isSignIn ? 'Sign in' : 'Sign up'
+      }
+    },
+
+    methods: {
+      closeSignInOrUp() {
+        this.$store.commit('TOGGLE_SIGN_IN')
+      },
+      toggleSignInOrUp(bool) {
+        if(this.$data.isSignIn === !bool){
+          this.clear()
+          this.$data.isSignIn = bool
+        }
+      },
+      submit() {
+        if(this.$refs.form.validate()) {
+          //axios store call needed
+          console.log('email', this.$data.email, 'password', this.$data.password )
+        } else {
+          console.log('reqs not met');
+        }
+      },
+      clear() {
+        this.$refs.form.reset()
+      },
+
+    }
+  }
+</script>

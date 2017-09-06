@@ -5,7 +5,8 @@ const knex = require('knex')({
   client: 'sqlite3',
   connection: {
     filename: './src/urban-trails-info.sqlite3'
-  }
+  },
+  useNullAsDefault: true
 })
 // Create a server with a host and port
 const server = new Hapi.Server()
@@ -64,12 +65,15 @@ server.route({
 })
 
 server.route({
-  method: 'GET',
-  path: '/trailblazers',
+  method: 'POST',
+  path: '/report',
   handler: (request, reply) => {
-    knex('users').select('*')
-      .then((usernames) => {
-        reply(usernames)
+    knex('reports').insert({ report_type: request.payload.reportType, report_data: request.payload.reportContent, coordinates: request.payload.position, userid: request.payload.userid })
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
       })
   }
 })
