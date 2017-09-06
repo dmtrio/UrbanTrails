@@ -20,8 +20,6 @@ const actions = {
   FIND_LOCATION: ({ commit }) => {
     navigator.geolocation.watchPosition((position) => {
       commit('SET_LOCATION', { location: [position.coords.latitude, position.coords.longitude] })
-    }, (err) => {
-      console.log(err)
     })
   },
 

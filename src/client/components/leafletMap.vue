@@ -13,6 +13,7 @@
   import methods from './leafletMethods/methodSample.js'
   import mLayers from './leafletMethods/methLayers.js'
   import mLocation from './leafletMethods/methLocation.js'
+  import { getDistance } from 'geolib'
   export default {
     data() {
       return {
@@ -22,6 +23,8 @@
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
+        kiosksClose: [],
+        notifiedKiosks: []
       };
     },
     beforeCreate() {
@@ -35,8 +38,26 @@
       this.makeMap()
     },
     watch: {
+      kiosksClose: function() {
+        console.log('STATE CHANGED')
+
+        this.kiosksClose.forEach(kiosk => {
+          if (!this.notifiedKiosks.includes(kiosk)) {
+            alert(`Your'e within 200 meters from ${kiosk[9]}`)
+            this.notifiedKiosks.push(kiosk)
+          }
+        })
+      },
       location: function() {
-        console.log(this.$store.getters.location)
+        console.log('you are in this location', this.$store.getters.location)
+        this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
+          const lat = JSON.parse(data[11])
+          const long = JSON.parse(data[12])
+          return getDistance(
+            { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] },
+            { latitude: lat, longitude: long }
+          ) < 200
+        })
       },
       fixits: function() {
         mLayers.fixitMarkers(this)
@@ -46,7 +67,7 @@
       },
       trails: function(){
         mLayers.addTrails(this)
-      },
+      }
     },
     computed: {
       location: function() {
