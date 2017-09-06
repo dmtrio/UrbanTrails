@@ -66,10 +66,9 @@ server.route({
 
 server.route({
   method: 'POST',
-  path: '/pothole',
+  path: '/report',
   handler: (request, reply) => {
-    console.log('Req body', request.payload)
-    knex('reports').insert({ report_type: 'pothole', report_data: 'pothole', coordinates: request.payload.position, userid: request.payload.userid })
+    knex('reports').insert({ report_type: request.payload.reportType, report_data: request.payload.reportContent, coordinates: request.payload.position, userid: request.payload.userid })
       .then((report) => {
         reply(report)
       })

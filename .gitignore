@@ -6,3 +6,4 @@ nodemon.json
 yarn.lock
 package-lock.json
 yarn-error.log
+src/urban-trails-info.sqlite3
