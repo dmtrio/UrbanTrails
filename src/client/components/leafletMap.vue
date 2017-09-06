@@ -24,7 +24,8 @@
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
-        kiosksClose: []
+        kiosksClose: [],
+        notifiedKiosks: []
       };
     },
     beforeCreate() {
@@ -40,7 +41,13 @@
     watch: {
       kiosksClose: function() {
         console.log('STATE CHANGED')
-        this.kiosksClose.forEach(kiosk => alert(`Your'e within 200 meters from ${kiosk[9]}`))
+
+        this.kiosksClose.forEach(kiosk => {
+          if (!this.notifiedKiosks.includes(kiosk)) {
+            alert(`Your'e within 200 meters from ${kiosk[9]}`)
+            this.notifiedKiosks.push(kiosk)
+          }
+        })
       },
       location: function() {
         console.log('you are in this location', this.$store.getters.location)
