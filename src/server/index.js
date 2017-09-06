@@ -69,13 +69,13 @@ server.route({
   path: '/pothole',
   handler: (request, reply) => {
     console.log('Req body', request.payload)
-    knex('reports').insert({report_type: 'pothole', report_data: 'pothole', coordinates: request.payload.position, userid: request.payload.userid})
-    .then(function (report) {
-      console.log(report);
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
+    knex('reports').insert({ report_type: 'pothole', report_data: 'pothole', coordinates: request.payload.position, userid: request.payload.userid })
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 })
 
