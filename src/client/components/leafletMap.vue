@@ -87,29 +87,25 @@
       toggleLayer(layer) {
         return mLayers.toggleLayer(layer, this, this.$data.map)
       },
-      // transformMap(dir, percentage) {
-      //   document.getElementById("mapid").style[dir] = percentage
-      //   this.$data.map.invalidateSize({
-      //     pan: true,
-      //     zoom: false
-      //   })
-      // },
       closePanels() {
         if (this.$store.state.sidePanelOpen) {
           this.$store.commit('TOGGLE_SIDEPANEL')
+        }
+        if (this.$store.state.viewSignIn) {
+          this.$store.commit('TOGGLE_SIGN_IN')
         }
       },
 
       makeMap() {
 
         //layers including empty
-        this.$data.mainLightLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
+        this.$data.mainDarkLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
           maxZoom: 18,
           id: 'mapbox.streets'
         })
-        this.$data.mainDarkLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
-            maxZoom: 18,
-            id: 'mapbox.streets'
+        this.$data.mainLightLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
+          maxZoom: 18,
+          id: 'mapbox.streets'
         })
         this.$data.trailsLayer = L.geoJSON()
         this.$data.fixitsLayer = L.layerGroup('')
@@ -121,8 +117,8 @@
             center: [51.505, -0.09],
             zoom: 13,
             layers: [
+            // this.$data.mainDarkLayer,
             this.$data.mainLightLayer,
-            this.$data.mainDarkLayer,
             this.$data.trailsLayer,
             this.$data.fixitsLayer,
             this.$data.kiosksLayer,
