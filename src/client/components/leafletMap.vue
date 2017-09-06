@@ -23,7 +23,8 @@
         mainLayer: null,
         trailsLayer: null,
         fixitsLayer: null,
-        kiosksLayer: null
+        kiosksLayer: null,
+        kiosksClose: []
       };
     },
     beforeCreate() {
@@ -37,16 +38,20 @@
       this.makeMap()
     },
     watch: {
-      closeKiosks: function() {
-        console.log('kiosks within location', this.$store.getters.kiosksWithinLocation)
+      kiosksClose: function() {
+        console.log('STATE CHANGED')
+        this.kiosksClose.forEach(kiosk => alert(`Your'e within 200 meters from ${kiosk[9]}`))
       },
       location: function() {
-         console.log('our location', this.$store.getters.location)
-         console.log(this.$store.getters.kiosks.filter(data => {
-            const lat = JSON.parse(data[11])
-            const long = JSON.parse(data[12])
-            return getDistance({latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1]}, {latitude: lat, longitude: long}) < 1000
-         }))
+        console.log('you are in this location', this.$store.getters.location)
+        this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
+          const lat = JSON.parse(data[11])
+          const long = JSON.parse(data[12])
+          return getDistance(
+            { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] },
+            { latitude: lat, longitude: long }
+          ) < 200
+        })
       },
       fixits: function() {
         loadLayer.fixitMarkers(this)
@@ -70,9 +75,6 @@
       },
       fixits: function() {
           return this.$store.getters.fixits
-      },
-      closeKiosks: function() {
-          return this.$store.getters.kiosksWithinLocation
       },
       allLayers: function() {
         let layers = [ this.$data.mainLayer, this.$data.trailsLayer, this.$data.fixitsLayer, this.$data.kiosksLayer ]
