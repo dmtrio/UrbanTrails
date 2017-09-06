@@ -129,9 +129,10 @@
 
         function doubleClick (e) {
           console.log('TWO, AH AH AH');
-          let pos = [e.latlng.lat, e.latlng.lng]
+          let position = [e.latlng.lat, e.latlng.lng];
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
+          reports[0].setAttribute('data', position);
         }
 
         //capture clicks on the map
