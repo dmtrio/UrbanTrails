@@ -9,6 +9,7 @@ import App from './App.vue'
 import leafletMap from './leafletMap.vue'
 import areaReporting from './areaReporting.vue'
 import Dropdown from './Dropdown.vue'
+import NavAlert from './NavAlert.vue'
 
 
 Vue.use(VueAsyncData)
@@ -21,6 +22,8 @@ Vue.component('v-tilelayer', Vue2Leaflet.TileLayer)
 Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('areaReporting', areaReporting)
 Vue.component('Dropdown', Dropdown)
+Vue.component('NavAlert', NavAlert)
+
 
 new Vue({
   // inject store into all components
