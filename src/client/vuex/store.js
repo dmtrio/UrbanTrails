@@ -5,11 +5,16 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 const state = {
-  viewSignIn: true,
+  mobile: '',
+  //SignInOrUp
+  SiouActive: null,
+  viewSignIn: false,
+  //user
   signedIn: false,
   user: null,
-  mobile: '',
+  //Sidepanel
   sidePanelOpen: false,
+  //leafletMap
   kiosks: [],
   fixits: [],
   trails: [],
@@ -72,7 +77,13 @@ const mutations = {
     state.sidePanelOpen = !state.sidePanelOpen
   },
   TOGGLE_SIGN_IN(state) {
-    state.viewSignIn = !state.viewSignIn
+    if(!state.signedIn) {
+      state.viewSignIn = !state.viewSignIn
+    }
+  },
+  TOGGLE_SIOU_ACTIVE(state, active) {
+    console.log('store', active)
+    state.SiouActive = active
   },
   SET_KIOSKS(state, { kiosks }) {
     state.kiosks = kiosks

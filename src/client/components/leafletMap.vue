@@ -91,6 +91,9 @@
         if (this.$store.state.sidePanelOpen) {
           this.$store.commit('TOGGLE_SIDEPANEL')
         }
+        if (this.$store.state.viewSignIn) {
+          this.$store.commit('TOGGLE_SIGN_IN')
+        }
       },
 
       makeMap() {

@@ -9,6 +9,7 @@ import App from './App.vue'
 // other components
 import leafletMap from './leafletMap.vue'
 import SignInOrUp from './SignInOrUp.vue'
+import SignInOrUpForm from './SignInOrUpForm.vue'
 import areaReporting from './areaReporting.vue'
 import Sidepanel from './Sidepanel.vue'
 
@@ -24,6 +25,7 @@ Vue.component('v-map', Vue2Leaflet.Map)
 Vue.component('v-tilelayer', Vue2Leaflet.TileLayer)
 Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('SignInOrUp', SignInOrUp)
+Vue.component('SignInOrUpForm', SignInOrUpForm)
 Vue.component('areaReporting', areaReporting)
 Vue.component('Vue2Leaflet', Vue2Leaflet)
 Vue.component('Sidepanel', Sidepanel)
