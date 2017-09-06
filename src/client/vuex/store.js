@@ -26,16 +26,15 @@ const actions = {
   },
 
   POST_REPORT: (skipThisV, reportInfo) => {
-    console.log('REPINFO', reportInfo);
     axios.post('/' + reportInfo.reportType, {
       userid: reportInfo.userid,
       position: reportInfo.position
     })
-    .then((response) => {
-      console.log(response);
-    }, (err) => {
-      console.log('ERROR', err);
-    })
+      .then((response) => {
+        console.log(response)
+      }, (err) => {
+        console.log('ERROR', err)
+      })
   },
 
   LOAD_KIOSKS: ({ commit }) => {
