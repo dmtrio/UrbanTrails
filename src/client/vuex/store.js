@@ -6,15 +6,15 @@ Vue.use(Vuex)
 
 const state = {
   mobile: '',
-  //SignInOrUp
+  // SignInOrUp
   SiouActive: null,
   viewSignIn: false,
-  //user
+  // user
   signedIn: false,
   user: null,
-  //Sidepanel
+  // Sidepanel
   sidePanelOpen: false,
-  //leafletMap
+  // leafletMap
   kiosks: [],
   fixits: [],
   trails: [],
@@ -77,7 +77,7 @@ const mutations = {
     state.sidePanelOpen = !state.sidePanelOpen
   },
   TOGGLE_SIGN_IN(state) {
-    if(!state.signedIn) {
+    if (!state.signedIn) {
       state.viewSignIn = !state.viewSignIn
     }
   },
