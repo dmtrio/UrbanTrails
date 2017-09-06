@@ -28,11 +28,12 @@ const actions = {
     })
   },
 
-  POST_REPORT: (skipThisV, reportInfo) => {
-    const reportType = `/${reportInfo.reportType}`
-    axios.post(reportType, {
-      userid: reportInfo.userid,
-      position: reportInfo.position
+  POST_REPORT: (skipThisVal, reportInfo) => {
+    axios.post('/report', {
+      reportType: reportInfo.reportType,
+      reportContent: reportInfo.reportContent,
+      position: reportInfo.position,
+      userid: reportInfo.userid
     })
       .then((response) => {
         console.log(response)
