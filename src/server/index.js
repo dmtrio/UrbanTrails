@@ -1,5 +1,8 @@
 const Hapi = require('hapi')
 const path = require('path')
+const bcrypt = require('bcryptjs')
+const sessions = require('hapi-server-session')
+
 
 const knex = require('knex')({
   client: 'sqlite3',
@@ -16,6 +19,15 @@ server.connection({
   port: 8000,
 })
 
+
+server.register({
+  register: sessions,
+  options: {
+    cookie: {
+      isSecure: false,
+    },
+  },
+}, (err) => { if (err) { throw err } })
 
 // Add the route
 server.register(require('inert'), (err) => {
@@ -35,23 +47,34 @@ server.register(require('inert'), (err) => {
 })
 
 server.route({
+  method: 'GET',
+  path: '/session',
+  handler: (request, reply) => {
+    if (request.session.user) {
+      reply(request.session.user)
+    } else {
+      reply(null).code(404)
+    }
+  }
+})
+
+server.route({
   method: 'POST',
   path: '/signup',
   handler: (request, reply) => {
-    console.log('reques', request)
-    console.log('reques.eems', request.payload.email)
-
     // check if user exists
     knex('users').where({ email: request.payload.email })
       .then((exist) => {
         if (!exist.length) {
           // add user if it doesn't exist
-          knex('users').insert({ email: request.payload.email, phone: request.payload.phone, password: request.payload.password })
+          const hash = bcrypt.hashSync(request.payload.password, 8)
+          knex('users').insert({ email: request.payload.email, phone: request.payload.phone, password: hash })
             .then((num) => {
             // search for user to return
               knex('users').where({ id: num[0] })
                 .then((user) => {
-                  reply(user)
+                  request.session.user = user[0]
+                  reply(request.session.user)
                 })
                 .catch((error) => {
                   console.log(error)
@@ -67,6 +90,35 @@ server.route({
       .catch((error) => {
         console.log('error', error)
       })
+  }
+})
+
+server.route({
+  method: 'POST',
+  path: '/signin',
+  handler: (request, reply) => {
+    // check if user exists
+    knex('users').where({ email: request.payload.email })
+      .then((user) => {
+        if (user.length && bcrypt.compareSync(request.payload.password, user[0].password)) {
+          request.session.user = user[0]
+          reply(request.session.user)
+        } else {
+          reply('Email or password doesn\'t match').code(404)
+        }
+      })
+      .catch((error) => {
+        console.log('error', error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/logout',
+  handler: (request, reply) => {
+    request.session = null
+    reply(null).code(200)
   }
 })
 

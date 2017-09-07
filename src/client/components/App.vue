@@ -7,11 +7,11 @@
 
 <script>
   export default {
+    beforeCreate() {
+      this.$store.dispatch('GET_SESSION')
+    },
     mounted() {
       this.detectmob()
-    },
-    computed: {
-
     },
     methods: {
       detectmob() {
@@ -27,7 +27,7 @@
           } else {
             this.$store.commit('SET_MOBILE', false)
           }
-        console.log('mobile', this.$store.state.mobile)
+        console.log('on mobile', this.$store.state.mobile)
       },
     }
   }
