@@ -38,7 +38,6 @@
         ></v-text-field>
         <v-btn @click="submit">submit</v-btn>
         <v-btn @click="clear">clear</v-btn>
-        <a href="#" @click.prevent="closeSignInOrUp">CLOSE</a>
       </v-form>
     </v-card>
   </div>
@@ -69,9 +68,6 @@
     methods: {
       signInOrUp() {
         return this.$data.isSignIn ? 'signin' : 'signup'
-      },
-      closeSignInOrUp() {
-        this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
       },
       toggleSignInOrUp(bool) {
         if(this.$data.isSignIn === !bool){
