@@ -7,11 +7,11 @@
 
 <script>
   export default {
+    beforeCreate() {
+      this.$store.dispatch('GET_SESSION')
+    },
     mounted() {
       this.detectmob()
-    },
-    computed: {
-
     },
     methods: {
       detectmob() {

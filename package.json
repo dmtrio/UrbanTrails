@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bcryptjs": "^2.4.3",
     "coveralls": "^2.13.1",
     "css-base": "^1.0.0",
     "css-loader": "^0.28.5",
@@ -28,6 +29,7 @@
     "eslint": "^3.19.0 || ^4.3.0",
     "geolib": "^2.0.23",
     "hapi": "^16.5.2",
+    "hapi-server-session": "^3.0.2",
     "husky": "^0.14.3",
     "inert": "^4.2.1",
     "jQuery": "^1.7.4",

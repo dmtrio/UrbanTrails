@@ -8,9 +8,9 @@ Vue.use(Vuex)
 const state = {
   mobile: '',
   // SignInOrUp
-  SiouActive: null,
+  SiouActive: 'none',
   viewSignIn: false,
-  authfail: { signin: false, signUp: false },
+  authfail: { signIn: false, signUp: false },
   // user
   signedIn: false,
   user: null,
@@ -28,6 +28,15 @@ const state = {
 axios.defaults.headers.post['Content-Type'] = 'application/JSON'
 
 const actions = {
+  GET_SESSION: ({ commit }) => {
+    axios.get('/session').then((response) => {
+      commit('SET_USER', response.data)
+      commit('TOGGLE_SIGNED_IN', true)
+    }, (err) => {
+      console.log(err)
+    })
+  },
+
   FIND_LOCATION: ({ commit }) => {
     navigator.geolocation.watchPosition((position) => {
       commit('SET_LOCATION', { location: [position.coords.latitude, position.coords.longitude] })
@@ -52,15 +61,15 @@ const actions = {
     axios.post(`/${dispatchObj.signInOrUp}`, dispatchObj)
       .then((response) => {
         commit('TOGGLE_VIEW_SIGN_IN', false)
-        commit('SET_USER', response.data[0])
+        commit('SET_USER', response.data)
         commit('TOGGLE_SIGNED_IN', true)
       }, (err) => {
         console.log(err)
         const strErr = err.toString()
         if (strErr.endsWith('409')) {
-          commit('TOGGLE_AUTHFAIL', { signin: false, signUp: true })
+          commit('TOGGLE_AUTHFAIL', { signIn: false, signUp: true })
         } else if (strErr.endsWith('404')) {
-          commit('TOGGLE_AUTHFAIL', { signin: true, signUp: false })
+          commit('TOGGLE_AUTHFAIL', { signIn: true, signUp: false })
         }
       })
   },
@@ -124,7 +133,6 @@ const mutations = {
     }
   },
   TOGGLE_SIOU_ACTIVE(state, active) {
-    console.log('store', active)
     state.SiouActive = active
   },
   SET_KIOSKS(state, { kiosks }) {
