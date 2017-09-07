@@ -62,12 +62,9 @@
         ]
       }
     },
-    computed: {
-
-    },
     methods: {
       signInOrUp() {
-        return this.$data.isSignIn ? 'signin' : 'signup'
+        return this.isSignIn ? 'signin' : 'signup'
       },
       toggleSignInOrUp(bool) {
         if(this.$data.isSignIn === !bool){
@@ -89,6 +86,7 @@
       },
       clear() {
         this.$refs.form.reset()
+        this.$store.commit('TOGGLE_AUTHFAIL', { signIn: false, signUp: false })
       },
 
     }

@@ -1,6 +1,6 @@
 <template>
   <div id="signInOrUp">
-    <v-tabs v-model="active" dark fixed centered secondary scrollable=false >
+    <v-tabs v-model="active" dark fixed centered secondary >
       <v-tabs-bar>
         <v-tabs-slider class="yellow"></v-tabs-slider>
         <v-tabs-item class="ml-5":key="1" :href="'#SignIn'">
