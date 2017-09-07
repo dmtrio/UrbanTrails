@@ -1,6 +1,7 @@
 const Hapi = require('hapi')
 const path = require('path')
 const bcrypt = require('bcryptjs')
+const sessions = require('hapi-server-session')
 
 
 const knex = require('knex')({
@@ -20,13 +21,13 @@ server.connection({
 
 
 server.register({
-  register: require('hapi-server-session'),
+  register: sessions,
   options: {
     cookie: {
       isSecure: false,
     },
   },
-}, function (err) { if (err) { throw err; } });
+}, (err) => { if (err) { throw err } })
 
 // Add the route
 server.register(require('inert'), (err) => {
@@ -49,7 +50,11 @@ server.route({
   method: 'GET',
   path: '/session',
   handler: (request, reply) => {
-    request.session.user ? reply(request.session.user) : reply().code(404)
+    if (request.session.user) {
+      reply(request.session.user)
+    } else {
+      reply(null).code(404)
+    }
   }
 })
 
@@ -112,7 +117,7 @@ server.route({
   method: 'GET',
   path: '/logout',
   handler: (request, reply) => {
-    request.session = null;
+    request.session = null
     reply(null).code(200)
   }
 })

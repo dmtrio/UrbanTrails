@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const state = {
   mobile: '',
   // SignInOrUp
-  SiouActive: "none",
+  SiouActive: 'none',
   viewSignIn: false,
   authfail: { signIn: false, signUp: false },
   // user
@@ -68,7 +68,6 @@ const actions = {
         if (strErr.endsWith('409')) {
           commit('TOGGLE_AUTHFAIL', { signIn: false, signUp: true })
         } else if (strErr.endsWith('404')) {
-          console.log('here', "404")
           commit('TOGGLE_AUTHFAIL', { signIn: true, signUp: false })
         }
       })
