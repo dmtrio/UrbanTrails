@@ -4,11 +4,13 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+
 const state = {
   mobile: '',
   // SignInOrUp
   SiouActive: null,
   viewSignIn: false,
+  authfail: {signin: false, signUp: false},
   // user
   signedIn: false,
   user: null,
@@ -20,6 +22,9 @@ const state = {
   trails: [],
   location: null
 }
+
+// defeault axios headers
+axios.defaults.headers.post['Content-Type'] = 'application/JSON';
 
 const actions = {
   FIND_LOCATION: ({ commit }) => {
@@ -39,7 +44,25 @@ const actions = {
         console.log(response)
       }, (err) => {
         console.log('ERROR', err)
+
       })
+  },
+
+  USER_SIGN_IN_OR_UP: ({commit}, dispatchObj) => {
+    axios.post(`/${dispatchObj.signInOrUp}`, dispatchObj)
+    .then((response) => {
+      commit('TOGGLE_VIEW_SIGN_IN', false)
+      commit('SET_USER', response.data[0])
+      commit('TOGGLE_SIGNED_IN', true)
+    }, (err) => {
+      console.log(err)
+      const strErr = err.toString()
+      if (strErr.endsWith('409')) {
+        commit('TOGGLE_AUTHFAIL', {signin: false, signUp: true})
+      } else if (strErr.endsWith('404')) {
+
+      }
+    })
   },
 
   LOAD_KIOSKS: ({ commit }) => {
@@ -74,12 +97,22 @@ const mutations = {
   SET_MOBILE(state, mobile) {
     state.mobile = mobile
   },
+  SET_USER(state, user) {
+    state.user = user
+  },
+  TOGGLE_SIGNED_IN(state, bool) {
+    state.signedIn = bool
+  },
+  TOGGLE_AUTHFAIL(state, obj) {
+    state.authfail = obj
+  },
   TOGGLE_SIDEPANEL(state) {
     state.sidePanelOpen = !state.sidePanelOpen
   },
-  TOGGLE_SIGN_IN(state) {
+  TOGGLE_VIEW_SIGN_IN(state, bool) {
+    // blocking sign in or up if already signed In
     if (!state.signedIn) {
-      state.viewSignIn = !state.viewSignIn
+      state.viewSignIn = bool
     }
   },
   TOGGLE_SIOU_ACTIVE(state, active) {
@@ -102,7 +135,7 @@ const getters = {
   kiosks: state => state.kiosks,
   fixits: state => state.fixits,
   trails: state => state.trails,
-  // viewSignIn: state => state.viewSignIn || !state.signedIn,
+  // authfailAt: state => state.viewSignIn || !state.signedIn,
 }
 
 export default new Vuex.Store({

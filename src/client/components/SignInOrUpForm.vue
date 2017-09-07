@@ -2,6 +2,8 @@
   <div>
     <v-card flat>
       <v-form ref="form" >
+        <h6 class="error--text" v-if="!isSignIn && this.$store.state.authfail.signUp">Email already in use</h6>
+        <h6 class="error--text" v-if="isSignIn && this.$store.state.authfail.signIn">Incorrect email or password</h6>
         <v-text-field
           label="Enter your E-mail"
           v-model="email"
@@ -48,6 +50,7 @@
     data() {
       return {
         nonVisible: true,
+        error: true,
         password: '',
         email: '',
         emailRules: [
@@ -56,19 +59,19 @@
         ],
         passwordRules: [
         (v) => !!v || 'Password is required',
-        (v) => v.length >= 8 || 'Password must be at least 8 characters'
+        (v) => (!!v && v.length >= 8) || 'Password must be at least 8 characters'
         ]
       }
     },
     computed: {
-      signInOrUp: function() {
-        return this.$data.isSignIn ? 'Sign in' : 'Sign up'
-      }
-    },
 
+    },
     methods: {
+      signInOrUp() {
+        return this.$data.isSignIn ? 'signin' : 'signup'
+      },
       closeSignInOrUp() {
-        this.$store.commit('TOGGLE_SIGN_IN')
+        this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
       },
       toggleSignInOrUp(bool) {
         if(this.$data.isSignIn === !bool){
@@ -78,10 +81,14 @@
       },
       submit() {
         if(this.$refs.form.validate()) {
-          //axios store call needed
-          console.log('email', this.$data.email, 'password', this.$data.password )
+          let dispatchObj = {
+            signInOrUp: this.signInOrUp(),
+            email: this.$data.email,
+            password: this.$data.password
+          }
+          this.$store.dispatch('USER_SIGN_IN_OR_UP', dispatchObj)
         } else {
-          console.log('reqs not met');
+          console.log('requirements not met');
         }
       },
       clear() {

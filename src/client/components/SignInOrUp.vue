@@ -38,14 +38,14 @@
   </script>
   <style>
     #signInOrUp {
-      width: 100%;
-      max-width: 500px;
-      height: auto;
       position: relative;
       bottom: 80%;
+      height: auto;
+      width: 100%;
+      max-width: 500px;
       margin: auto;
-      z-index: 1200;
       padding: 10px;
+      z-index: 1200;
     }
     #signInOrUp > div {
       background-color: white;

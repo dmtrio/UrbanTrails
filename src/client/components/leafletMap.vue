@@ -92,7 +92,7 @@
           this.$store.commit('TOGGLE_SIDEPANEL')
         }
         if (this.$store.state.viewSignIn) {
-          this.$store.commit('TOGGLE_SIGN_IN')
+          this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
         }
       },
 
