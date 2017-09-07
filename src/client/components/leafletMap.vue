@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div id="mapid"></div>
+    <div id="mapid">
+      <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
+    </div>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
@@ -24,7 +26,8 @@
         fixitsLayer: null,
         kiosksLayer: null,
         kiosksClose: [],
-        notifiedKiosks: []
+        notifiedKiosks: [],
+        isNotified: false
       };
     },
     beforeCreate() {
@@ -39,17 +42,17 @@
     },
     watch: {
       kiosksClose: function() {
-        console.log('STATE CHANGED')
-
         this.kiosksClose.forEach(kiosk => {
           if (!this.notifiedKiosks.includes(kiosk)) {
-            alert(`Your'e within 200 meters from ${kiosk[9]}`)
             this.notifiedKiosks.push(kiosk)
+            this.isNotified = true
+            setTimeout(() => { this.isNotified = false }, 2200 )
+          } else {
+            this.isNotified = false
           }
         })
       },
       location: function() {
-        console.log('you are in this location', this.$store.getters.location)
         this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
           const lat = JSON.parse(data[11])
           const long = JSON.parse(data[12])
@@ -95,7 +98,6 @@
           this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
         }
       },
-
       makeMap() {
 
         //layers including empty
