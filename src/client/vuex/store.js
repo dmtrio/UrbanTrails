@@ -20,6 +20,7 @@ const state = {
   kiosks: [],
   fixits: [],
   trails: [],
+  parking: [],
   location: null
 }
 
@@ -71,6 +72,14 @@ const actions = {
           commit('TOGGLE_AUTHFAIL', { signIn: true, signUp: false })
         }
       })
+  },
+
+  LOAD_PARKING: ({ commit }) => {
+    axios.get('/racks').then((response) => {
+      commit('SET_PARKING', { parking: response.data.data })
+    }, (err) => {
+      console.log(err)
+    })
   },
 
   LOAD_KIOSKS: ({ commit }) => {
@@ -129,6 +138,9 @@ const mutations = {
   SET_KIOSKS(state, { kiosks }) {
     state.kiosks = kiosks
   },
+  SET_PARKING(state, { parking }) {
+    state.parking = parking
+  },
   SET_FIXITS(state, { fixits }) {
     state.fixits = fixits
   },
@@ -141,6 +153,7 @@ const getters = {
   location: state => state.location,
   kiosks: state => state.kiosks,
   fixits: state => state.fixits,
+  parking: state => state.parking,
   trails: state => state.trails,
   // authfailAt: state => state.viewSignIn || !state.signedIn,
 }

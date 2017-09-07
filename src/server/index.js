@@ -70,7 +70,7 @@ server.route({
           const hash = bcrypt.hashSync(request.payload.password, 8)
           knex('users').insert({ email: request.payload.email, phone: request.payload.phone, password: hash })
             .then((num) => {
-            // search for user to return
+              // search for user to return
               knex('users').where({ id: num[0] })
                 .then((user) => {
                   request.session.user = user[0]
@@ -128,6 +128,16 @@ server.route({
   handler: {
     file: {
       path: path.join(__dirname, '../client/data/bCycleKiosks.json')
+    }
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/racks',
+  handler: {
+    file: {
+      path: path.join(__dirname, '../client/data/bikeRacks.json')
     }
   }
 })
