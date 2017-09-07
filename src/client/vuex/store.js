@@ -10,7 +10,7 @@ const state = {
   // SignInOrUp
   SiouActive: null,
   viewSignIn: false,
-  authfail: {signin: false, signUp: false},
+  authfail: { signin: false, signUp: false },
   // user
   signedIn: false,
   user: null,
@@ -24,7 +24,7 @@ const state = {
 }
 
 // defeault axios headers
-axios.defaults.headers.post['Content-Type'] = 'application/JSON';
+axios.defaults.headers.post['Content-Type'] = 'application/JSON'
 
 const actions = {
   FIND_LOCATION: ({ commit }) => {
@@ -44,16 +44,15 @@ const actions = {
         console.log(response)
       }, (err) => {
         console.log('ERROR', err)
-
       })
   },
 
   USER_SIGN_IN_OR_UP: ({commit}, dispatchObj) => {
-    axios.post(`/${dispatchObj.signInOrUp}`, dispatchObj)
-    .then((response) => {
-      commit('TOGGLE_VIEW_SIGN_IN', false)
-      commit('SET_USER', response.data[0])
-      commit('TOGGLE_SIGNED_IN', true)
+    axios.post(`/${ dispatchObj.signInOrUp }`, dispatchObj)
+      .then((response) => {
+        commit('TOGGLE_VIEW_SIGN_IN', false)
+        commit('SET_USER', response.data[0])
+        commit('TOGGLE_SIGNED_IN', true)
     }, (err) => {
       console.log(err)
       const strErr = err.toString()
