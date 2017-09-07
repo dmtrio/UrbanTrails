@@ -48,7 +48,7 @@ server.route({
           // add user if it doesn't exist
           knex('users').insert({ email: request.payload.email, phone: request.payload.phone, password: request.payload.password })
             .then((num) => {
-            // search for user to return
+              // search for user to return
               knex('users').where({ id: num[0] })
                 .then((user) => {
                   reply(user)
@@ -71,13 +71,13 @@ server.route({
 })
 
 server.route({
-    method: 'GET',
-    path: '/kiosks',
-    handler: {
-        file: {
-            path: path.join(__dirname, '../client/data/bCycleKiosks.json')
-        }
+  method: 'GET',
+  path: '/kiosks',
+  handler: {
+    file: {
+      path: path.join(__dirname, '../client/data/bCycleKiosks.json')
     }
+  }
 })
 
 server.route({

@@ -8,7 +8,7 @@ export default {
       const lon = chunk[11][2]
       const name = chunk[8]
       const address = JSON.parse(chunk[11][0]).address
-        const marker = L.marker([lat, lon], { icon: fixitIcon })
+      const marker = L.marker([lat, lon], { icon: fixitIcon })
       marker.bindPopup(`<b>${name} Fixit Station</b><br>${address}`)
       context.$data.fixitsLayer.addLayer(marker)
     })
@@ -19,23 +19,23 @@ export default {
         const address = chunk[9]
         const lat = chunk[11]
         const lon = chunk[12]
-          const marker = L.marker([lat, lon], { icon: kioskIcon })
+        const marker = L.marker([lat, lon], { icon: kioskIcon })
         marker.bindPopup(`${address} Bicycle Kiosk`)
         context.$data.kiosksLayer.addLayer(marker)
       }
     })
   },
-    parkingMarkers(context) {
-        context.parking.forEach((chunk) => {
-            console.log(chunk[9])
-            const address = chunk[9]
-            const lat = chunk[11]
-            const lon = chunk[12]
-            const marker = L.marker([lat, lon], { icon: parkingIcon })
-            marker.bindPopup(`${address} Bicycle Rack`)
-            context.$data.parkingLayer.addLayer(marker)
-        })
-    },
+  parkingMarkers(context) {
+    context.parking.forEach((chunk) => {
+      console.log(chunk[9])
+      const address = chunk[9]
+      const lat = chunk[11]
+      const lon = chunk[12]
+      const marker = L.marker([lat, lon], { icon: rackIcon })
+      marker.bindPopup(`${address} Bicycle Rack`)
+      context.$data.parkingLayer.addLayer(marker)
+    })
+  },
   addTrails(context) {
     context.$data.trailsLayer.addData(context.trails)
   },

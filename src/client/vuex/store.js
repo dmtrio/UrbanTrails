@@ -66,14 +66,14 @@ const actions = {
   },
 
   LOAD_PARKING: ({ commit }) => {
-        axios.get('/racks').then((response) => {
-            commit('SET_PARKING', { parking: response.data.data })
-        }, (err) => {
-            console.log(err)
-        })
-    },
+    axios.get('/racks').then((response) => {
+      commit('SET_PARKING', { parking: response.data.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
 
- LOAD_KIOSKS: ({ commit }) => {
+  LOAD_KIOSKS: ({ commit }) => {
     axios.get('/kiosks').then((response) => {
       commit('SET_KIOSKS', { kiosks: response.data.data })
     }, (err) => {
@@ -130,9 +130,9 @@ const mutations = {
   SET_KIOSKS(state, { kiosks }) {
     state.kiosks = kiosks
   },
-    SET_PARKING(state, { parking }) {
-        state.parking = parking
-    },
+  SET_PARKING(state, { parking }) {
+    state.parking = parking
+  },
   SET_FIXITS(state, { fixits }) {
     state.fixits = fixits
   },
