@@ -71,11 +71,21 @@ server.route({
 })
 
 server.route({
+    method: 'GET',
+    path: '/kiosks',
+    handler: {
+        file: {
+            path: path.join(__dirname, '../client/data/bCycleKiosks.json')
+        }
+    }
+})
+
+server.route({
   method: 'GET',
-  path: '/kiosks',
+  path: '/racks',
   handler: {
     file: {
-      path: path.join(__dirname, '../client/data/bCycleKiosks.json')
+      path: path.join(__dirname, '../client/data/bikeRacks.json')
     }
   }
 })

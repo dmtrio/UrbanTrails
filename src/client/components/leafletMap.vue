@@ -25,6 +25,7 @@
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
+        // parkingLayer: null,
         kiosksClose: [],
         notifiedKiosks: [],
         isNotified: false
@@ -35,6 +36,7 @@
       this.$store.dispatch('LOAD_KIOSKS')
       this.$store.dispatch('LOAD_TRAILS')
       this.$store.dispatch('LOAD_FIXITS')
+      // this.$store.dispatch('LOAD_PARKING')
     },
 
     mounted() {
@@ -65,6 +67,9 @@
       fixits: function() {
         mLayers.fixitMarkers(this)
       },
+        // parking: function() {
+        //     mLayers.parkingMarkers(this)
+        // },
       kiosks: function() {
         mLayers.kioskMarkers(this)
       },
@@ -76,6 +81,10 @@
       location: function() {
           return this.$store.getters.location
       },
+        // parking: function() {
+        //     return this.$store.getters.parking
+        // }
+        // ,
       kiosks: function() {
           return this.$store.getters.kiosks
       },
@@ -112,11 +121,12 @@
         this.$data.trailsLayer = L.geoJSON()
         this.$data.fixitsLayer = L.layerGroup('')
         this.$data.kiosksLayer = L.layerGroup('')
+        // this.$data.parkingLayer = L.layerGroup('')
         //end layers
 
         //map creation
         var mymap = L.map('mapid', {
-            center: [51.505, -0.09],
+            center: [30.269, -97.743],
             zoom: 13,
             layers: [
             // this.$data.mainDarkLayer,
@@ -124,6 +134,7 @@
             this.$data.trailsLayer,
             this.$data.fixitsLayer,
             this.$data.kiosksLayer,
+            // this.$data.parkingLayer,
             ]
         });
         this.$data.map = mymap
@@ -131,24 +142,20 @@
         L.Control.geocoder({position: "topleft"}).addTo(this.map);
 
         //map location
-        // mLocation.locate()
 
         mLocation.locate(this, mymap)
 
         function getHandlerForFeature(feat) {  // A function...
           return function(ev) {   // ...that returns a function...
-            console.log(feat);  // ...that has a closure over the value.
           }
         }
 
         function click (e) {
           this.closePanels()
-          console.log('One, ah ah ah');
         }
 
         function doubleClick (e) {
-          console.log('TWO, AH AH AH');
-          let position = [e.latlng.lat, e.latlng.lng];
+          let position = [e.latlng.lat, e.latlng.lng]
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
           reports[0].setAttribute('data', position);

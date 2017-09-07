@@ -52,7 +52,6 @@
       return {};
     },
     mounted() {
-      console.log(this)
     },
     methods: {
       toReportType: (reportType, other) => {

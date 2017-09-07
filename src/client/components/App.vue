@@ -15,7 +15,6 @@
     },
     methods: {
       detectmob() {
-        console.log(window.innerWidth)
         if( navigator.userAgent.match(/Android/i)
           || navigator.userAgent.match(/webOS/i)
           || navigator.userAgent.match(/iPhone/i)
@@ -27,7 +26,6 @@
           } else {
             this.$store.commit('SET_MOBILE', false)
           }
-        console.log('mobile', this.$store.state.mobile)
       },
     }
   }
