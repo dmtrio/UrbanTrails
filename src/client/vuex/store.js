@@ -47,21 +47,20 @@ const actions = {
       })
   },
 
-  USER_SIGN_IN_OR_UP: ({commit}, dispatchObj) => {
-    axios.post(`/${ dispatchObj.signInOrUp }`, dispatchObj)
+  USER_SIGN_IN_OR_UP: ({ commit }, dispatchObj) => {
+    axios.post(`/${dispatchObj.signInOrUp}`, dispatchObj)
       .then((response) => {
         commit('TOGGLE_VIEW_SIGN_IN', false)
         commit('SET_USER', response.data[0])
         commit('TOGGLE_SIGNED_IN', true)
-    }, (err) => {
-      console.log(err)
-      const strErr = err.toString()
-      if (strErr.endsWith('409')) {
-        commit('TOGGLE_AUTHFAIL', {signin: false, signUp: true})
-      } else if (strErr.endsWith('404')) {
-
-      }
-    })
+      }, (err) => {
+        console.log(err)
+        const strErr = err.toString()
+        if (strErr.endsWith('409')) {
+          commit('TOGGLE_AUTHFAIL', { signin: false, signUp: true })
+        } else if (strErr.endsWith('404')) {
+        }
+      })
   },
 
   LOAD_KIOSKS: ({ commit }) => {

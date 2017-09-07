@@ -49,17 +49,17 @@ server.route({
           knex('users').insert({ email: request.payload.email, phone: request.payload.phone, password: request.payload.password })
             .then((num) => {
             // search for user to return
-              knex('users').where({id: num[0]})
+              knex('users').where({ id: num[0] })
                 .then((user) => {
                   reply(user)
-              })
+                })
                 .catch((error) => {
-                console.log(error)
-              })
+                  console.log(error)
+                })
             })
             .catch((error) => {
               console.log(error)
-          })
+            })
         } else {
           reply('Email already in use').code(409)
         }
