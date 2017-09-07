@@ -59,6 +59,7 @@ const actions = {
         if (strErr.endsWith('409')) {
           commit('TOGGLE_AUTHFAIL', { signin: false, signUp: true })
         } else if (strErr.endsWith('404')) {
+          commit('TOGGLE_AUTHFAIL', { signin: true, signUp: false })
         }
       })
   },
