@@ -74,8 +74,12 @@
       },
       submit() {
         if(this.$refs.form.validate()) {
-          //axios store call needed
-          console.log('email', this.$data.email, 'password', this.$data.password )
+          let dispatchObj = {
+            signInOrUp: this.signInOrUp(),
+            email: this.$data.email,
+            password: this.$data.password
+          }		
+          this.$store.dispatch('USER_SIGN_IN_OR_UP', dispatchObj)
         } else {
           console.log('reqs not met');
         }
