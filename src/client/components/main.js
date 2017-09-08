@@ -28,6 +28,7 @@ Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('SignInOrUp', SignInOrUp)
 Vue.component('SignInOrUpForm', SignInOrUpForm)
 Vue.component('areaReporting', areaReporting)
+Vue.component('NavAlert', NavAlert)
 Vue.component('Vue2Leaflet', Vue2Leaflet)
 Vue.component('Sidepanel', Sidepanel)
 
