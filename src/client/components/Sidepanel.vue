@@ -72,7 +72,7 @@
     right: 0px;
     width: 250px;
     padding: 0px 15px;
-    height: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
 
 
