@@ -2,6 +2,8 @@
   <div>
     <v-card flat>
       <v-form ref="form" >
+        <h6 class="error--text" v-if="!isSignIn && this.$store.state.authfail.signUp">Email already in use</h6>		
+        <h6 class="error--text" v-if="isSignIn && this.$store.state.authfail.signIn">Incorrect email or password</h6>
         <v-text-field
           label="Enter your E-mail"
           v-model="email"
