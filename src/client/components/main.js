@@ -11,6 +11,7 @@ import leafletMap from './leafletMap.vue'
 import SignInOrUp from './SignInOrUp.vue'
 import SignInOrUpForm from './SignInOrUpForm.vue'
 import areaReporting from './areaReporting.vue'
+import NavAlert from './NavAlert.vue'
 import Sidepanel from './Sidepanel.vue'
 
 
