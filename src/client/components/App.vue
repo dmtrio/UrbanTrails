@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <leafletMap></leafletMap>
-    <SignInOrUp v-if="this.$store.state.viewSignIn"></SignInOrUp>
+    <SignInOrUp v-show="this.$store.state.viewSignIn"></SignInOrUp>
   </v-app>
 </template>
 
