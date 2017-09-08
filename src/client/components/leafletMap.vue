@@ -3,6 +3,7 @@
     <div id="mapid">
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
+    <v-btn @click="$store.commit('TOGGLE_VIEW_LOCKED', true)"></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
@@ -166,6 +167,10 @@
           this.closePanels()
         }
 
+        function pan (e) {
+          this.closePanels()
+          this.$store.commit('TOGGLE_VIEW_LOCKED', false)
+        }
 
         function doubleClick (e) {
           let position = [e.latlng.lat, e.latlng.lng];
@@ -178,7 +183,7 @@
         //capture clicks on the map
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
-        mymap.on('movestart', click.bind(this))
+        mymap.on('movestart', pan.bind(this))
       },
     }
   }
