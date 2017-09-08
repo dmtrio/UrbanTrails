@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div id="mapid"></div>
+    <div id="mapid">
+      <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
+    </div>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
