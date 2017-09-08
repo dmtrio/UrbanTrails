@@ -3,7 +3,7 @@
     <div id="mapid">
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
-    <v-btn @click="$store.commit('TOGGLE_VIEW_LOCKED', true)"></v-btn>
+    <v-btn @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
@@ -15,7 +15,7 @@
   import * as L from 'leaflet'
   import methods from './leafletMethods/methodSample.js'
   import mLayers from './leafletMethods/methLayers.js'
-  import mLocation from './leafletMethods/methLocation.js'
+  import * as mLocation from './leafletMethods/methLocation.js'
   import { getDistance } from 'geolib'
   export default {
     data() {
@@ -117,7 +117,10 @@
           this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
         }
       },
-
+      locationLock() {
+        this.$store.commit('TOGGLE_VIEW_LOCKED', true)
+        mLocation.setView(this, this.$data.map, false)
+      },
       makeMap() {
 
         //layers including empty
@@ -156,7 +159,11 @@
 
         //map location
 
-        mLocation.locate(this, mymap)
+
+        let position = L.marker([51.505, -0.09]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
+        let area = L.circle([51.505, -0.09], 120).addTo(mymap)
+
+        mLocation.locate(this, mymap, position, area)
 
         function getHandlerForFeature(feat) {  // A function...
           return function(ev) {   // ...that returns a function...
