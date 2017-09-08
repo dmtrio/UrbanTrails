@@ -4,7 +4,6 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-
 const state = {
   mobile: '',
   // SignInOrUp
@@ -21,11 +20,9 @@ const state = {
   fixits: [],
   trails: [],
   parking: [],
+  potholes: [],
   location: null
 }
-
-// defeault axios headers
-axios.defaults.headers.post['Content-Type'] = 'application/JSON'
 
 const actions = {
   GET_SESSION: ({ commit }) => {
@@ -48,10 +45,11 @@ const actions = {
       reportType: reportInfo.reportType,
       reportContent: reportInfo.reportContent,
       position: reportInfo.position,
+      created_at: reportInfo.created_at,
       userid: reportInfo.userid
     })
       .then((response) => {
-        console.log(response)
+        console.log(`Status: ${response.status} ${response.statusText}, Posted your report!`)
       }, (err) => {
         console.log('ERROR', err)
       })
@@ -104,7 +102,16 @@ const actions = {
     }, (err) => {
       console.log(err)
     })
-  }
+  },
+
+  LOAD_POTHOLES: ({ commit }) => {
+    axios.get('/potholes').then((response) => {
+      console.log('store response 73: ',response.data);
+      commit('SET_POTHOLES', { potholes: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
 }
 
 const mutations = {
@@ -114,22 +121,12 @@ const mutations = {
   SET_MOBILE(state, mobile) {
     state.mobile = mobile
   },
-  SET_USER(state, user) {
-    state.user = user
-  },
-  TOGGLE_SIGNED_IN(state, bool) {
-    state.signedIn = bool
-  },
-  TOGGLE_AUTHFAIL(state, obj) {
-    state.authfail = obj
-  },
   TOGGLE_SIDEPANEL(state) {
     state.sidePanelOpen = !state.sidePanelOpen
   },
-  TOGGLE_VIEW_SIGN_IN(state, bool) {
-    // blocking sign in or up if already signed In
+  TOGGLE_SIGN_IN(state) {
     if (!state.signedIn) {
-      state.viewSignIn = bool
+      state.viewSignIn = !state.viewSignIn
     }
   },
   TOGGLE_SIOU_ACTIVE(state, active) {
@@ -146,6 +143,9 @@ const mutations = {
   },
   SET_TRAILS(state, { trails }) {
     state.trails = trails
+  },
+  SET_POTHOLES(state, { potholes }) {
+    state.potholes = potholes
   }
 }
 
@@ -155,7 +155,8 @@ const getters = {
   fixits: state => state.fixits,
   parking: state => state.parking,
   trails: state => state.trails,
-  // authfailAt: state => state.viewSignIn || !state.signedIn,
+  potholes: state => state.potholes,
+  // viewSignIn: state => state.viewSignIn || !state.signedIn,
 }
 
 export default new Vuex.Store({

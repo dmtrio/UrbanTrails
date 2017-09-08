@@ -11,7 +11,6 @@ import leafletMap from './leafletMap.vue'
 import SignInOrUp from './SignInOrUp.vue'
 import SignInOrUpForm from './SignInOrUpForm.vue'
 import areaReporting from './areaReporting.vue'
-import NavAlert from './NavAlert.vue'
 import Sidepanel from './Sidepanel.vue'
 
 
@@ -28,7 +27,6 @@ Vue.component('v-marker', Vue2Leaflet.Marker)
 Vue.component('SignInOrUp', SignInOrUp)
 Vue.component('SignInOrUpForm', SignInOrUpForm)
 Vue.component('areaReporting', areaReporting)
-Vue.component('NavAlert', NavAlert)
 Vue.component('Vue2Leaflet', Vue2Leaflet)
 Vue.component('Sidepanel', Sidepanel)
 

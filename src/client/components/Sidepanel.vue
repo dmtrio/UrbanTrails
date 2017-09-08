@@ -2,16 +2,15 @@
   <div id="slide-in-container">
     <v-btn id="hamburger" class="overLeaflet" @click="toggleVisible" @dblclick="toggleVisible" primary dark raised icon><v-icon>mdi-menu</v-icon></v-btn>
     <transition name="slide-fade">
-      <div id="sidepanel-list" class="base overEverything" v-if="this.$store.state.sidePanelOpen">
-        <h4>Urban Trails</h4>
-        <h6 v-if="this.$store.state.signedIn">Welcome {{this.$store.state.user.email}}</h6>
+      <div id="sidepanel-list" class="base overEverything" onDrag="()=>console.log('dragme')" draggable="true" v-if="this.$store.state.sidePanelOpen">
+        <h3>Urban Trails</h3>
         <v-switch @click="changeBool('kiosks')" v-bind:label="`Kiosks`" v-model="kiosksBool" light></v-switch>
         <v-switch @click="changeBool('fixits')" v-bind:label="`Fixits`" v-model="fixitsBool" light></v-switch>
         <v-switch @click="changeBool('trails')" v-bind:label="`Trails`" v-model="trailsBool" light></v-switch>
         <v-switch @click="toggleMainLayer()" v-bind:label="`Dark`" v-model="mainDarkBool" light></v-switch>
         <hr></hr>
-        <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignIn')">Sign in</v-btn>
-        <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignUp')">Sign up</v-btn>
+        <v-btn @click="openSignInOrUp('SignIn')">Sign in</v-btn>
+        <v-btn @click="openSignInOrUp('SignUp')">Sign up</v-btn>
       </div>
       </transition>
     </div>
@@ -36,7 +35,7 @@
         openSignInOrUp(value) {
           this.$store.commit('TOGGLE_SIDEPANEL')
           this.$store.commit('TOGGLE_SIOU_ACTIVE', value)
-          this.$store.commit('TOGGLE_VIEW_SIGN_IN', true)
+          this.$store.commit('TOGGLE_SIGN_IN')
         },
         toggleMainLayer(){
           const layers = ['mainDark', 'mainLight']
@@ -45,7 +44,7 @@
           }
         },
         changeBool(layer) {
-          this.$data[`${layer}Bool`] = this.toggleLayer(`${layer}Layer`)
+        this.$data[`${layer}Bool`] = this.toggleLayer(`${layer}Layer`)
         },
         toggleVisible(e) {
           this.$store.commit('TOGGLE_SIDEPANEL')
@@ -70,10 +69,9 @@
     position: fixed;
     top: 0px;
     right: 0px;
-    height: 100%;
     width: 250px;
     padding: 0px 15px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    height: 100%;
   }
 
 
