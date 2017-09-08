@@ -24,8 +24,8 @@ const state = {
   location: null
 }
 
-// defeault axios headers		
- axios.defaults.headers.post['Content-Type'] = 'application/JSON'
+// defeault axios headers
+axios.defaults.headers.post['Content-Type'] = 'application/JSON'
 
 const actions = {
   GET_SESSION: ({ commit }) => {
