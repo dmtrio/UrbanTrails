@@ -28,7 +28,8 @@
         // parkingLayer: null,
         potholesLayer: null,
         kiosksClose: [],
-        notifiedKiosks: []
+        notifiedKiosks: [],
+        isNotified: false
       };
     },
     beforeCreate() {
@@ -49,6 +50,10 @@
           if (!this.notifiedKiosks.includes(kiosk)) {
             alert(`Your'e within 200 meters from ${kiosk[9]}`)
             this.notifiedKiosks.push(kiosk)
+            this.isNotified = true
+            setTimeout(() => { this.isNotified = false }, 2200 )
+           } else {
+             this.isNotified = false
           }
         })
       },
