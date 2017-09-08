@@ -177,6 +177,8 @@
 
         //capture clicks on the map
         mymap.on('dblclick', doubleClick.bind(this));
+        mymap.on('click', click.bind(this));
+        mymap.on('movestart', click.bind(this))
       },
     }
   }
