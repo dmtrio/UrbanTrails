@@ -136,7 +136,7 @@ const mutations = {
     state.sidePanelOpen = !state.sidePanelOpen
   },
   TOGGLE_VIEW_SIGN_IN(state, bool) {
-    //blocking sign in or up if already signed In
+    // blocking sign in or up if already signed In
     if (!state.signedIn) {
       state.viewSignIn = bool
     }
@@ -167,6 +167,7 @@ const getters = {
   fixits: state => state.fixits,
   parking: state => state.parking,
   trails: state => state.trails,
+  // authfailAt: state => state.viewSignIn || !state.signedIn,
   potholes: state => state.potholes,
   // viewSignIn: state => state.viewSignIn || !state.signedIn,
 }
