@@ -36,7 +36,7 @@
         openSignInOrUp(value) {
           this.$store.commit('TOGGLE_SIDEPANEL')
           this.$store.commit('TOGGLE_SIOU_ACTIVE', value)
-          this.$store.commit('TOGGLE_SIGN_IN')
+          this.$store.commit('TOGGLE_VIEW_SIGN_IN', true)
         },
         toggleMainLayer(){
           const layers = ['mainDark', 'mainLight']
@@ -45,7 +45,7 @@
           }
         },
         changeBool(layer) {
-        this.$data[`${layer}Bool`] = this.toggleLayer(`${layer}Layer`)
+          this.$data[`${layer}Bool`] = this.toggleLayer(`${layer}Layer`)
         },
         toggleVisible(e) {
           this.$store.commit('TOGGLE_SIDEPANEL')
