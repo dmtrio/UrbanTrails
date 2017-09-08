@@ -75,6 +75,16 @@ const actions = {
       })
   },
 
+  USER_SIGN_OUT: ({ commit }) => {
+    axios.post('/signout')
+      .then((response) => {
+        commit('SET_USER', response.data)
+        commit('TOGGLE_SIGNED_IN', false)
+      }, (err) => {
+        console.log(err)
+      })
+  },
+
   LOAD_PARKING: ({ commit }) => {
     axios.get('/racks').then((response) => {
       commit('SET_PARKING', { parking: response.data.data })
@@ -82,7 +92,7 @@ const actions = {
       console.log(err)
     })
   },
-
+  
   LOAD_KIOSKS: ({ commit }) => {
     axios.get('/kiosks').then((response) => {
       commit('SET_KIOSKS', { kiosks: response.data.data })

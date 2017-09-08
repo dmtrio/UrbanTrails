@@ -12,6 +12,7 @@
         <hr></hr>
         <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignIn')">Sign in</v-btn>
         <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignUp')">Sign up</v-btn>
+        <v-btn v-if="this.$store.state.signedIn" @click="$store.dispatch('USER_SIGN_OUT')">Sign Out</v-btn>
       </div>
       </transition>
     </div>

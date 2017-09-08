@@ -1,5 +1,6 @@
 const Hapi = require('hapi')
 const path = require('path')
+const fs = require('fs');
 const bcrypt = require('bcryptjs')
 const sessions = require('hapi-server-session')
 
@@ -14,6 +15,17 @@ const knex = require('knex')({
 // Create a server with a host and port
 const server = new Hapi.Server()
 
+
+// var tls = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/example.com/privkey.pem'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/example.com/cert.pem')
+// };
+
+// server.connection({
+//   host: 'localhost',
+//   port: 443,
+//   tls: tls
+// });
 server.connection({
   host: 'localhost',
   port: 8000,
@@ -53,7 +65,7 @@ server.route({
     if (request.session.user) {
       reply(request.session.user)
     } else {
-      reply(null).code(404)
+      reply(null)
     }
   }
 })
@@ -114,11 +126,11 @@ server.route({
 })
 
 server.route({
-  method: 'GET',
-  path: '/logout',
+  method: 'POST',
+  path: '/signout',
   handler: (request, reply) => {
-    request.session = null
-    reply(null).code(200)
+    request.session.user = null
+    reply(request.session.user).code(200)
   }
 })
 

@@ -80,6 +80,11 @@
             password: this.$data.password
           }
           this.$store.dispatch('USER_SIGN_IN_OR_UP', dispatchObj)
+          setTimeout(()=>{
+            if(this.$store.state.signedIn){
+              this.clear()
+            }
+          }, 2000)
         } else {
           console.log('requirements not met');
         }

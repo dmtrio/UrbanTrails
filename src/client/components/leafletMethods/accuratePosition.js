@@ -14,7 +14,7 @@ export default {
       this._accuratePositionEventCount = 0;
       this._accuratePositionOptions = L.extend(
         {
-          maxWait: 10000,
+          maxWait: 100,
           desiredAccuracy: 20
         }, options);
       this._accuratePositionOptions.enableHighAccuracy = true;
