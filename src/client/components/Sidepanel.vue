@@ -2,7 +2,7 @@
   <div id="slide-in-container">
     <v-btn id="hamburger" class="overLeaflet" @click="toggleVisible" @dblclick="toggleVisible" primary dark raised icon><v-icon>mdi-menu</v-icon></v-btn>
     <transition name="slide-fade">
-       <div id="sidepanel-list" class="base overEverything" v-if="this.$store.state.sidePanelOpen">
+      <div id="sidepanel-list" class="base overEverything" v-if="this.$store.state.sidePanelOpen">
         <h4>Urban Trails</h4>
         <h6 v-if="this.$store.state.signedIn">Welcome {{this.$store.state.user.email}}</h6>
         <v-switch @click="changeBool('kiosks')" v-bind:label="`Kiosks`" v-model="kiosksBool" light></v-switch>
@@ -10,8 +10,8 @@
         <v-switch @click="changeBool('trails')" v-bind:label="`Trails`" v-model="trailsBool" light></v-switch>
         <v-switch @click="toggleMainLayer()" v-bind:label="`Dark`" v-model="mainDarkBool" light></v-switch>
         <hr></hr>
-        <v-btn @click="openSignInOrUp('SignIn')">Sign in</v-btn>
-        <v-btn @click="openSignInOrUp('SignUp')">Sign up</v-btn>
+        <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignIn')">Sign in</v-btn>
+        <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignUp')">Sign up</v-btn>
       </div>
       </transition>
     </div>
