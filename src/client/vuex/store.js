@@ -127,7 +127,7 @@ const mutations = {
     state.user = user
   },
   TOGGLE_SIGNED_IN(state, bool) {
-   state.signedIn = bool
+    state.signedIn = bool
   },
   TOGGLE_AUTHFAIL(state, obj) {
     state.authfail = obj
@@ -135,9 +135,10 @@ const mutations = {
   TOGGLE_SIDEPANEL(state) {
     state.sidePanelOpen = !state.sidePanelOpen
   },
-  TOGGLE_SIGN_IN(state) {
-    if (!state.signedIn) {
-      state.viewSignIn = !state.viewSignIn
+  TOGGLE_VIEW_SIGN_IN(state) {
+    //blocking sign in or up if already signed In
+    if (bool) {
+      state.viewSignIn = bool
     }
   },
   TOGGLE_SIOU_ACTIVE(state, active) {
