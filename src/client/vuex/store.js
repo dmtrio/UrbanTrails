@@ -123,6 +123,15 @@ const mutations = {
   SET_MOBILE(state, mobile) {
     state.mobile = mobile
   },
+  SET_USER(state, user) {
+    state.user = user
+  },
+  TOGGLE_SIGNED_IN(state, bool) {
+   state.signedIn = bool
+  },
+  TOGGLE_AUTHFAIL(state, obj) {
+    state.authfail = obj
+  },
   TOGGLE_SIDEPANEL(state) {
     state.sidePanelOpen = !state.sidePanelOpen
   },
