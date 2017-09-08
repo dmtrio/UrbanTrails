@@ -78,10 +78,10 @@
             signInOrUp: this.signInOrUp(),
             email: this.$data.email,
             password: this.$data.password
-          }		
+          }
           this.$store.dispatch('USER_SIGN_IN_OR_UP', dispatchObj)
         } else {
-          console.log('reqs not met');
+          console.log('requirements not met');
         }
       },
       clear() {
