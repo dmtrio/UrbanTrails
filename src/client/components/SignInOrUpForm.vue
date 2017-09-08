@@ -49,6 +49,7 @@
     data() {
       return {
         nonVisible: true,
+        error: true,
         password: '',
         email: '',
         emailRules: [
@@ -57,7 +58,7 @@
         ],
         passwordRules: [
         (v) => !!v || 'Password is required',
-        (v) => v.length >= 8 || 'Password must be at least 8 characters'
+        (v) => (!!v && v.length >= 8) || 'Password must be at least 8 characters'
         ]
       }
     },
