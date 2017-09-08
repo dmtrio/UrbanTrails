@@ -52,8 +52,8 @@
             this.notifiedKiosks.push(kiosk)
             this.isNotified = true
             setTimeout(() => { this.isNotified = false }, 2200 )
-           } else {
-             this.isNotified = false
+          } else {
+            this.isNotified = false
           }
         })
       },
@@ -113,7 +113,7 @@
           this.$store.commit('TOGGLE_SIDEPANEL')
         }
         if (this.$store.state.viewSignIn) {
-          this.$store.commit('TOGGLE_SIGN_IN')
+          this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
         }
       },
 
