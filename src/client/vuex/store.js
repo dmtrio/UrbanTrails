@@ -106,7 +106,6 @@ const actions = {
 
   LOAD_POTHOLES: ({ commit }) => {
     axios.get('/potholes').then((response) => {
-      console.log('store response 73: ',response.data);
       commit('SET_POTHOLES', { potholes: response.data })
     }, (err) => {
       console.log(err)
