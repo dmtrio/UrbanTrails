@@ -163,10 +163,24 @@ server.route({
 })
 
 server.route({
+  method: 'GET',
+  path: '/potholes',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'potholes' }).select('coordinates', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
   method: 'POST',
   path: '/report',
   handler: (request, reply) => {
-    knex('reports').insert({ report_type: request.payload.reportType, report_data: request.payload.reportContent, coordinates: request.payload.position, userid: request.payload.userid })
+    knex('reports').insert({ report_type: request.payload.reportType, report_data: request.payload.reportContent, coordinates: request.payload.position, created_at: request.payload.created_at, userid: request.payload.userid })
       .then((report) => {
         reply(report)
       })

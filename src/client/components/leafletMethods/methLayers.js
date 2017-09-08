@@ -36,6 +36,15 @@ export default {
       context.$data.parkingLayer.addLayer(marker)
     })
   },
+  potholeMarkers(context) {
+    console.log('methLayers 27 context', context)
+    context.potholes.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`Pothole found on ${chunk.created_at}`)
+      context.$data.potholesLayer.addLayer(marker)
+    })
+  },
   addTrails(context) {
     context.$data.trailsLayer.addData(context.trails)
   },

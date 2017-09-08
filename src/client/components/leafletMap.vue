@@ -26,6 +26,7 @@
         fixitsLayer: null,
         kiosksLayer: null,
         // parkingLayer: null,
+        potholesLayer: null,
         kiosksClose: [],
         notifiedKiosks: [],
         isNotified: false
@@ -37,6 +38,7 @@
       this.$store.dispatch('LOAD_TRAILS')
       this.$store.dispatch('LOAD_FIXITS')
       // this.$store.dispatch('LOAD_PARKING')
+      this.$store.dispatch('LOAD_POTHOLES')
     },
 
     mounted() {
@@ -46,6 +48,7 @@
       kiosksClose: function() {
         this.kiosksClose.forEach(kiosk => {
           if (!this.notifiedKiosks.includes(kiosk)) {
+            alert(`Your'e within 200 meters from ${kiosk[9]}`)
             this.notifiedKiosks.push(kiosk)
             this.isNotified = true
             setTimeout(() => { this.isNotified = false }, 2200 )
@@ -73,8 +76,11 @@
       kiosks: function() {
         mLayers.kioskMarkers(this)
       },
-      trails: function(){
+      trails: function() {
         mLayers.addTrails(this)
+      },
+      potholes: function() {
+        mLayers.potholeMarkers(this)
       }
     },
     computed: {
@@ -94,6 +100,9 @@
       fixits: function() {
           return this.$store.getters.fixits
       },
+      potholes: function() {
+          return this.$store.getters.potholes
+      }
     },
     methods: {
       toggleLayer(layer) {
@@ -107,6 +116,7 @@
           this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
         }
       },
+
       makeMap() {
 
         //layers including empty
@@ -122,6 +132,7 @@
         this.$data.fixitsLayer = L.layerGroup('')
         this.$data.kiosksLayer = L.layerGroup('')
         // this.$data.parkingLayer = L.layerGroup('')
+        this.$data.potholesLayer = L.layerGroup('')
         //end layers
 
         //map creation
@@ -135,6 +146,7 @@
             this.$data.fixitsLayer,
             this.$data.kiosksLayer,
             // this.$data.parkingLayer,
+            this.$data.potholesLayer,
             ]
         });
         this.$data.map = mymap
@@ -154,8 +166,10 @@
           this.closePanels()
         }
 
+
         function doubleClick (e) {
-          let position = [e.latlng.lat, e.latlng.lng]
+          let position = [e.latlng.lat, e.latlng.lng];
+          document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
           reports[0].setAttribute('data', position);

@@ -4,7 +4,6 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-
 const state = {
   mobile: '',
   // SignInOrUp
@@ -21,6 +20,7 @@ const state = {
   fixits: [],
   trails: [],
   parking: [],
+  potholes: [],
   location: null
 }
 
@@ -48,10 +48,11 @@ const actions = {
       reportType: reportInfo.reportType,
       reportContent: reportInfo.reportContent,
       position: reportInfo.position,
+      created_at: reportInfo.created_at,
       userid: reportInfo.userid
     })
       .then((response) => {
-        console.log(response)
+        console.log(`Status: ${response.status} ${response.statusText}, Posted your report!`)
       }, (err) => {
         console.log('ERROR', err)
       })
@@ -104,7 +105,15 @@ const actions = {
     }, (err) => {
       console.log(err)
     })
-  }
+  },
+
+  LOAD_POTHOLES: ({ commit }) => {
+    axios.get('/potholes').then((response) => {
+      commit('SET_POTHOLES', { potholes: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
 }
 
 const mutations = {
@@ -146,6 +155,9 @@ const mutations = {
   },
   SET_TRAILS(state, { trails }) {
     state.trails = trails
+  },
+  SET_POTHOLES(state, { potholes }) {
+    state.potholes = potholes
   }
 }
 
@@ -156,6 +168,8 @@ const getters = {
   parking: state => state.parking,
   trails: state => state.trails,
   // authfailAt: state => state.viewSignIn || !state.signedIn,
+  potholes: state => state.potholes,
+  // viewSignIn: state => state.viewSignIn || !state.signedIn,
 }
 
 export default new Vuex.Store({
