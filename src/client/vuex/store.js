@@ -135,9 +135,9 @@ const mutations = {
   TOGGLE_SIDEPANEL(state) {
     state.sidePanelOpen = !state.sidePanelOpen
   },
-  TOGGLE_VIEW_SIGN_IN(state) {
+  TOGGLE_VIEW_SIGN_IN(state, bool) {
     //blocking sign in or up if already signed In
-    if (bool) {
+    if (!state.signedIn) {
       state.viewSignIn = bool
     }
   },
