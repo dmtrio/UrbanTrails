@@ -65,15 +65,16 @@
   }
 
   #sidepanel-heading {
-
+    height: 60px;
   }
 
   #sidepanel-heading > h4{
-
+    float: left;
+    font-size: 28px;
   }
 
   #sidepanel-heading > button{
-
+    float: right;
   }
 
   #hamburger {

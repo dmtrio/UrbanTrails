@@ -3,7 +3,8 @@
     <div id="mapid">
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
-    <v-btn v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
+    <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
+    <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
@@ -49,7 +50,6 @@
       kiosksClose: function() {
         this.kiosksClose.forEach(kiosk => {
           if (!this.notifiedKiosks.includes(kiosk)) {
-            alert(`Your'e within 200 meters from ${kiosk[9]}`)
             this.notifiedKiosks.push(kiosk)
             this.isNotified = true
             setTimeout(() => { this.isNotified = false }, 2200 )
@@ -204,5 +204,10 @@
     float: left;
     transition: width .5s, height .5s;
   }
-
+  #location-lock-btn {
+    position: absolute;
+    top: 140px;
+    left: 0px;
+    z-index: 1050;
+  }
 </style>
