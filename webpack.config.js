@@ -33,11 +33,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['css-loader', 'style-loader']
+        loaders: ['style-loader', 'css-loader']
       },
       {
         test: /\.sass$/,
-        loaders: ['css-loader', 'style-loader', 'sass-loader']
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
