@@ -13,6 +13,7 @@ import SignInOrUpForm from './SignInOrUpForm.vue'
 import areaReporting from './areaReporting.vue'
 import NavAlert from './NavAlert.vue'
 import Sidepanel from './Sidepanel.vue'
+import Compass from './Compass.vue'
 
 
 Vue.use(VueAsyncData)
@@ -31,6 +32,7 @@ Vue.component('areaReporting', areaReporting)
 Vue.component('NavAlert', NavAlert)
 Vue.component('Vue2Leaflet', Vue2Leaflet)
 Vue.component('Sidepanel', Sidepanel)
+Vue.component('Compass', Compass)
 
 new Vue({
   // inject store into all components
