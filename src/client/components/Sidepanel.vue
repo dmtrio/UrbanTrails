@@ -3,7 +3,12 @@
     <v-btn id="hamburger" class="overLeaflet" @click="toggleVisible" @dblclick="toggleVisible" primary dark raised icon><v-icon>mdi-menu</v-icon></v-btn>
     <transition name="slide-fade">
       <div id="sidepanel-list" class="base overEverything" v-if="this.$store.state.sidePanelOpen">
-        <h4>Urban Trails</h4>
+        <div id="sidepanel-heading">
+          <h4>Urban Trails</h4>
+          <v-btn @click="toggleVisible" icon center>
+            <v-icon dark>mdi-arrow-right-bold</v-icon>
+          </v-btn>
+        </div>
         <h6 v-if="this.$store.state.signedIn">Welcome {{this.$store.state.user.email}}</h6>
         <v-switch @click="changeBool('kiosks')" v-bind:label="`Kiosks`" v-model="kiosksBool" light></v-switch>
         <v-switch @click="changeBool('fixits')" v-bind:label="`Fixits`" v-model="fixitsBool" light></v-switch>
@@ -12,6 +17,7 @@
         <hr></hr>
         <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignIn')">Sign in</v-btn>
         <v-btn v-if="!this.$store.state.signedIn" @click="openSignInOrUp('SignUp')">Sign up</v-btn>
+        <v-btn v-if="this.$store.state.signedIn" @click="$store.dispatch('USER_SIGN_OUT')">Sign Out</v-btn>
       </div>
       </transition>
     </div>
@@ -56,6 +62,19 @@
 <style>
   #slide-in-container {
     height: 100%;
+  }
+
+  #sidepanel-heading {
+    height: 60px;
+  }
+
+  #sidepanel-heading > h4{
+    float: left;
+    font-size: 28px;
+  }
+
+  #sidepanel-heading > button{
+    float: right;
   }
 
   #hamburger {

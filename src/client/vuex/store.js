@@ -21,7 +21,9 @@ const state = {
   trails: [],
   parking: [],
   potholes: [],
-  location: null
+  // location tracking
+  location: null,
+  viewLocked: true
 }
 
 // defeault axios headers
@@ -75,6 +77,16 @@ const actions = {
       })
   },
 
+  USER_SIGN_OUT: ({ commit }) => {
+    axios.post('/signout')
+      .then((response) => {
+        commit('SET_USER', response.data)
+        commit('TOGGLE_SIGNED_IN', false)
+      }, (err) => {
+        console.log(err)
+      })
+  },
+
   LOAD_PARKING: ({ commit }) => {
     axios.get('/racks').then((response) => {
       commit('SET_PARKING', { parking: response.data.data })
@@ -117,9 +129,6 @@ const actions = {
 }
 
 const mutations = {
-  SET_LOCATION(state, { location }) {
-    state.location = location
-  },
   SET_MOBILE(state, mobile) {
     state.mobile = mobile
   },
@@ -158,6 +167,12 @@ const mutations = {
   },
   SET_POTHOLES(state, { potholes }) {
     state.potholes = potholes
+  },
+  SET_LOCATION(state, { location }) {
+    state.location = location
+  },
+  TOGGLE_VIEW_LOCKED(state, bool) {
+    state.viewLocked = bool
   }
 }
 

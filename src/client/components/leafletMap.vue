@@ -3,6 +3,8 @@
     <div id="mapid">
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
+    <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
+    <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
@@ -14,7 +16,7 @@
   import * as L from 'leaflet'
   import methods from './leafletMethods/methodSample.js'
   import mLayers from './leafletMethods/methLayers.js'
-  import mLocation from './leafletMethods/methLocation.js'
+  import * as mLocation from './leafletMethods/methLocation.js'
   import { getDistance } from 'geolib'
   export default {
     data() {
@@ -48,7 +50,6 @@
       kiosksClose: function() {
         this.kiosksClose.forEach(kiosk => {
           if (!this.notifiedKiosks.includes(kiosk)) {
-            alert(`Your'e within 200 meters from ${kiosk[9]}`)
             this.notifiedKiosks.push(kiosk)
             this.isNotified = true
             setTimeout(() => { this.isNotified = false }, 2200 )
@@ -116,7 +117,10 @@
           this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
         }
       },
-
+      locationLock() {
+        this.$store.commit('TOGGLE_VIEW_LOCKED', true)
+        mLocation.setView(this, this.$data.map, false)
+      },
       makeMap() {
 
         //layers including empty
@@ -155,7 +159,11 @@
 
         //map location
 
-        mLocation.locate(this, mymap)
+
+        let position = L.marker([51.505, -0.09]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
+        let area = L.circle([51.505, -0.09], 120).addTo(mymap)
+
+        mLocation.locate(this, mymap, position, area)
 
         function getHandlerForFeature(feat) {  // A function...
           return function(ev) {   // ...that returns a function...
@@ -166,6 +174,10 @@
           this.closePanels()
         }
 
+        function pan (e) {
+          this.closePanels()
+          this.$store.commit('TOGGLE_VIEW_LOCKED', false)
+        }
 
         function doubleClick (e) {
           let position = [e.latlng.lat, e.latlng.lng];
@@ -178,7 +190,7 @@
         //capture clicks on the map
         mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
-        mymap.on('movestart', click.bind(this))
+        mymap.on('movestart', pan.bind(this))
       },
     }
   }
@@ -192,5 +204,10 @@
     float: left;
     transition: width .5s, height .5s;
   }
-
+  #location-lock-btn {
+    position: absolute;
+    top: 140px;
+    left: 0px;
+    z-index: 1050;
+  }
 </style>
