@@ -15,8 +15,8 @@
     </div>
 
     <div class="bikelanesDiv">
-      <button v-on:click="postReport('BIKE_LANES', 'Cracked Pavement')" class="issues twoWide button">Cracked Pavement</button>
-      <button v-on:click="postReport('BIKE_LANES', 'Dirty Bike Lane')" class="issues twoWide button">Dirty Bike Lane</button>
+      <button v-on:click="postReport('CRACKED_PAVEMENT', 'Cracked Pavement')" class="issues twoWide button">Cracked Pavement</button>
+      <button v-on:click="postReport('DIRTY_LANES', 'Dirty Bike Lane')" class="issues twoWide button">Dirty Bike Lane</button>
     </div>
 
     <div class="trafficDiv">
