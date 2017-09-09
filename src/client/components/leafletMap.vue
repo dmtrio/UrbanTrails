@@ -154,11 +154,19 @@
             this.$data.potholesLayer,
             ]
         });
+          // end map creation
         this.$data.map = mymap
-        //end map creation
-        L.Control.geocoder({position: "topleft"}).addTo(this.map);
-
-        //map location
+        // L.Control.geocoder({position: "topleft"}).addTo(this.map);
+        L.Routing.control({
+          router: L.Routing.mapbox('pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg'),
+          // showAlternatives: true,
+          reverseWaypoints: true, 
+          routeWhileDragging: true,
+          geocoder: L.Control.Geocoder.nominatim(),
+          collapsible: true,
+          show: false
+        }).addTo(mymap);
+       //map location
 
 
         let position = L.marker([51.505, -0.09]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
@@ -166,8 +174,8 @@
 
         mLocation.locate(this, mymap, position, area)
 
-        function getHandlerForFeature(feat) {  // A function...
-          return function(ev) {   // ...that returns a function...
+        function getHandlerForFeature(feat) {  
+          return function(ev) { 
           }
         }
 
