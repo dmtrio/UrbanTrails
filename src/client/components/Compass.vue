@@ -1,5 +1,5 @@
 <template>
-  <img src="/static/images/ugly-comp-ass.png" id="compass" ref="compass"/>
+  <img src="/static/images/compass.png" id="compass" ref="compass"/>
 </template>
 <script>
   export default {
@@ -48,8 +48,8 @@
   #compass{
     position: fixed;
     top: 84px;
-    right: 16px;
-    width: 56px;
+    right: 20px;
+    width: 48px;
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
     -moz-transform-origin: 50% 50%;
