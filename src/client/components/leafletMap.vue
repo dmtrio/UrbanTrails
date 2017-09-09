@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Compass></Compass>
     <div id="mapid">
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
