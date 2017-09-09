@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card flat>
-      <v-form ref="form" >
+      <v-form v-on:submit.prevent="submit" ref="form">
         <h6 class="error--text" v-if="!isSignIn && this.$store.state.authfail.signUp">Email already in use</h6>
         <h6 class="error--text" v-if="isSignIn && this.$store.state.authfail.signIn">Incorrect email or password</h6>
         <v-text-field
@@ -36,7 +36,7 @@
           required
           counter
         ></v-text-field>
-        <v-btn @click="submit">submit</v-btn>
+        <v-btn type="submit">submit</v-btn>
         <v-btn @click="clear">clear</v-btn>
       </v-form>
     </v-card>
