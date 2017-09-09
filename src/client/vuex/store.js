@@ -44,6 +44,7 @@ const actions = {
   },
 
   POST_REPORT: (skipThisVal, reportInfo) => {
+    
     axios.post('/report', {
       reportType: reportInfo.reportType,
       reportContent: reportInfo.reportContent,
@@ -158,6 +159,9 @@ const mutations = {
   },
   SET_POTHOLES(state, { potholes }) {
     state.potholes = potholes
+  },
+  ADD_POTHOLE(state, { pothole }) {
+    state.potholes.push(pothole)
   }
 }
 

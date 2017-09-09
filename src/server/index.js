@@ -166,6 +166,20 @@ server.route({
   method: 'GET',
   path: '/potholes',
   handler: (request, reply) => {
+    knex('reports').where({ report_type: 'Pothole' }).select('coordinates', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+/*server.route({
+  method: 'GET',
+  path: '/potholes',
+  handler: (request, reply) => {
     knex('reports').where({ report_type: 'potholes' }).select('coordinates', 'created_at')
       .then((report) => {
         reply(report)
@@ -175,6 +189,48 @@ server.route({
       })
   }
 })
+
+server.route({
+  method: 'GET',
+  path: '/potholes',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'potholes' }).select('coordinates', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/potholes',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'potholes' }).select('coordinates', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/potholes',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'potholes' }).select('coordinates', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})*/
 
 server.route({
   method: 'POST',

@@ -45,6 +45,78 @@ export default {
       context.$data.potholesLayer.addLayer(marker)
     })
   },
+  mildTrafficMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  heavyTrafficMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  crackedPavementMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  dirtyBikeLaneMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  otherIssueMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  bikeRackMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  bikeFriendlyBusinessMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  scenicAreaMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
+  otherCommendationMarkers(context) {
+    context.nameHere.forEach(chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`nameHere found on $chunk.created_at`)
+      context.$data.nameHereLayer.addLayer(marker)
+    }
+  },
   addTrails(context) {
     context.$data.trailsLayer.addData(context.trails)
   },
