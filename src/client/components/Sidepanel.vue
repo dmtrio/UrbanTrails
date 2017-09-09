@@ -5,7 +5,7 @@
       <div id="sidepanel-list" class="base overEverything" v-if="this.$store.state.sidePanelOpen">
         <div id="sidepanel-heading">
           <h4>Urban Trails</h4>
-          <v-btn icon center class="">
+          <v-btn @click="toggleVisible" icon center>
             <v-icon dark>mdi-arrow-right-bold</v-icon>
           </v-btn>
         </div>
