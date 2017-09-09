@@ -33,7 +33,7 @@
     },
  }
 </script>
-<style >
+<style scoped>
   #slide-inContainer {
     width: 100%;
   }
