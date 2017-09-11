@@ -16,7 +16,14 @@ export function setView(context, mymap) {
   }
 }
 
-export function locate(context, mymap, position, area) {
+function setInitialWaypoint (coords, router) {
+  let location = {lat: coords.latitude,
+                  lng: coords.longitude}
+  let newWayPoint = new L.Routing.Waypoint(location, "Current location")
+  router.spliceWaypoints(0, 1, newWayPoint)
+}
+
+export function locate(context, mymap, position, area, router) {
   function onLocationFound(e) {
     radius = e.accuracy / 2
     latln = { lat: e.latitude, lng: e.longitude }
@@ -30,12 +37,13 @@ export function locate(context, mymap, position, area) {
     // pans/zooms to current location
     setView(context, mymap)
   }
-  mymap.on('locationFound', onLocationFound)
+  // mymap.on('locationFound', onLocationFound)
 
   // updates location based on navigator
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition((position) => {
       onLocationFound(position.coords)
+      setInitialWaypoint(position.coords, router)
     })
   }
   accuratePosition.findAccuratePosition.bind(this, { maxWait: 15000, desiredAccuracy: 10, enableHighAccuracy: true })
