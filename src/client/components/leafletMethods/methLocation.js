@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable indent */
 /* eslint-disable max-len */
 import accuratePosition from './accuratePosition'
 
