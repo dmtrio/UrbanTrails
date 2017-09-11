@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Compass></Compass>
+    <Compass v-if="$store.state.mobile"></Compass>
     <div id="mapid">
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
