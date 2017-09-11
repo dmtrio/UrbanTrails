@@ -30,7 +30,7 @@
         mildTrafficLayer : null,
         heavyTrafficLayer : null,
         crackedPavementLayer : null,
-        dirtyBikeLanesLayer : null,
+        dirtyLanesLayer : null,
         otherIssuesLayer : null,
         // parkingLayer: null,
         bikeRacksLayer : null,
@@ -50,10 +50,10 @@
       this.$store.dispatch('LOAD_FIXITS')
       //User reported issues
       this.$store.dispatch('LOAD_POTHOLES')
-      this.$store.dispatch('LOAD_TRAFFIC_MILD')
-      this.$store.dispatch('LOAD_TRAFFIC_HEAVY')
-      this.$store.dispatch('LOAD_BIKE_LANES_CRACKED')
-      this.$store.dispatch('LOAD_BIKE_LANES_DIRTY')
+      this.$store.dispatch('LOAD_MILD_TRAFFIC')
+      this.$store.dispatch('LOAD_HEAVY_TRAFFIC')
+      this.$store.dispatch('LOAD_CRACKED_PAVEMENT')
+      this.$store.dispatch('LOAD_DIRTY_LANES')
       this.$store.dispatch('LOAD_OTHER_ISSUES')
       //User reported commendations
       // this.$store.dispatch('LOAD_PARKING')
@@ -97,7 +97,7 @@
       mildTraffic: function() { mLayers.mildTrafficMarkers(this) },
       heavyTraffic: function() { mLayers.heavyTrafficMarkers(this) },
       crackedPavement: function() { mLayers.crackedPavementMarkers(this) },
-      dirtyBikeLanes: function() { mLayers.dirtyBikeLaneMarkers(this) },
+      dirtyLanes: function() { mLayers.dirtyLaneMarkers(this) },
       otherIssues: function() { mLayers.otherIssueMarkers(this) },
       //User commendation report layer
       // parking: function() {
@@ -120,7 +120,7 @@
       mildTraffic: function() { return this.$store.getters.mildTraffic },
       heavyTraffic: function() { return this.$store.getters.heavyTraffic },
       crackedPavement: function() { return this.$store.getters.crackedPavement },
-      dirtyBikeLanes: function() { return this.$store.getters.dirtyBikeLanes },
+      dirtyLanes: function() { return this.$store.getters.dirtyLanes },
       otherIssues: function() { return this.$store.getters.otherIssues },
       //User commendation layers
       // parking: function() {
@@ -162,7 +162,7 @@
         this.$data.mildTrafficLayer = L.layerGroup('')
         this.$data.heavyTrafficLayer = L.layerGroup('')
         this.$data.crackedPavementLayer = L.layerGroup('')
-        this.$data.dirtyBikeLanesLayer = L.layerGroup('')
+        this.$data.dirtyLanesLayer = L.layerGroup('')
         this.$data.otherIssuesLayer = L.layerGroup('')
         //User reported commendations layers
         // this.$data.parkingLayer = L.layerGroup('')
@@ -188,7 +188,7 @@
             this.$data.mildTrafficLayer,
             this.$data.heavyTrafficLayer,
             this.$data.crackedPavementLayer,
-            this.$data.dirtyBikeLanesLayer,
+            this.$data.dirtyLanesLayer,
             this.$data.otherIssuesLayer,
             //User commendation layers
             // this.$data.parkingLayer,
@@ -211,10 +211,11 @@
           }
         }
 
-        function click (e) { this.closePanels()}
+        function closeFunc (e) { this.closePanels()}
 
-        function doubleClick (e) {
-          let position = [e.latlng.lat, e.latlng.lng];
+        function click (e) {
+          this.closePanels()
+          let position = [e.latlng.lat, e.latlng.lng]
           document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
@@ -222,9 +223,8 @@
         }
 
         //Captures clicks on the map
-        mymap.on('dblclick', doubleClick.bind(this));
         mymap.on('click', click.bind(this));
-        mymap.on('movestart', click.bind(this))
+        mymap.on('movestart', closeFunc.bind(this))
       },
     }
   }

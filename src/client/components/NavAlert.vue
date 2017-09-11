@@ -26,7 +26,6 @@
     },
     watch: {
       isNotified: () => {
-          console.log('now i want the alert to transition out')
       }
     },
     methods: {

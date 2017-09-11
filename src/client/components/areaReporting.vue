@@ -20,12 +20,12 @@
     </div>
 
     <div class="trafficDiv">
-      <button v-on:click="postReport('TRAFFIC', 'Mild Traffic')" class="issues twoWide button">Mild Traffic</button>
-      <button v-on:click="postReport('TRAFFIC', 'Heavy Traffic')" class="issues twoWide button">Heavy Traffic</button>
+      <button v-on:click="postReport('MILD_TRAFFIC', 'Mild Traffic')" class="issues twoWide button">Mild Traffic</button>
+      <button v-on:click="postReport('HEAVY_TRAFFIC', 'Heavy Traffic')" class="issues twoWide button">Heavy Traffic</button>
     </div>
 
     <div class="commendationsDiv">
-      <button v-on:click="postReport('BIKE_BUSINESS', 'bikeBusiness')" class="commendations fourWide button">Bike Friendly Business</button>
+      <button v-on:click="postReport('BIKE_FRIENDLY_BUSINESS', 'bikeBusiness')" class="commendations fourWide button">Bike Friendly Business</button>
       <button v-on:click="postReport('SCENIC_AREAS', 'scenicArea')"class="commendations fourWide button">Scenic Area</button>
       <button v-on:click="postReport('BIKE_RACKS', 'bikeRacks')" class="commendations fourWide button">Bike Racks</button>
       <button v-on:click="toReportType('otherDiv', 'OTHER_COMMENDATIONS')" class="commendations fourWide button">Other</button>
@@ -59,9 +59,9 @@
       },
 
       postReport(type, content) {
-        let reportInfo = {reportType: type, reportContent: content, userid: 1, created_at: new Date(), position: document.getElementsByClassName('reporting')[0].getAttribute('data')}
+        let reportInfo = {reportType: type, reportContent: content, userid: 1, created_at: new Date(), coordinates: document.getElementsByClassName('reporting')[0].getAttribute('data')}
         this.$store.dispatch('POST_REPORT', reportInfo)
-        this.$store.dispatch(`ADD_${type}`)
+        this.$store.dispatch(`LOAD_${type}`, reportInfo)
         document.getElementById('selected').removeAttribute('id')
         document.getElementById('active').removeAttribute('id')
       },

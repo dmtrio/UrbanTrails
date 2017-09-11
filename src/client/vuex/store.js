@@ -24,7 +24,7 @@ const state = {
   mildTraffic: [],
   heavyTraffic: [],
   crackedPavement: [],
-  dirtyBikeLanes: [],
+  dirtyLanes: [],
   otherIssues: [],
   bikeRacks: [],
   bikeFriendlyBusiness: [],
@@ -53,11 +53,10 @@ const actions = {
   },
 
   POST_REPORT: (skipThisVal, reportInfo) => {
-
     axios.post('/report', {
       reportType: reportInfo.reportType,
       reportContent: reportInfo.reportContent,
-      position: reportInfo.position,
+      coordinates: reportInfo.coordinates,
       created_at: reportInfo.created_at,
       userid: reportInfo.userid
     })
@@ -126,7 +125,7 @@ const actions = {
   },
   LOAD_MILD_TRAFFIC: ({ commit }) => {
     axios.get('/mildTraffic').then((response) => {
-      commit('SET_POTHOLES', { mildTraffic: response.data })
+      commit('SET_MILD_TRAFFIC', { mildTraffic: response.data })
     }, (err) => {
       console.log(err)
     })
@@ -212,16 +211,6 @@ const mutations = {
   SET_BIKE_FRIENDLY_BUSINESS(state, { bikeFriendlyBusiness }) { state.bikeFriendlyBusiness = bikeFriendlyBusiness },
   SET_SCENIC_AREAS(state, { scenicAreas }) { state.scenicAreas = scenicAreas },
   SET_OTHER_COMMENDATIONS(state, { otherCommendations }) { state.otherCommendations = otherCommendations },
-  ADD_POTHOLE(state, { pothole }) { state.potholes.push(pothole) },
-  ADD_MILD_TRAFFIC(state, { mildTraffic }) { state.mildTraffic.push(mildTraffic) },
-  ADD_HEAVY_TRAFFIC(state, { heavyTraffic }) { state.heavyTraffic.push(heavyTraffic) },
-  ADD_CRACKED_PAVEMENT(state, { crackedPavement }) { state.crackedPavement.push(crackedPavement) },
-  ADD_DIRTY_LANES(state, { dirtyLanes }) { state.dirtyLanes.push(dirtyLanes) },
-  ADD_OTHER_ISSUES(state, { otherIssues }) { state.otherIssues.push(otherIssues) },
-  ADD_BIKE_RACKS(state, { bikeRacks }) { state.bikeRacks.push(bikeRacks) },
-  ADD_BIKE_FRIENDLY_BUSINESS(state, { bikeFriendlyBusiness }) { state.bikeFriendlyBusiness.push(bikeFriendlyBusiness) },
-  ADD_SCENIC_AREAS(state, { scenicAreas }) { state.scenicAreas.push(scenicAreas) },
-  ADD_OTHER_COMMENDATIONS(state, { otherCommendations }) { state.otherCommendations.push(otherCommendations)  }
 }
 
 const getters = {
