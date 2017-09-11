@@ -3,7 +3,7 @@
     <transition name="slide-fading">
       <div id="notification" v-if="isNotified">
         <audio id="audio" autoplay>
-          <source src="https://www.zedge.net/d2w/4/971615/275962413/view/?mp3" type="audio/mpeg"></source>
+          <source src="../sounds/bikesound.mp3" type="audio/mpeg"></source>
           G-dangit, you can't play audio.
         </audio>
       <div v-for='kiosk in notifiedKiosks'>
