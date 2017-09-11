@@ -1,3 +1,6 @@
+.leaflet-routing-containter {
+    text-align: center;
+}
 .leaflet-routing-container, .leaflet-routing-error {
     width: 320px;
     background-color: white;
@@ -211,7 +214,7 @@
 .leaflet-routing-collapse-btn {
     position: absolute;
     top: 0;
-    right: 6px;
+    right: 0px;
     font-size: 24px;
     color: #ccc;
     font-weight: bold;
@@ -223,12 +226,15 @@
 
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn {
     position: relative;
-    left: 4px;
-    top: 4px;
+    left: 0px;
+    top: -3px;
     display: block;
     width: 26px;
-    height: 23px;
-    background-image: url('routing-icon.png');
+    height: 26px;
+    background-image: url('PinkMap.png');
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn:after {

@@ -6,7 +6,7 @@
     </div>
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
-    <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
+    <!-- <Sidepanel :toggleLayer="toggleLayer"></Sidepanel> -->
     <areaReporting></areaReporting>
   </div>
 </template>
@@ -153,24 +153,31 @@
             // this.$data.parkingLayer,
             this.$data.potholesLayer,
             ]
-        });
+        })
+        let bingKey = 'Av5guhuRA2EPX3ahI-QuCJvUS0ORctt8aZuWVYh3Os-YAIXQ887T7Fj2mFkgwQOP'
           // end map creation
         this.$data.map = mymap
+        L.Control.geocoder({geocoder: L.Control.Geocoder.bing(bingKey),
+                                             position: "topleft"}).addTo(this.map)
         // L.Control.geocoder({position: "topleft"}).addTo(this.map);
         L.Routing.control({
           router: L.Routing.mapbox('pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg'),
-          // showAlternatives: true,
+          showAlternatives: true, 
+          altLineOptions: {styles: [{color: 'gray'}]}, 
           reverseWaypoints: true, 
           routeWhileDragging: true,
-          geocoder: L.Control.Geocoder.nominatim(),
+          // geocoder: geoCodeItUp,
+          // geocoder: L.Control.Geocoder.mapbox('pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg'),
+          // geocoder: L.Control.Geocoder.bing(bingKey),
+// google('AIzaSyBjMJWjY2zb7Q8aOMZWZlOhZTY_auGszj4'),
           collapsible: true,
           show: false
         }).addTo(mymap);
        //map location
 
 
-        let position = L.marker([51.505, -0.09]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
-        let area = L.circle([51.505, -0.09], 120).addTo(mymap)
+        let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
+        let area = L.circle([30.269, -97.743], 120).addTo(mymap)
 
         mLocation.locate(this, mymap, position, area)
 
