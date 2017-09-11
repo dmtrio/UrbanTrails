@@ -84,7 +84,9 @@ export default {
     })
   },
   bikeRackMarkers(context) {
+    console.log(context)
     context.bikeRacks.forEach((chunk) => {
+      console.log(chunk)
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
       marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)

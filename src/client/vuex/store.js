@@ -225,6 +225,7 @@ const mutations = {
   SET_BIKE_FRIENDLY_BUSINESS(state, { bikeFriendlyBusiness }) { state.bikeFriendlyBusiness = bikeFriendlyBusiness },
   SET_SCENIC_AREAS(state, { scenicAreas }) { state.scenicAreas = scenicAreas },
   SET_OTHER_COMMENDATIONS(state, { otherCommendations }) { state.otherCommendations = otherCommendations },
+  TOGGLE_VIEW_LOCKED(state, bool) { state.viewLocked = bool }
 }
 
 const getters = {
