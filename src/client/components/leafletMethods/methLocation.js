@@ -16,10 +16,10 @@ export function setView(context, mymap) {
   }
 }
 
-function setInitialWaypoint (coords, router) {
-  let location = {lat: coords.latitude,
-                  lng: coords.longitude}
-  let newWayPoint = new L.Routing.Waypoint(location, "Current location")
+function setInitialWaypoint(coords, router) {
+  const location = { lat: coords.latitude,
+                     lng: coords.longitude }
+  const newWayPoint = new L.Routing.Waypoint(location, 'Current location')
   router.spliceWaypoints(0, 1, newWayPoint)
 }
 
