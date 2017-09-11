@@ -30,7 +30,9 @@ const state = {
   bikeFriendlyBusiness: [],
   scenicAreas: [],
   otherCommendations: [],
-  location: null
+  // location tracking
+  location: null,
+  viewLocked: true
 }
 
 // defeault axios headers
@@ -39,8 +41,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/JSON'
 const actions = {
   GET_SESSION: ({ commit }) => {
     axios.get('/session').then((response) => {
-      commit('SET_USER', response.data)
-      commit('TOGGLE_SIGNED_IN', true)
+      if (response.data) {
+        commit('SET_USER', response.data)
+        commit('TOGGLE_SIGNED_IN', true)
+      }
     }, (err) => {
       console.log(err)
     })
@@ -81,6 +85,16 @@ const actions = {
         } else if (strErr.endsWith('404')) {
           commit('TOGGLE_AUTHFAIL', { signIn: true, signUp: false })
         }
+      })
+  },
+
+  USER_SIGN_OUT: ({ commit }) => {
+    axios.post('/signout')
+      .then((response) => {
+        commit('SET_USER', response.data)
+        commit('TOGGLE_SIGNED_IN', false)
+      }, (err) => {
+        console.log(err)
       })
   },
 

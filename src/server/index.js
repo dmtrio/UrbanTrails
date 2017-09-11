@@ -53,7 +53,7 @@ server.route({
     if (request.session.user) {
       reply(request.session.user)
     } else {
-      reply(null).code(404)
+      reply(null)
     }
   }
 })
@@ -114,11 +114,11 @@ server.route({
 })
 
 server.route({
-  method: 'GET',
-  path: '/logout',
+  method: 'POST',
+  path: '/signout',
   handler: (request, reply) => {
-    request.session = null
-    reply(null).code(200)
+    request.session.user = null
+    reply(request.session.user).code(200)
   }
 })
 

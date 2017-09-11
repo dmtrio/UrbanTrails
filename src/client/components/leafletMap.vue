@@ -1,8 +1,11 @@
 <template>
   <div>
+    <Compass v-if="$store.state.mobile"></Compass>
     <div id="mapid">
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
+    <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
+    <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
   </div>
@@ -14,7 +17,7 @@
   import * as L from 'leaflet'
   import methods from './leafletMethods/methodSample.js'
   import mLayers from './leafletMethods/methLayers.js'
-  import mLocation from './leafletMethods/methLocation.js'
+  import * as mLocation from './leafletMethods/methLocation.js'
   import { getDistance } from 'geolib'
   export default {
     data() {
@@ -142,7 +145,10 @@
           this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
         }
       },
-
+      locationLock() {
+        this.$store.commit('TOGGLE_VIEW_LOCKED', true)
+        mLocation.setView(this, this.$data.map, false)
+      },
       makeMap() {
         //layers including empty
         this.$data.mainDarkLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
@@ -204,7 +210,11 @@
 
         //map location
 
-        mLocation.locate(this, mymap)
+
+        let position = L.marker([51.505, -0.09]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
+        let area = L.circle([51.505, -0.09], 120).addTo(mymap)
+
+        mLocation.locate(this, mymap, position, area)
 
         function getHandlerForFeature(feat) {  // A function...
           return function(ev) {   // ...that returns a function...
@@ -213,9 +223,15 @@
 
         function closeFunc (e) { this.closePanels()}
 
+        function pan (e) {
+          this.closePanels()
+          this.$store.commit('TOGGLE_VIEW_LOCKED', false)
+        }
+
+
         function click (e) {
           this.closePanels()
-          let position = [e.latlng.lat, e.latlng.lng]
+          let position = [e.latlng.lat, e.latlng.lng];
           document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
           var reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('id', 'selected');
@@ -224,7 +240,7 @@
 
         //Captures clicks on the map
         mymap.on('click', click.bind(this));
-        mymap.on('movestart', closeFunc.bind(this))
+        mymap.on('movestart', pan.bind(this))
       },
     }
   }
@@ -238,5 +254,10 @@
     float: left;
     transition: width .5s, height .5s;
   }
-
+  #location-lock-btn {
+    position: absolute;
+    top: 140px;
+    left: 0px;
+    z-index: 1050;
+  }
 </style>
