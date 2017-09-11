@@ -8,27 +8,27 @@
     </div>
 
     <div class="issuesDiv">
-      <button v-on:click="postReport('potholes', 'pothole')" class="issues fourWide button">Potholes</button>
+      <button v-on:click="postReport('POTHOLES', 'Pothole')" class="issues fourWide button">Potholes</button>
       <button v-on:click="toReportType('bikelanesDiv')" class="issues fourWide button">Bad Bike Lanes</button>
       <button v-on:click="toReportType('trafficDiv')" class="issues fourWide button">Traffic</button>
-      <button v-on:click="toReportType('otherDiv', 'issue')" class="issues fourWide button">Other</button>
+      <button v-on:click="toReportType('otherDiv', 'OTHER_ISSUES')" class="issues fourWide button">Other</button>
     </div>
 
     <div class="bikelanesDiv">
-      <button v-on:click="postReport('bikelanes', 'Cracked Pavement')" class="issues twoWide button">Cracked Pavement</button>
-      <button v-on:click="postReport('bikelanes', 'Dirty Bike Lane')" class="issues twoWide button">Dirty Bike Lane</button>
+      <button v-on:click="postReport('CRACKED_PAVEMENT', 'Cracked Pavement')" class="issues twoWide button">Cracked Pavement</button>
+      <button v-on:click="postReport('DIRTY_LANES', 'Dirty Bike Lane')" class="issues twoWide button">Dirty Bike Lane</button>
     </div>
 
     <div class="trafficDiv">
-      <button v-on:click="postReport('traffic', 'Mild Traffic')" class="issues twoWide button">Mild Traffic</button>
-      <button v-on:click="postReport('traffic', 'Heavy Traffic')" class="issues twoWide button">Heavy Traffic</button>
+      <button v-on:click="postReport('MILD_TRAFFIC', 'Mild Traffic')" class="issues twoWide button">Mild Traffic</button>
+      <button v-on:click="postReport('HEAVY_TRAFFIC', 'Heavy Traffic')" class="issues twoWide button">Heavy Traffic</button>
     </div>
 
     <div class="commendationsDiv">
-      <button v-on:click="postReport('goodarea', 'goodarea')" class="commendations fourWide button">Good Break Area</button>
-      <button v-on:click="postReport('clean', 'clean')" id="clean" class="commendations fourWide button">Who</button>
-      <button v-on:click="postReport('anotherop', 'anotherop')" class="commendations fourWide button">Knows</button>
-      <button v-on:click="toReportType('otherDiv', 'commendation')" class="commendations fourWide button">Other</button>
+      <button v-on:click="postReport('BIKE_FRIENDLY_BUSINESS', 'bikeBusiness')" class="commendations fourWide button">Bike Friendly Business</button>
+      <button v-on:click="postReport('SCENIC_AREAS', 'scenicArea')"class="commendations fourWide button">Scenic Area</button>
+      <button v-on:click="postReport('BIKE_RACKS', 'bikeRacks')" class="commendations fourWide button">Bike Racks</button>
+      <button v-on:click="toReportType('otherDiv', 'OTHER_COMMENDATIONS')" class="commendations fourWide button">Other</button>
     </div>
 
     <div class="otherDiv">
@@ -52,17 +52,18 @@
         if (other) document.getElementsByClassName('otherDiv')[0].setAttribute('data', other)
       },
 
-      postReport(type, content) {
-        let reportInfo = {reportType: type, reportContent: content, userid: 1, created_at: new Date(), position: document.getElementsByClassName('reporting')[0].getAttribute('data')}
-        this.$store.dispatch('POST_REPORT', reportInfo)
-        document.getElementById('selected').removeAttribute('id')
-        document.getElementById('active').removeAttribute('id')
-      },
-
       otherReport() {
-        this.postReport(document.getElementsByClassName('other')[0].getAttribute('data'), document.getElementById('inputBox').value)
+        this.postReport(document.getElementsByClassName('otherDiv')[0].getAttribute('data'), document.getElementById('inputBox').value)
         document.getElementById('inputBox').value = ''
         document.getElementsByClassName('other')[0].removeAttribute('data')
+      },
+
+      postReport(type, content) {
+        let reportInfo = {reportType: type, reportContent: content, userid: 1, created_at: new Date(), coordinates: document.getElementsByClassName('reporting')[0].getAttribute('data')}
+        this.$store.dispatch('POST_REPORT', reportInfo)
+        this.$store.dispatch(`LOAD_${type}`, reportInfo)
+        document.getElementById('selected').removeAttribute('id')
+        document.getElementById('active').removeAttribute('id')
       },
 
       closeReport: () => {

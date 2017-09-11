@@ -27,7 +27,6 @@ export default {
   },
   parkingMarkers(context) {
     context.parking.forEach((chunk) => {
-      console.log(chunk[9])
       const address = chunk[9]
       const lat = chunk[11]
       const lon = chunk[12]
@@ -37,12 +36,85 @@ export default {
     })
   },
   potholeMarkers(context) {
-    console.log('methLayers 27 context', context)
     context.potholes.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`Pothole found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
       context.$data.potholesLayer.addLayer(marker)
+    })
+  },
+  mildTrafficMarkers(context) {
+    context.mildTraffic.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.mildTrafficLayer.addLayer(marker)
+    })
+  },
+  heavyTrafficMarkers(context) {
+    context.heavyTraffic.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.heavyTrafficLayer.addLayer(marker)
+    })
+  },
+  crackedPavementMarkers(context) {
+    context.crackedPavement.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.crackedPavementLayer.addLayer(marker)
+    })
+  },
+  dirtyLaneMarkers(context) {
+    context.dirtyLanes.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.dirtyLanesLayer.addLayer(marker)
+    })
+  },
+  otherIssueMarkers(context) {
+    context.otherIssues.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.otherIssuesLayer.addLayer(marker)
+    })
+  },
+  bikeRackMarkers(context) {
+    console.log(context)
+    context.bikeRacks.forEach((chunk) => {
+      console.log(chunk)
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.bikeRacksLayer.addLayer(marker)
+    })
+  },
+  bikeFriendlyBusinessMarkers(context) {
+    context.bikeFriendlyBusiness.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.bikeFriendlyBusinessLayer.addLayer(marker)
+    })
+  },
+  scenicAreaMarkers(context) {
+    context.scenicAreas.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.scenicAreasLayer.addLayer(marker)
+    })
+  },
+  otherCommendationMarkers(context) {
+    context.otherCommendations.forEach((chunk) => {
+      const coords = chunk.coordinates.split(',')
+      const marker = L.marker([coords[0], coords[1]])
+      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      context.$data.otherCommendationsLayer.addLayer(marker)
     })
   },
   addTrails(context) {

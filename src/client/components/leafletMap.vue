@@ -25,23 +25,45 @@
         map: 'blah',
         mainLightLayer: null,
         mainDarkLayer: null,
+        //API data layer status
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
-        // parkingLayer: null,
         potholesLayer: null,
+        mildTrafficLayer : null,
+        heavyTrafficLayer : null,
+        crackedPavementLayer : null,
+        dirtyLanesLayer : null,
+        otherIssuesLayer : null,
+        // parkingLayer: null,
+        bikeRacksLayer : null,
+        bikeFriendlyBusinessLayer : null,
+        scenicAreasLayer : null,
+        otherCommendationsLayer : null,
         kiosksClose: [],
         notifiedKiosks: [],
         isNotified: false
       };
     },
     beforeCreate() {
+      //API data
       this.$store.dispatch('FIND_LOCATION')
       this.$store.dispatch('LOAD_KIOSKS')
       this.$store.dispatch('LOAD_TRAILS')
       this.$store.dispatch('LOAD_FIXITS')
-      // this.$store.dispatch('LOAD_PARKING')
+      //User reported issues
       this.$store.dispatch('LOAD_POTHOLES')
+      this.$store.dispatch('LOAD_MILD_TRAFFIC')
+      this.$store.dispatch('LOAD_HEAVY_TRAFFIC')
+      this.$store.dispatch('LOAD_CRACKED_PAVEMENT')
+      this.$store.dispatch('LOAD_DIRTY_LANES')
+      this.$store.dispatch('LOAD_OTHER_ISSUES')
+      //User reported commendations
+      // this.$store.dispatch('LOAD_PARKING')
+      this.$store.dispatch('LOAD_BIKE_RACKS')
+      this.$store.dispatch('LOAD_BIKE_FRIENDLY_BUSINESS')
+      this.$store.dispatch('LOAD_SCENIC_AREAS')
+      this.$store.dispatch('LOAD_OTHER_COMMENDATIONS')
     },
 
     mounted() {
@@ -53,7 +75,7 @@
           if (!this.notifiedKiosks.includes(kiosk)) {
             this.notifiedKiosks.push(kiosk)
             this.isNotified = true
-            setTimeout(() => { this.isNotified = false }, 2200 )
+            setTimeout(() => { this.isNotified = false }, 3000 )
           } else {
             this.isNotified = false
           }
@@ -69,47 +91,52 @@
           ) < 200
         })
       },
-      fixits: function() {
-        mLayers.fixitMarkers(this)
-      },
-        // parking: function() {
-        //     mLayers.parkingMarkers(this)
-        // },
-      kiosks: function() {
-        mLayers.kioskMarkers(this)
-      },
-      trails: function() {
-        mLayers.addTrails(this)
-      },
-      potholes: function() {
-        mLayers.potholeMarkers(this)
-      }
+      //API data layers
+      fixits: function() { mLayers.fixitMarkers(this) },
+      kiosks: function() { mLayers.kioskMarkers(this) },
+      trails: function() { mLayers.addTrails(this) },
+      //User issue report layers
+      potholes: function() { mLayers.potholeMarkers(this) },
+      mildTraffic: function() { mLayers.mildTrafficMarkers(this) },
+      heavyTraffic: function() { mLayers.heavyTrafficMarkers(this) },
+      crackedPavement: function() { mLayers.crackedPavementMarkers(this) },
+      dirtyLanes: function() { mLayers.dirtyLaneMarkers(this) },
+      otherIssues: function() { mLayers.otherIssueMarkers(this) },
+      //User commendation report layer
+      // parking: function() {
+      //     mLayers.parkingMarkers(this)
+      // },
+      bikeRacks: function() { mLayers.bikeRackMarkers(this) },
+      bikeFriendlyBusiness: function() { mLayers.bikeFriendlyBusinessMarkers(this) },
+      scenicAreas: function() { mLayers.scenicAreaMarkers(this) },
+      otherCommendations: function() { mLayers.otherCommendationMarkers(this) }
+      
     },
     computed: {
-      location: function() {
-          return this.$store.getters.location
-      },
-        // parking: function() {
-        //     return this.$store.getters.parking
-        // }
-        // ,
-      kiosks: function() {
-          return this.$store.getters.kiosks
-      },
-      trails: function() {
-          return this.$store.getters.trails
-      },
-      fixits: function() {
-          return this.$store.getters.fixits
-      },
-      potholes: function() {
-          return this.$store.getters.potholes
-      }
+      location: function() { return this.$store.getters.location },
+      //API data getters
+      kiosks: function() { return this.$store.getters.kiosks },
+      trails: function() { return this.$store.getters.trails },
+      fixits: function() { return this.$store.getters.fixits },
+      //User issue getters
+      potholes: function() { return this.$store.getters.potholes },
+      mildTraffic: function() { return this.$store.getters.mildTraffic },
+      heavyTraffic: function() { return this.$store.getters.heavyTraffic },
+      crackedPavement: function() { return this.$store.getters.crackedPavement },
+      dirtyLanes: function() { return this.$store.getters.dirtyLanes },
+      otherIssues: function() { return this.$store.getters.otherIssues },
+      //User commendation layers
+      // parking: function() {
+      //     return this.$store.getters.parking
+      // }
+      // ,
+      bikeRacks: function() { return this.$store.getters.bikeRacks },
+      bikeFriendlyBusiness: function() { return this.$store.getters.bikeFriendlyBusiness },
+      scenicAreas: function() { return this.$store.getters.scenicAreas },
+      otherCommendations: function() { return this.$store.getters.otherCommendations }
     },
     methods: {
-      toggleLayer(layer) {
-        return mLayers.toggleLayer(layer, this, this.$data.map)
-      },
+      toggleLayer(layer) { return mLayers.toggleLayer(layer, this, this.$data.map) },
       closePanels() {
         if (this.$store.state.sidePanelOpen) {
           this.$store.commit('TOGGLE_SIDEPANEL')
@@ -123,7 +150,6 @@
         mLocation.setView(this, this.$data.map, false)
       },
       makeMap() {
-
         //layers including empty
         this.$data.mainDarkLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg', {
           maxZoom: 18,
@@ -133,11 +159,23 @@
           maxZoom: 18,
           id: 'mapbox.streets'
         })
+        //API data layers
         this.$data.trailsLayer = L.geoJSON()
         this.$data.fixitsLayer = L.layerGroup('')
         this.$data.kiosksLayer = L.layerGroup('')
-        // this.$data.parkingLayer = L.layerGroup('')
+        //User reported issues layers
         this.$data.potholesLayer = L.layerGroup('')
+        this.$data.mildTrafficLayer = L.layerGroup('')
+        this.$data.heavyTrafficLayer = L.layerGroup('')
+        this.$data.crackedPavementLayer = L.layerGroup('')
+        this.$data.dirtyLanesLayer = L.layerGroup('')
+        this.$data.otherIssuesLayer = L.layerGroup('')
+        //User reported commendations layers
+        // this.$data.parkingLayer = L.layerGroup('')
+        this.$data.bikeRacksLayer = L.layerGroup('')
+        this.$data.bikeFriendlyBusinessLayer = L.layerGroup('')
+        this.$data.scenicAreasLayer = L.layerGroup('')
+        this.$data.otherCommendationsLayer = L.layerGroup('')
         //end layers
 
         //map creation
@@ -147,11 +185,23 @@
             layers: [
             // this.$data.mainDarkLayer,
             this.$data.mainLightLayer,
+            //API layers
             this.$data.trailsLayer,
             this.$data.fixitsLayer,
             this.$data.kiosksLayer,
-            // this.$data.parkingLayer,
+            //User issue layers
             this.$data.potholesLayer,
+            this.$data.mildTrafficLayer,
+            this.$data.heavyTrafficLayer,
+            this.$data.crackedPavementLayer,
+            this.$data.dirtyLanesLayer,
+            this.$data.otherIssuesLayer,
+            //User commendation layers
+            // this.$data.parkingLayer,
+            this.$data.bikeRacksLayer,
+            this.$data.bikeFriendlyBusinessLayer,
+            this.$data.scenicAreasLayer,
+            this.$data.otherCommendationsLayer
             ]
         })
         let bingKey = 'Av5guhuRA2EPX3ahI-QuCJvUS0ORctt8aZuWVYh3Os-YAIXQ887T7Fj2mFkgwQOP'
@@ -187,16 +237,16 @@
           }
         }
 
-        function click (e) {
-          this.closePanels()
-        }
+        function closeFunc (e) { this.closePanels()}
 
         function pan (e) {
           this.closePanels()
           this.$store.commit('TOGGLE_VIEW_LOCKED', false)
         }
 
-        function doubleClick (e) {
+
+        function click (e) {
+          this.closePanels()
           let position = [e.latlng.lat, e.latlng.lng];
           document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
           var reports = document.getElementsByClassName('reporting');
@@ -204,8 +254,7 @@
           reports[0].setAttribute('data', position);
         }
 
-        //capture clicks on the map
-        mymap.on('dblclick', doubleClick.bind(this));
+        //Captures clicks on the map
         mymap.on('click', click.bind(this));
         mymap.on('movestart', pan.bind(this))
       },
