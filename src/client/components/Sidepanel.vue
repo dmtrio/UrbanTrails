@@ -59,7 +59,7 @@
       }
     }
   </script>
-<style>
+<style scoped>
   #slide-in-container {
     height: 100%;
   }
