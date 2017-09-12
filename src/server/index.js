@@ -166,7 +166,134 @@ server.route({
   method: 'GET',
   path: '/potholes',
   handler: (request, reply) => {
-    knex('reports').where({ report_type: 'potholes' }).select('coordinates', 'created_at')
+    knex('reports').where({ report_type: 'POTHOLES' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        console.log(report)
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/mildTraffic',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'MILD_TRAFFIC' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/heavyTraffic',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'HEAVY_TRAFFIC' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/crackedPavement',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'CRACKED_PAVEMENT' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/dirtyLanes',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'DIRTY_LANES' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/otherIssues',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'OTHER_ISSUES' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/bikeRacks',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'BIKE_RACKS' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/bikeFriendlyBusiness',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'BIKE_FRIENDLY_BUSINESS' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/scenicAreas',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'SCENIC_AREAS' }).select('coordinates', 'report_data', 'created_at')
+      .then((report) => {
+        reply(report)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+})
+
+server.route({
+  method: 'GET',
+  path: '/otherCommendations',
+  handler: (request, reply) => {
+    knex('reports').where({ report_type: 'OTHER_COMMENDATIONS' }).select('coordinates', 'report_data', 'created_at')
       .then((report) => {
         reply(report)
       })
@@ -180,7 +307,8 @@ server.route({
   method: 'POST',
   path: '/report',
   handler: (request, reply) => {
-    knex('reports').insert({ report_type: request.payload.reportType, report_data: request.payload.reportContent, coordinates: request.payload.position, created_at: request.payload.created_at, userid: request.payload.userid })
+    console.log(request.payload.reportType)
+    knex('reports').insert({ report_type: request.payload.reportType, report_data: request.payload.reportContent, coordinates: request.payload.coordinates, created_at: request.payload.created_at, userid: request.payload.userid })
       .then((report) => {
         reply(report)
       })

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
@@ -21,6 +22,15 @@ const state = {
   trails: [],
   parking: [],
   potholes: [],
+  mildTraffic: [],
+  heavyTraffic: [],
+  crackedPavement: [],
+  dirtyLanes: [],
+  otherIssues: [],
+  bikeRacks: [],
+  bikeFriendlyBusiness: [],
+  scenicAreas: [],
+  otherCommendations: [],
   // location tracking
   location: null,
   viewLocked: true
@@ -51,7 +61,7 @@ const actions = {
     axios.post('/report', {
       reportType: reportInfo.reportType,
       reportContent: reportInfo.reportContent,
-      position: reportInfo.position,
+      coordinates: reportInfo.coordinates,
       created_at: reportInfo.created_at,
       userid: reportInfo.userid
     })
@@ -128,54 +138,95 @@ const actions = {
       console.log(err)
     })
   },
+  LOAD_MILD_TRAFFIC: ({ commit }) => {
+    axios.get('/mildTraffic').then((response) => {
+      commit('SET_MILD_TRAFFIC', { mildTraffic: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_HEAVY_TRAFFIC: ({ commit }) => {
+    axios.get('/heavyTraffic').then((response) => {
+      commit('SET_HEAVY_TRAFFIC', { heavyTraffic: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_CRACKED_PAVEMENT: ({ commit }) => {
+    axios.get('/crackedPavement').then((response) => {
+      commit('SET_CRACKED_PAVEMENT', { crackedPavement: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_DIRTY_LANES: ({ commit }) => {
+    axios.get('/dirtyLanes').then((response) => {
+      commit('SET_DIRTY_LANES', { dirtyLanes: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_OTHER_ISSUES: ({ commit }) => {
+    axios.get('/otherIssues').then((response) => {
+      commit('SET_OTHER_ISSUES', { otherIssues: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_BIKE_RACKS: ({ commit }) => {
+    axios.get('/bikeRacks').then((response) => {
+      commit('SET_BIKE_RACKS', { bikeRacks: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_BIKE_FRIENDLY_BUSINESS: ({ commit }) => {
+    axios.get('/bikeFriendlyBusiness').then((response) => {
+      commit('SET_BIKE_FRIENDLY_BUSINESS', { bikeFriendlyBusiness: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_SCENIC_AREAS: ({ commit }) => {
+    axios.get('/scenicAreas').then((response) => {
+      commit('SET_SCENIC_AREAS', { scenicAreas: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
+  LOAD_OTHER_COMMENDATIONS: ({ commit }) => {
+    axios.get('/otherCommendations').then((response) => {
+      commit('SET_OTHER_COMMENDATIONS', { otherCommendations: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
 }
 
 const mutations = {
-  SET_MOBILE(state, mobile) {
-    state.mobile = mobile
-  },
-  SET_USER(state, user) {
-    state.user = user
-  },
-  TOGGLE_SIGNED_IN(state, bool) {
-    state.signedIn = bool
-  },
-  TOGGLE_AUTHFAIL(state, obj) {
-    state.authfail = obj
-  },
-  TOGGLE_SIDEPANEL(state) {
-    state.sidePanelOpen = !state.sidePanelOpen
-  },
-  TOGGLE_VIEW_SIGN_IN(state, bool) {
-    // blocking sign in or up if already signed In
-    if (!state.signedIn) {
-      state.viewSignIn = bool
-    }
-  },
-  TOGGLE_SIOU_ACTIVE(state, active) {
-    state.SiouActive = active
-  },
-  SET_KIOSKS(state, { kiosks }) {
-    state.kiosks = kiosks
-  },
-  SET_PARKING(state, { parking }) {
-    state.parking = parking
-  },
-  SET_FIXITS(state, { fixits }) {
-    state.fixits = fixits
-  },
-  SET_TRAILS(state, { trails }) {
-    state.trails = trails
-  },
-  SET_POTHOLES(state, { potholes }) {
-    state.potholes = potholes
-  },
-  SET_LOCATION(state, { location }) {
-    state.location = location
-  },
-  TOGGLE_VIEW_LOCKED(state, bool) {
-    state.viewLocked = bool
-  }
+  SET_LOCATION(state, { location }) { state.location = location },
+  SET_MOBILE(state, mobile) { state.mobile = mobile },
+  SET_USER(state, user) { state.user = user },
+  TOGGLE_SIGNED_IN(state, bool) { state.signedIn = bool },
+  TOGGLE_AUTHFAIL(state, obj) { state.authfail = obj },
+  TOGGLE_SIDEPANEL(state) { state.sidePanelOpen = !state.sidePanelOpen },
+  TOGGLE_VIEW_SIGN_IN(state, bool) { if (!state.signedIn) state.viewSignIn = bool },
+  TOGGLE_SIOU_ACTIVE(state, active) { state.SiouActive = active },
+  SET_KIOSKS(state, { kiosks }) { state.kiosks = kiosks },
+  SET_PARKING(state, { parking }) { state.parking = parking },
+  SET_FIXITS(state, { fixits }) { state.fixits = fixits },
+  SET_TRAILS(state, { trails }) { state.trails = trails },
+  SET_POTHOLES(state, { potholes }) { state.potholes = potholes },
+  SET_MILD_TRAFFIC(state, { mildTraffic }) { state.mildTraffic = mildTraffic },
+  SET_HEAVY_TRAFFIC(state, { heavyTraffic }) { state.heavyTraffic = heavyTraffic },
+  SET_CRACKED_PAVEMENT(state, { crackedPavement }) { state.crackedPavement = crackedPavement },
+  SET_DIRTY_LANES(state, { dirtyLanes }) { state.dirtyLanes = dirtyLanes },
+  SET_OTHER_ISSUES(state, { otherIssues }) { state.otherIssues = otherIssues },
+  SET_BIKE_RACKS(state, { bikeRacks }) { state.bikeRacks = bikeRacks },
+  SET_BIKE_FRIENDLY_BUSINESS(state, { bikeFriendlyBusiness }) { state.bikeFriendlyBusiness = bikeFriendlyBusiness },
+  SET_SCENIC_AREAS(state, { scenicAreas }) { state.scenicAreas = scenicAreas },
+  SET_OTHER_COMMENDATIONS(state, { otherCommendations }) { state.otherCommendations = otherCommendations },
+  TOGGLE_VIEW_LOCKED(state, bool) { state.viewLocked = bool }
 }
 
 const getters = {
@@ -187,6 +238,15 @@ const getters = {
   // authfailAt: state => state.viewSignIn || !state.signedIn,
   potholes: state => state.potholes,
   // viewSignIn: state => state.viewSignIn || !state.signedIn,
+  mildTraffic: state => state.mildTraffic,
+  heavyTraffic: state => state.heavyTraffic,
+  crackedPavement: state => state.crackedPavement,
+  dirtyLanes: state => state.dirtyLanes,
+  otherIssues: state => state.otherIssues,
+  bikeRacks: state => state.bikeRacks,
+  bikeFriendlyBusiness: state => state.bikeFriendlyBusiness,
+  scenicAreas: state => state.scenicAreas,
+  otherCommendations: state => state.otherCommendations
 }
 
 export default new Vuex.Store({
