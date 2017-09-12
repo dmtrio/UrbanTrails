@@ -110,7 +110,7 @@
       bikeFriendlyBusiness: function() { mLayers.bikeFriendlyBusinessMarkers(this) },
       scenicAreas: function() { mLayers.scenicAreaMarkers(this) },
       otherCommendations: function() { mLayers.otherCommendationMarkers(this) }
-      
+
     },
     computed: {
       location: function() { return this.$store.getters.location },
@@ -214,8 +214,8 @@
           position: "topleft",
           fitSelectedRoutes: true,
           showAlternatives: true,
-          altLineOptions: {styles: [{color: 'gray'}]}, 
-          reverseWaypoints: true, 
+          altLineOptions: {styles: [{color: 'gray'}]},
+          reverseWaypoints: true,
           routeWhileDragging: true,
           // geocoder: geoCodeItUp,
           geocoder: L.Control.Geocoder.mapbox(mapboxKey),
@@ -226,14 +226,14 @@
         }).addTo(mymap)
       //map location
 
-        
+
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
         let area = L.circle([30.269, -97.743], 120).addTo(mymap)
 
         mLocation.locate(this, mymap, position, area, router)
 
-        function getHandlerForFeature(feat) {  
-          return function(ev) { 
+        function getHandlerForFeature(feat) {
+          return function(ev) {
           }
         }
 
