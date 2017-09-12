@@ -39,7 +39,7 @@ export default {
     context.potholes.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.potholesLayer.addLayer(marker)
     })
   },
@@ -47,7 +47,7 @@ export default {
     context.mildTraffic.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.mildTrafficLayer.addLayer(marker)
     })
   },
@@ -55,7 +55,7 @@ export default {
     context.heavyTraffic.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.heavyTrafficLayer.addLayer(marker)
     })
   },
@@ -63,7 +63,7 @@ export default {
     context.crackedPavement.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.crackedPavementLayer.addLayer(marker)
     })
   },
@@ -71,7 +71,7 @@ export default {
     context.dirtyLanes.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.dirtyLanesLayer.addLayer(marker)
     })
   },
@@ -79,17 +79,15 @@ export default {
     context.otherIssues.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.otherIssuesLayer.addLayer(marker)
     })
   },
   bikeRackMarkers(context) {
-    console.log(context)
     context.bikeRacks.forEach((chunk) => {
-      console.log(chunk)
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.bikeRacksLayer.addLayer(marker)
     })
   },
@@ -97,7 +95,7 @@ export default {
     context.bikeFriendlyBusiness.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.bikeFriendlyBusinessLayer.addLayer(marker)
     })
   },
@@ -105,7 +103,7 @@ export default {
     context.scenicAreas.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.scenicAreasLayer.addLayer(marker)
     })
   },
@@ -113,7 +111,7 @@ export default {
     context.otherCommendations.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]])
-      marker.bindPopup(`${chunk.content} found on ${chunk.created_at}`)
+      marker.bindPopup(`${chunk.report_data} found on ${chunk.created_at}`)
       context.$data.otherCommendationsLayer.addLayer(marker)
     })
   },
