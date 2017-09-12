@@ -24,7 +24,9 @@ html, body, body > div, body > div > div{
   left: 90%;
   display: block;
   z-index: 2000;
-  font-size: 50;
+  font-size: 2.5em;
+  text-align:center;
+  line-height: 0px;
   font-weight: bold;
 }
 
@@ -37,7 +39,11 @@ html, body, body > div, body > div > div{
   z-index: 2000;
 }
 
-.reporting, .issuesDiv, .commendationsDiv, .bikelanesDiv, .trafficDiv, .otherDiv, .closure {display: none; background: linear-gradient(0deg, #BBBBBB, grey);}
+.reporting, .issuesDiv, .commendationsDiv, .bikelanesDiv, .trafficDiv, .otherDiv, .closure {
+  display: none; 
+  background: linear-gradient(0deg, #BBBBBB, grey);
+  box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3), inset 5px 5px 10px rgba(255,255,255,0.3);
+}
 
 .issues {
   background-color: #AA5555; 
@@ -57,15 +63,15 @@ html, body, body > div, body > div > div{
 }
 
 .button {
-  vertical-align: middle;
-  display:inline-block;
-  margin: 1%;
-  margin-left:1.25%;
-  border-radius: 10px;
-  border: none;
-  font-size: 30px;
-  font-weight: bold;
-}
+    vertical-align: middle;
+    display:inline-block;
+    margin: 1%;
+    margin-left:1%;
+    border-radius: 10px;
+    border: 2px solid blue;
+    font-size: 2em;
+    font-weight: bold;
+  }
 
 .twoWide {
   margin-left: 2%;
@@ -84,6 +90,7 @@ html, body, body > div, body > div > div{
   margin-left: 2%;
   margin-right: 1%;
   width: 68.5%;
+  height: 95%
   border: solid 2px grey;
   border-radius: 5px;
   box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
@@ -94,4 +101,41 @@ html, body, body > div, body > div > div{
 * {
   margin: 0px;
   padding: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  .button {
+    vertical-align: middle;
+    display:inline-block;
+    margin: 1%;
+    margin-left:2.5%;
+    border-radius: 10px;
+    border: none;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .fourWide {
+    width: 45%;
+    height: 43.5%;
+    font-size: 1.5em;
+  }
+
+  #inputBox {
+    margin-top: 1.5%;
+    width: 95%;
+    height: 70%
+  }
+
+  .otherDiv {
+    text-align:center;
+  }
+  .other { 
+    width: 50%;
+    height: 22.5%
+  }
+  #active {
+    font-size: 1.5em;
+  }
+
 }
