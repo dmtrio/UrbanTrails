@@ -10,7 +10,7 @@
           </v-btn>
           <h6 v-if="this.$store.state.signedIn">Welcome {{this.$store.state.user.email}}</h6>
         </div>
-        <div class="sidepanel-content add-overflow">
+        <div class="sidepanel-content add-overflow" v-bind:style="{ height: heightPercent }" >
           <button @click="changeBool('fixits')" class="toggleBtn input-group"><img v-bind:class="{ greyBtn: !fixitsBool }" src="/static/repair-bicycle.svg"></img><label>Fixits</label></button>
           <button @click="changeBool('kiosks')" class="toggleBtn input-group"><img v-bind:class="{ greyBtn: !kiosksBool }" src="/static/rental-bicycle.svg"></img><label>Kiosks</label></button>
           <button @click="changeBool('bikeRacks')" class="toggleBtn input-group"><img v-bind:class="{ greyBtn: !bikeRacksBool }" src="/static/parking-bicycle.svg"></img><label>Bike Racks</label></button>
@@ -44,6 +44,7 @@
       data() {
         return {
           visible: false,
+          heightPercent: '70%',
           mainDarkBool: false,
           trailsBool: true,
           kiosksBool: true,
@@ -60,8 +61,8 @@
           scenicAreasBool : true,
         }
       },
-      computed: {
-
+      mounted() {
+        this.$data.heightPercent = `${100 * ((window.document.body.clientHeight - 200) / window.document.body.clientHeight)}%`
       },
       methods: {
         openSignInOrUp(value) {
@@ -130,7 +131,6 @@
   }
 
   .add-overflow {
-    height: 70%;
     max-height: 715px;
     overflow: auto;
   }
