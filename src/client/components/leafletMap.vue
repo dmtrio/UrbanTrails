@@ -228,7 +228,7 @@
 
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
-        let area = L.circle([30.269, -97.743], 120).addTo(mymap)
+        let area = L.circle([30.269, -97.74], 120).addTo(mymap)
 
         mLocation.locate(this, mymap, position, area, router)
 
