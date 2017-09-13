@@ -41,7 +41,7 @@
         scenicAreasLayer : null,
         otherCommendationsLayer : null,
         kiosksClose: [],
-        notifiedKiosks: [],
+        notifiedKiosks: {},
         isNotified: false
       };
     },
@@ -72,8 +72,8 @@
     watch: {
       kiosksClose: function() {
         this.kiosksClose.forEach(kiosk => {
-          if (!this.notifiedKiosks.includes(kiosk)) {
-            this.notifiedKiosks.push(kiosk)
+          if (!this.notifiedKiosks[kiosk]) {
+            this.notifiedKiosks[kiosk] = "notified"
             this.isNotified = true
             setTimeout(() => { this.isNotified = false }, 3000 )
           } else {
