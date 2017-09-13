@@ -82,11 +82,12 @@
         })
       },
       location: function() {
+        let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] } 
         this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
           const lat = JSON.parse(data[11])
           const long = JSON.parse(data[12])
           return getDistance(
-            { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] },
+            currentLocation,
             { latitude: lat, longitude: long }
           ) < 200
         })
@@ -113,6 +114,7 @@
 
     },
     computed: {
+      route: function() { return this.$store.getters.route },
       location: function() { return this.$store.getters.location },
       //API data getters
       kiosks: function() { return this.$store.getters.kiosks },
