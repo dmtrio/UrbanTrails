@@ -206,7 +206,11 @@
         })
         let bingKey = 'Av5guhuRA2EPX3ahI-QuCJvUS0ORctt8aZuWVYh3Os-YAIXQ887T7Fj2mFkgwQOP'
         let mapboxKey = 'pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg'
-          // end map creation
+        // end map creation
+        // geocoder: L.Control.Geocoder.bing(bingKey),
+        // geocoder: geoCodeItUp,
+        // google('AIzaSyBjMJWjY2zb7Q8aOMZWZlOhZTY_auGszj4'),
+
         this.$data.map = mymap
 
         let router = L.Routing.control({
@@ -217,15 +221,17 @@
           altLineOptions: {styles: [{color: 'gray'}]},
           reverseWaypoints: true,
           routeWhileDragging: true,
-          // geocoder: geoCodeItUp,
           geocoder: L.Control.Geocoder.mapbox(mapboxKey),
-          // geocoder: L.Control.Geocoder.bing(bingKey),
-// google('AIzaSyBjMJWjY2zb7Q8aOMZWZlOhZTY_auGszj4'),
           collapsible: true,
           show: false
         }).addTo(mymap)
-      //map location
 
+        //map location
+        let store = this.$store
+       router.on("routeselected", function (route) { 
+         router.hide() 
+         store.dispatch('FIND_ROUTE', route)
+       })
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
         let area = L.circle([30.269, -97.74], 120).addTo(mymap)
@@ -276,4 +282,7 @@
     left: 0px;
     z-index: 1050;
   }
-</style>
+  .leaflet-routing-alternatives-container{
+      display: none;
+}
+</style> 
