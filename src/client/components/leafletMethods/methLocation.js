@@ -27,7 +27,7 @@ export function setInitialWaypoint(coords, router) {
 }
 
 export function trackCurrentWaypoint(coords, router) {
-  let location = { lat: coords.latitude,
+  const location = { lat: coords.latitude,
                    lng: coords.longitude }
   const trackWaypoint = new L.Routing.Waypoint(location, 'tracked')
   router.spliceWaypoints(1, 1, trackWaypoint)
