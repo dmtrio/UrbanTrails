@@ -8,6 +8,7 @@
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting></areaReporting>
+    <NavDirections></NavDirections>
   </div>
 </template>
 
@@ -82,10 +83,10 @@
         })
       },
       route: function() {
-        
+
       },
       location: function() {
-        let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] } 
+        let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] }
         this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
           const lat = JSON.parse(data[11])
           const long = JSON.parse(data[12])
@@ -236,18 +237,24 @@
           navigator.geolocation.watchPosition((position) => {
             if ( !this.$data.enRoute ) {
               mLocation.setInitialWaypoint(position.coords, router)
-            } 
+              console.log('set', position.coords)
+            } else {
+              console.log('tracked?')
+              mLocation.trackCurrentWaypoint(position.coords, router)
+              console.log('track', position.coords)
+            }
+
           })
         }
-        
+
         const store = this.$store
         const data = this.$data
 
         router.on("routeselected", function (route) {
-          router.hide() 
+          router.hide()
           store.dispatch('FIND_ROUTE', route)
         })
-
+        
         router.on("routingToggled", function() {
           data.enRoute = true
         })
@@ -257,12 +264,12 @@
 
         mLocation.locate(this, mymap, position, area, router)
 
-        function getHandlerForFeature(feat) {
-          return function(ev) {
-          }
-        }
+        // function getHandlerForFeature(feat) {
+        //   return function(ev) {
+        //   }
+        // }
 
-        function closeFunc (e) { this.closePanels()}
+        // function closeFunc (e) { this.closePanels()}
 
         function pan (e) {
           this.closePanels()
@@ -304,4 +311,4 @@
   .leaflet-routing-alternatives-container{
       display: none;
 }
-</style> 
+</style>
