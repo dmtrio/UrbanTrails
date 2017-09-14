@@ -7,7 +7,6 @@
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
-    <areaReporting></areaReporting>
     <NavDirections></NavDirections>
   </div>
 </template>
@@ -43,6 +42,8 @@
         kiosksClose: [],
         notifiedKiosks: {},
         isNotified: false,
+        // routing popup & nav
+        routePopup: false,
         enRoute: false
       };
     },
@@ -81,9 +82,6 @@
             this.isNotified = false
           }
         })
-      },
-      route: function() {
-
       },
       location: function() {
         let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] }
@@ -236,12 +234,12 @@
         if (navigator.geolocation) {
           navigator.geolocation.watchPosition((position) => {
             if ( !this.$data.enRoute ) {
-              mLocation.setInitialWaypoint(position.coords, router)
-              console.log('set', position.coords)
-            } else {
-              console.log('tracked?')
+              if ( !this.$data.routePopup ) {
+                mLocation.setInitialWaypoint(position.coords, router)
+              }
+            }
+            if ( this.$data.enRoute ) {
               mLocation.trackCurrentWaypoint(position.coords, router)
-              console.log('track', position.coords)
             }
 
           })
@@ -253,10 +251,11 @@
         router.on("routeselected", function (route) {
           router.hide()
           store.dispatch('FIND_ROUTE', route)
-        })
-        
-        router.on("routingToggled", function() {
           data.enRoute = true
+        })
+
+        router.on("routingToggled", function() {
+          data.routePopup?  data.routePopup = false : data.routePopup = true
         })
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()

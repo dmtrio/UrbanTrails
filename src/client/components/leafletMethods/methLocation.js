@@ -51,7 +51,6 @@ export function locate(context, mymap, position, area) {
 
   // updates location based on navigator
   if (navigator.geolocation) {
-    console.log('does this update')
     navigator.geolocation.watchPosition((position) => {
       onLocationFound(position.coords)
     })
