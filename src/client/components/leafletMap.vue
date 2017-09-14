@@ -42,7 +42,8 @@
         otherCommendationsLayer : null,
         kiosksClose: [],
         notifiedKiosks: {},
-        isNotified: false
+        isNotified: false,
+        enRoute: false
       };
     },
     beforeCreate() {
@@ -80,6 +81,9 @@
             this.isNotified = false
           }
         })
+      },
+      route: function() {
+        
       },
       location: function() {
         let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] } 
@@ -229,11 +233,20 @@
         }).addTo(mymap)
 
         //map location
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition((position) => {
+            if ( !this.$data.enRoute ) {
+              mLocation.setInitialWaypoint(position.coords, router)
+            } 
+          })
+        }
+        
         let store = this.$store
-       router.on("routeselected", function (route) { 
-         router.hide() 
-         store.dispatch('FIND_ROUTE', route)
-       })
+        router.on("routeselected", function (route) {
+          this.$data.enRoute = true
+          router.hide() 
+          store.dispatch('FIND_ROUTE', route)
+        })
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
         let area = L.circle([30.269, -97.74], 120).addTo(mymap)
