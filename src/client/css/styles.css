@@ -15,87 +15,84 @@ html, body, body > div, body > div > div{
   background-color: white;
 }
 
-#active {
-  position: absolute;
-  border-radius: 10px 0px 0px 0px;
-  height: 5%;
-  width: 10%;
-  top: 70%;
-  left: 90%;
-  display: block;
-  z-index: 2000;
-  font-size: 2.5em;
-  text-align:center;
-  line-height: 0px;
-  font-weight: bold;
+.closure {
+  background-color: transparent;
+  vertical-align: top;
 }
 
 #selected {
   position: absolute;
-  height: 25%;
+  height: 10%;
   width: 100%;
-  top: 75%;
+  top: 90%;
   display: block;
   z-index: 2000;
 }
 
+#sidepanel-heading > h4[data-v-c81d4ac2] {
+  float: left;
+  color: #fff0f0;
+  font-size: 28px;
+}
+
 .reporting, .issuesDiv, .commendationsDiv, .bikelanesDiv, .trafficDiv, .otherDiv, .closure {
-  display: none; 
-  background: linear-gradient(0deg, #BBBBBB, grey);
-  box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3), inset 5px 5px 10px rgba(255,255,255,0.3);
+  background-color: #426FC5;
+  border: 2px solid #426FC5;
+  color: #2f5398;
 }
 
 .issues {
-  background-color: #AA5555; 
-  color: #772222;
+  color: #2f5398;
 }
 .commendations {
-  background-color: #55AA55; 
-  color: #227722;
+  color: #2f5398;
 }
 .other {
   text-align: center;
-  background-color: #888888; 
-  color: #444444
-}
-
-.issues, .commendations, .other, .closure {box-shadow: 5px 5px 5px grey, inset -5px -5px 10px rgba(0,0,0,0.3), inset 5px 5px 10px rgba(255,255,255,0.3);
+  color:#2f5398;
 }
 
 .button {
-    vertical-align: middle;
-    display:inline-block;
-    margin: 1%;
-    margin-left:1%;
-    border-radius: 10px;
-    border: 2px solid blue;
-    font-size: 2em;
-    font-weight: bold;
-  }
+  vertical-align: middle;
+  display: inline-block;
+  margin: 1%;
+  margin-left: 1%;
+  /* border-radius: 10px; */
+  padding: 2px;
+  font-size: 20px;
+  /* font-weight: bold; */
+}
 
 .twoWide {
   margin-left: 2%;
   margin-right: 2%;
   width: 45%;
-  height: 90%;
+  font-size: x-large;
+  color: white;
+  font-family: sans-serif;
+  height: 70%;
+  font-weight: bold;
 }
 
 .fourWide {
   width: 22.5%;
-  height: 90%;
+  margin-top: 20px;
+  line-height: 25px;
+  color: #fcfcfc;
 }
 
 #inputBox {
   vertical-align: middle;
-  margin-left: 2%;
+  padding-left: 1%;
+  margin-top: 1%;
+  margin-left: 1%;
   margin-right: 1%;
   width: 68.5%;
-  height: 95%
-  border: solid 2px grey;
+  height: 80%;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
-  background-color: #CCCCCC;
-  color: #444444;
+  background-color: rgb(250, 250, 250);
+  color: #4293d3;
+  font-weight: bold;
 }
 
 * {
@@ -130,7 +127,7 @@ html, body, body > div, body > div > div{
   .otherDiv {
     text-align:center;
   }
-  .other { 
+  .other {
     width: 50%;
     height: 22.5%
   }
@@ -138,4 +135,21 @@ html, body, body > div, body > div > div{
     font-size: 1.5em;
   }
 
+  #active {
+    top: 75%;
+    position: absolute;
+    height: 5%;
+    width: 10%;
+    left: 90%;
+    display: block;
+    z-index: 2000;
+    font-size: 2.5em;
+    text-align:center;
+    line-height: 0px;
+    font-weight: bold;
+  }
+  @keyframes jumpIn {
+    0% { height: 0; }
+    100% { height: 10%; }
+  }
 }
