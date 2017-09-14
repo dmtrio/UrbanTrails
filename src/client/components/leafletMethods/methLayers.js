@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable no-undef, max-len */
 import { fixitIcon, kioskIcon, rackIcon, potholeIcon, mildIcon, stopIcon, storeIcon, trashIcon, cameraIcon, coneIcon, mentionIcon } from '../mapIcons'
 
 export default {
@@ -39,7 +39,7 @@ export default {
     context.potholes.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: potholeIcon })
-      marker.bindPopup(`${chunk.report_data} found at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`${chunk.report_data} found at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.potholesLayer.addLayer(marker)
     })
   },
@@ -47,7 +47,7 @@ export default {
     context.mildTraffic.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: mildIcon })
-      marker.bindPopup(`Mild traffic reported at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Mild traffic reported at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.mildTrafficLayer.addLayer(marker)
     })
   },
@@ -55,7 +55,7 @@ export default {
     context.heavyTraffic.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: stopIcon })
-      marker.bindPopup(`Heavy traffic reported at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Heavy traffic reported at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.heavyTrafficLayer.addLayer(marker)
     })
   },
@@ -63,7 +63,7 @@ export default {
     context.crackedPavement.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: coneIcon })
-      marker.bindPopup(`Cracked pavement found at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Cracked pavement found at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.crackedPavementLayer.addLayer(marker)
     })
   },
@@ -71,7 +71,7 @@ export default {
     context.dirtyLanes.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: trashIcon })
-      marker.bindPopup(`Dirty lane reported at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Dirty lane reported at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.dirtyLanesLayer.addLayer(marker)
     })
   },
@@ -79,7 +79,7 @@ export default {
     context.otherIssues.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: mentionIcon })
-      marker.bindPopup(`Rider reported ${chunk.report_data}, at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Rider reported ${chunk.report_data}, at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.otherIssuesLayer.addLayer(marker)
     })
   },
@@ -87,7 +87,7 @@ export default {
     context.bikeRacks.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: rackIcon })
-      marker.bindPopup(`Bike racks found at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Bike racks found at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.bikeRacksLayer.addLayer(marker)
     })
   },
@@ -95,7 +95,7 @@ export default {
     context.bikeFriendlyBusiness.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: storeIcon })
-      marker.bindPopup(`Bike-friendly Business found at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Bike-friendly Business found at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.bikeFriendlyBusinessLayer.addLayer(marker)
     })
   },
@@ -103,7 +103,7 @@ export default {
     context.scenicAreas.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: cameraIcon })
-      marker.bindPopup(`Scenic area found at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Scenic area found at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.scenicAreasLayer.addLayer(marker)
     })
   },
@@ -112,7 +112,7 @@ export default {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: mentionIcon })
       console.log(chunk)
-      marker.bindPopup(`Rider reported '${chunk.report_data}' at ${chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) >= 12 ? Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) % 12) + 'pm' : chunk.created_at.slice(chunk.created_at.indexOf('T')+1, chunk.created_at.indexOf('T')+3) + 'am'}`)
+      marker.bindPopup(`Rider reported '${chunk.report_data}' at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.otherCommendationsLayer.addLayer(marker)
     })
   },

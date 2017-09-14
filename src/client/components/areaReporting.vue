@@ -1,13 +1,13 @@
 <template>
   <div>
-    <button class="closure" v-on:click="closeReport()">x</button>
-
     <div class="reporting">
+      <button class="closure" v-on:click="closeReport()">x</button>
       <button v-on:click="toReportType('issuesDiv')" class="issues twoWide button">Issues</button>
       <button v-on:click="toReportType('commendationsDiv')" class="commendations twoWide button">Commend</button>
     </div>
 
     <div class="issuesDiv">
+      <button class="closure" v-on:click="closeReport()">x</button>
       <button v-on:click="postReport('POTHOLES', 'Pothole')" class="issues fourWide button">Potholes</button>
       <button v-on:click="toReportType('bikelanesDiv')" class="issues fourWide button">Bad Bike Lanes</button>
       <button v-on:click="toReportType('trafficDiv')" class="issues fourWide button">Traffic</button>
@@ -15,16 +15,19 @@
     </div>
 
     <div class="bikelanesDiv">
+      <button class="closure" v-on:click="closeReport()">x</button>
       <button v-on:click="postReport('CRACKED_PAVEMENT', 'Cracked Pavement')" class="issues twoWide button">Cracked Pavement</button>
       <button v-on:click="postReport('DIRTY_LANES', 'Dirty Bike Lane')" class="issues twoWide button">Dirty Bike Lane</button>
     </div>
 
     <div class="trafficDiv">
+      <button class="closure" v-on:click="closeReport()">x</button>
       <button v-on:click="postReport('MILD_TRAFFIC', 'Mild Traffic')" class="issues twoWide button">Mild Traffic</button>
       <button v-on:click="postReport('HEAVY_TRAFFIC', 'Heavy Traffic')" class="issues twoWide button">Heavy Traffic</button>
     </div>
 
     <div class="commendationsDiv">
+      <button class="closure" v-on:click="closeReport()">x</button>
       <button v-on:click="postReport('BIKE_FRIENDLY_BUSINESS', 'bikeBusiness')" class="commendations fourWide button">Bike Friendly Business</button>
       <button v-on:click="postReport('SCENIC_AREAS', 'scenicArea')"class="commendations fourWide button">Scenic Area</button>
       <button v-on:click="postReport('BIKE_RACKS', 'bikeRacks')" class="commendations fourWide button">Bike Racks</button>
@@ -32,6 +35,7 @@
     </div>
 
     <div class="otherDiv">
+      <button class="closure" v-on:click="closeReport()">x</button>
       <textarea id="inputBox" rows="8" cols="50" placeholder="Give us your thoughts!"></textarea>
       <button class="other button fourWide" v-on:click="otherReport()">Send Report</button>
     </div>
