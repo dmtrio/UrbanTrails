@@ -41,8 +41,9 @@
         scenicAreasLayer : null,
         otherCommendationsLayer : null,
         kiosksClose: [],
-        notifiedKiosks: [],
-        isNotified: false
+        notifiedKiosks: {},
+        isNotified: false,
+        enRoute: false
       };
     },
     beforeCreate() {
@@ -72,8 +73,8 @@
     watch: {
       kiosksClose: function() {
         this.kiosksClose.forEach(kiosk => {
-          if (!this.notifiedKiosks.includes(kiosk)) {
-            this.notifiedKiosks.push(kiosk)
+          if (!this.notifiedKiosks[kiosk]) {
+            this.notifiedKiosks[kiosk] = "notified"
             this.isNotified = true
             setTimeout(() => { this.isNotified = false }, 3000 )
           } else {
@@ -81,12 +82,16 @@
           }
         })
       },
+      route: function() {
+        
+      },
       location: function() {
+        let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] } 
         this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
           const lat = JSON.parse(data[11])
           const long = JSON.parse(data[12])
           return getDistance(
-            { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] },
+            currentLocation,
             { latitude: lat, longitude: long }
           ) < 200
         })
@@ -113,6 +118,7 @@
 
     },
     computed: {
+      route: function() { return this.$store.getters.route },
       location: function() { return this.$store.getters.location },
       //API data getters
       kiosks: function() { return this.$store.getters.kiosks },
@@ -227,11 +233,20 @@
         }).addTo(mymap)
 
         //map location
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition((position) => {
+            if ( !this.$data.enRoute ) {
+              mLocation.setInitialWaypoint(position.coords, router)
+            } 
+          })
+        }
+        
         let store = this.$store
-       router.on("routeselected", function (route) { 
-         router.hide() 
-         store.dispatch('FIND_ROUTE', route)
-       })
+        router.on("routeselected", function (route) {
+          this.$data.enRoute = true
+          router.hide() 
+          store.dispatch('FIND_ROUTE', route)
+        })
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
         let area = L.circle([30.269, -97.74], 120).addTo(mymap)
