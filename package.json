@@ -38,7 +38,6 @@
     "knex": "^0.13.0",
     "leaflet": "^1.2.0",
     "leaflet-control-geocoder": "^1.5.5",
-    "leaflet-routing-machine": "^3.2.5",
     "leaflet.marker.pin": "^1.3.0",
     "mdi": "^2.0.46",
     "node-sass": "^4.5.3",

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import { Routing } from "leaflet-routing-machine"
+  import { Routing } from "./leaflet-routing-machine.js"
   import "leaflet-control-geocoder"
   import * as L from 'leaflet'
   import methods from './leafletMethods/methodSample.js'
@@ -241,11 +241,16 @@
           })
         }
         
-        let store = this.$store
+        const store = this.$store
+        const data = this.$data
+
         router.on("routeselected", function (route) {
-          this.$data.enRoute = true
           router.hide() 
           store.dispatch('FIND_ROUTE', route)
+        })
+
+        router.on("routingToggled", function() {
+          data.enRoute = true
         })
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
