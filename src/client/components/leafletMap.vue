@@ -7,7 +7,7 @@
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
-    <NavDirections></NavDirections>
+    <NavDirections :routePopup="this.routePopup"></NavDirections>
   </div>
 </template>
 
@@ -238,7 +238,7 @@
                 mLocation.setInitialWaypoint(position.coords, router)
               }
             }
-            if ( this.$data.enRoute ) {
+            if ( this.$data.enRoute && !this.$data.routePopup) {
               mLocation.trackCurrentWaypoint(position.coords, router)
             }
 
@@ -252,6 +252,7 @@
           router.hide()
           store.dispatch('FIND_ROUTE', route)
           data.enRoute = true
+          data.routePopup = false
         })
 
         router.on("routingToggled", function() {

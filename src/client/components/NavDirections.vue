@@ -1,7 +1,7 @@
 <template>
   <div id="routing-directions">
     <transition-group name="slide-up-fade" tag="div">
-      <div class="instructions" v-for="(inst, index) in $data.instructions" :key="inst.index" v-show="(inst.index > $store.state.route.waypointIndices[1]) && (index < $data.showCount)">
+      <div class="instructions" v-for="(inst, index) in $data.instructions" :key="inst.index" v-show="((inst.index > $store.state.route.waypointIndices[1]) && (index < $data.showCount))  && routePopupClosed">
         <v-card>
           <v-card-title primary-title>
             <p> {{inst.type}} {{ inst.text }} </p>
@@ -16,6 +16,7 @@
 
 <script>
   export default {
+    props: ['routePopup'],
     data() {
       return {
         showCount: 2,
@@ -24,7 +25,7 @@
     },
     watch: {
       route: function() {
-        this.$data.instructions = [];
+        this.$data.instructions = []
         let current = this.$store.state.route.waypointIndices[1]
         let all = this.$store.state.route.instructions
         for (let inst of all ) {
@@ -36,6 +37,7 @@
     },
     computed: {
       route: function() { return this.$store.getters.route },
+      routePopupClosed: function () { return !this.routePopup }
     }
   }
 </script>
@@ -70,7 +72,7 @@
   }
   .slide-up-fade-enter, .slide-up-fade-leave-to
   /* .slide-up-fade-leave-active below version 2.1.8 */ {
-    transform: translatey(100%);
+    transform: translatey(333%);
     // opacity: 0;
   }
 
