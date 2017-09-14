@@ -8,10 +8,23 @@
     transition: all 0.2s ease;
     box-sizing: border-box;
 }
+#location-lock-btn {
+  margin-top: 26px;
+  margin-left: 10px;
+  width: 44px;
+  height: 44px;
+}
 
 .leaflet-control-container .leaflet-routing-container-hide {
-    width: 32px;
-    height: 32px;
+    margin-top: 0px;
+    width: 45px;
+    height: 45px;
+}
+
+.leaflet-touch .leaflet-bar a {
+    width: 41px;
+    height: 41px;
+    line-height: 41px;
 }
 
 .leaflet-routing-container h2 {
@@ -24,7 +37,8 @@
 }
 
 .leaflet-routing-collapsible .leaflet-routing-geocoders {
-    margin-top: 20px;
+    margin-left: 1px;
+    margin-bottom: 20px;
 }
 
 .leaflet-routing-alt, .leaflet-routing-geocoders, .leaflet-routing-error {
@@ -37,7 +51,7 @@
     transition: all 0.2s ease;
 }
 
-.leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-alt, 
+.leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-alt,
 .leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-geocoders {
     display: none;
 }
@@ -214,7 +228,7 @@
 .leaflet-routing-collapse-btn {
     position: absolute;
     top: 0;
-    right: 0px;
+    right: 2px;
     font-size: 24px;
     color: #ccc;
     font-weight: bold;
@@ -226,13 +240,13 @@
 
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn {
     position: relative;
-    left: 0px;
-    top: -3px;
+    left: 2px;
+    top: -2px;
     display: block;
-    width: 26px;
-    height: 26px;
-    background-image: url('PinkMap.png');
-    background-size: 40px;
+    width: 36px;
+    height: 36px;
+    background-image: url('BrownMap.svg');
+    background-size: 36px;
     background-repeat: no-repeat;
     background-position: center;
 }
