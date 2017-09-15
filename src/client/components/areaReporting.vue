@@ -68,11 +68,12 @@
         this.mymap.removeLayer(this.tempMarker)
 
       },
-
+      
       closeReport() {
         document.getElementById('selected').removeAttribute('id')
         document.getElementById('active').removeAttribute('id')
         this.mymap.removeLayer(this.tempMarker)
+        this.$store.commit('TOGGLE_NAVDIRECTIONS', true)
       }
     }
   }
