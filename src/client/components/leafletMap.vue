@@ -7,7 +7,7 @@
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
-    <areaReporting></areaReporting>
+    <areaReporting :mymap="this.$data.map" :tempMarker="this.$data.tempMarker"></areaReporting>
     <NavDirections :routePopup="this.routePopup"></NavDirections>
   </div>
 </template>
@@ -29,6 +29,7 @@
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
+        tempMarker: null,
         potholesLayer: null,
         mildTrafficLayer : null,
         heavyTrafficLayer : null,
@@ -273,10 +274,13 @@
           this.$store.commit('TOGGLE_VIEW_LOCKED', false)
         }
 
-
         function click (e) {
           this.closePanels()
+          if (mymap.hasLayer(this.$data.tempMarker)) {
+            mymap.removeLayer(this.$data.tempMarker)
+          }
           let position = [e.latlng.lat, e.latlng.lng];
+          this.$data.tempMarker = L.marker([position[0], position[1]]).addTo(mymap)
           let reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('data', position);
           document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
@@ -304,7 +308,7 @@
   #location-lock-btn {
     position: absolute;
     top: 108px;
-    right: 14px;
+    right: 8px;
     width: 44px;
     height: 44px;
     z-index: 1050;
