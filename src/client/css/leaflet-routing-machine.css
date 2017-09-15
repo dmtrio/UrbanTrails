@@ -38,11 +38,7 @@
 
 .leaflet-routing-collapsible .leaflet-routing-geocoders {
     margin-left: 1px;
-<<<<<<< HEAD
     margin-bottom: 20px;
-=======
-    /* margin-bottom: 20px; */
->>>>>>> e5ac315e82344e6912ca77704b35b9aa168e72da
 }
 
 .leaflet-routing-alt, .leaflet-routing-geocoders, .leaflet-routing-error {
