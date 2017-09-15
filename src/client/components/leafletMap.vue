@@ -84,6 +84,9 @@
           }
         })
       },
+      route: function() {
+        
+      },
       location: function() {
         let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] }
         this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
@@ -265,13 +268,6 @@
 
         mLocation.locate(this, mymap, position, area, router)
 
-        // function getHandlerForFeature(feat) {
-        //   return function(ev) {
-        //   }
-        // }
-
-        // function closeFunc (e) { this.closePanels()}
-
         function pan (e) {
           this.closePanels()
           this.$store.commit('TOGGLE_VIEW_LOCKED', false)
@@ -281,10 +277,12 @@
         function click (e) {
           this.closePanels()
           let position = [e.latlng.lat, e.latlng.lng];
-          document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
-          var reports = document.getElementsByClassName('reporting');
-          reports[0].setAttribute('id', 'selected');
+          let reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('data', position);
+          document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
+          if(document.getElementById('selected') === null){
+            reports[0].setAttribute('id', 'selected');
+          }
         }
 
         //Captures clicks on the map
@@ -305,11 +303,13 @@
   }
   #location-lock-btn {
     position: absolute;
-    top: 140px;
-    left: 0px;
+    top: 108px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
     z-index: 1050;
   }
   .leaflet-routing-alternatives-container{
       display: none;
 }
-</style>
+</style> 

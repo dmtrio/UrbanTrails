@@ -3,6 +3,10 @@ html, body, body > #app, body > #app > div{
   width: 100%;
 }
 
+html {
+  overflow: hidden;
+}
+
 .overLeaflet /*, .application, .application:not(#mapid) */{
   z-index: 1010 !important
 }
@@ -15,141 +19,127 @@ html, body, body > #app, body > #app > div{
   background-color: white;
 }
 
-.closure {
-  background-color: transparent;
-  vertical-align: top;
-}
-
-#selected {
-  position: absolute;
-  height: 10%;
-  width: 100%;
-  top: 90%;
-  display: block;
-  z-index: 2000;
-}
-
 #sidepanel-heading > h4[data-v-c81d4ac2] {
-  float: left;
   color: #fff0f0;
   font-size: 28px;
 }
 
-.reporting, .issuesDiv, .commendationsDiv, .bikelanesDiv, .trafficDiv, .otherDiv, .closure {
-  background-color: #426FC5;
-  border: 2px solid #426FC5;
-  color: #2f5398;
-}
-
-.issues {
-  color: #2f5398;
-}
-.commendations {
-  color: #2f5398;
-}
-.other {
-  text-align: center;
-  color:#2f5398;
-}
-
-.button {
-  vertical-align: middle;
+/* Reporting css */
+#active {
+  position: absolute;
   display: inline-block;
-  margin: 1%;
-  margin-left: 1%;
-  /* border-radius: 10px; */
-  padding: 2px;
-  font-size: 20px;
-  /* font-weight: bold; */
-}
-
-.twoWide {
-  margin-left: 2%;
-  margin-right: 2%;
-  width: 45%;
-  font-size: x-large;
   color: white;
-  font-family: sans-serif;
-  height: 70%;
-  font-weight: bold;
+  font-size: 2em;
+  left: 0.5%;
+  top:80%;
+  z-index: 2001;
 }
-
-.fourWide {
-  width: 22.5%;
-  margin-top: 20px;
-  line-height: 25px;
-  color: #fcfcfc;
+.reporting, .closure {
+  animation: slideUp .5s;
 }
-
-#inputBox {
-  vertical-align: middle;
-  padding-left: 1%;
+#selected {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: absolute;
+  width:100%;
+  height:20%;
+  top:80%;
+  z-index: 2000;
+  background-color: #426FC5;
+}
+#selected button {
+  color: white;
   margin-top: 1%;
-  margin-left: 1%;
-  margin-right: 1%;
-  width: 68.5%;
-  height: 80%;
+  display: inline-block;
+  border: none;
+  color: white;
+  font-size: 2em;
+  word-break: keep-all;
+  border-radius: 10px;
+  box-shadow: inset 5px 5px 5px rgba(255,255,255,0.2), inset -5px -5px 5px rgba(0,0,0,0.2), 5px 5px 5px rgba(0,0,0,0.6);
+}
+
+#selected button:focus, #active:focus {
+  outline:none;
+}
+
+.dualChoices {
+  width: 45%;
+  height: 85%;
+}
+
+.quadChoices {
+  width: 21%;
+  height: 85%;
+}
+
+.areaReport {
+  display: none;
+}
+
+#otherInput {
   border-radius: 5px;
-  background-color: rgb(250, 250, 250);
-  color: #4293d3;
-  font-weight: bold;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+  margin-top:1%;
+  height: 85%;
+  width: 70%;
+  outline: none;
+  color: white;
+  background-color: rgba(44,44,44,0.3);
+  z-index: 2002;
+}
+
+@keyframes slideUp {
+    0% { top: 100%; }
+    100% { top: 80%;}
+}
+
+@media only screen and (max-width: 850px) {
+ #active {
+  font-size: 1.5em;
+  left: 0.25%;
+ }
+}
+
+@media only screen and (max-width: 600px) {
+  #active {
+    font-size: 1em;
+    left: 0.125%;
+  }
+
+  #selected {
+    display: inline-block;
+  }
+
+  #selected button {
+    font-size: 1em;
+  }
+
+  .dualChoices {
+    margin: 2%;
+  }
+
+  .quadChoices {
+    margin: 2%;
+    width: 43%;
+    height: 40%;
+  }
+
+  .otherDiv button {
+    width: 95%;
+    height: 20%;
+    margin-bottom: 1%;
+  }
+
+  #otherInput {
+    margin: 2%;
+    width: 95%;
+    height: 60%;
+  }
 }
 
 * {
   margin: 0px;
   padding: 0px;
-}
-
-@media only screen and (max-width: 600px) {
-  .button {
-    vertical-align: middle;
-    display:inline-block;
-    margin: 1%;
-    margin-left:2.5%;
-    border-radius: 10px;
-    border: none;
-    font-size: 2em;
-    font-weight: bold;
-  }
-
-  .fourWide {
-    width: 45%;
-    height: 43.5%;
-    font-size: 1.5em;
-  }
-
-  #inputBox {
-    margin-top: 1.5%;
-    width: 95%;
-    height: 70%
-  }
-
-  .otherDiv {
-    text-align:center;
-  }
-  .other {
-    width: 50%;
-    height: 22.5%
-  }
-  #active {
-    font-size: 1.5em;
-  }
-
-  #active {
-    top: 75%;
-    position: absolute;
-    height: 5%;
-    width: 10%;
-    left: 90%;
-    display: block;
-    z-index: 2000;
-    font-size: 2.5em;
-    text-align:center;
-    line-height: 0px;
-    font-weight: bold;
-  }
-  @keyframes jumpIn {
-    0% { height: 0; }
-    100% { height: 10%; }
-  }
 }
