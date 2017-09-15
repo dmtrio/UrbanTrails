@@ -25,7 +25,6 @@
     },
     watch: {
       route: function() {
-        this.$data.instructions = []
         let current = this.$store.state.route.waypointIndices[1]
         let all = this.$store.state.route.instructions
         for (let i = 0; i < all.length; i++) {
@@ -35,9 +34,6 @@
         }
       }
     },
-    computed: {
-      route: function() { return this.$store.getters.route },
-    }
   }
 </script>
 <style>
@@ -55,16 +51,6 @@
     width: 100%;
     text-align: center;
   }
-
-
-  #routing-directions {
-      position: fixed;
-      z-index: 1050;
-      bottom: 0px;
-      width: 100%;
-      text-align: center;
-  }
-
   #routing-directions > div{
       display: inline-block;
       min-width: 300px;
@@ -77,7 +63,6 @@
   .instructions > div{
       margin-bottom: 10px;
   }
-
   .card__title {
       -webkit-box-align: center;
       font-weight: 500;
@@ -90,14 +75,15 @@
       padding: 16px;
       /* Enter and leave animations can use different */
       /* durations and timing functions.              */
-    .slide-up-fade-enter-active {
-        transition: all .5s ease;
-    }
-    .slide-up-fade-leave-active {
-        transition: all .5s ease;
-    }
-      .slide-up-fade-enter, .slide-up-fade-leave-to
-    /* .slide-up-fade-leave-active below version 2.1.8 */ {
-      transform: translatey(333%);
-    }
-    </style>
+  }
+  .slide-up-fade-enter-active {
+    transition: all .5s ease;
+  }
+  .slide-up-fade-leave-active {
+    transition: all .5s ease;
+  }
+  .slide-up-fade-enter, .slide-up-fade-leave-to
+  /* .slide-up-fade-leave-active below version 2.1.8 */ {
+    transform: translatey(333%);
+  }
+</style>
