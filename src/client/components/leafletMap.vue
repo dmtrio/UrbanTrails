@@ -5,7 +5,6 @@
       <NavAlert :notifiedKiosks="this.notifiedKiosks" :isNotified="this.isNotified"></NavAlert>
     </div>
     <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
-    <v-btn id="location-lock-btn" v-if="!$store.state.viewLocked" @click="locationLock" success dark raised icon><v-icon>mdi-crosshairs-gps</v-icon></v-btn>
     <Sidepanel :toggleLayer="toggleLayer"></Sidepanel>
     <areaReporting :mymap="this.$data.map" :tempMarker="this.$data.tempMarker"></areaReporting>
     <NavDirections :routePopup="this.routePopup"></NavDirections>
@@ -86,7 +85,7 @@
         })
       },
       route: function() {
-        
+
       },
       location: function() {
         let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] }
@@ -152,6 +151,11 @@
         }
         if (this.$store.state.viewSignIn) {
           this.$store.commit('TOGGLE_VIEW_SIGN_IN', false)
+        }
+      },
+      hideNavigation() {
+        if (this.$store.state.NavDirectionsOpen) {
+          this.$store.commit('TOGGLE_NAVDIRECTIONS', false)
         }
       },
       locationLock() {
@@ -276,6 +280,7 @@
 
         function click (e) {
           this.closePanels()
+          this.hideNavigation()
           if (mymap.hasLayer(this.$data.tempMarker)) {
             mymap.removeLayer(this.$data.tempMarker)
           }
@@ -316,4 +321,4 @@
   .leaflet-routing-alternatives-container{
       display: none;
 }
-</style> 
+</style>
