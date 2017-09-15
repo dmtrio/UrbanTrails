@@ -240,10 +240,11 @@
         }).addTo(mymap)
 
         //map location
-        
+
         const store = this.$store
         const data = this.$data
 
+        // this seems to be selected multiple times
         router.on("routeselected", function (route) {
           router.hide()
           store.dispatch('FIND_ROUTE', route)
@@ -253,7 +254,7 @@
 
         router.on("routingToggled", function() {
           data.routePopup?  data.routePopup = false : data.routePopup = true
-          store.state.NavDirectionsOpen?  store.commit('TOGGLE_NAVDIRECTIONS', false) : store.commit('TOGGLE_NAVDIRECTIONS', true)
+          data.routePopup?  store.commit('TOGGLE_NAVDIRECTIONS', false) : store.commit('TOGGLE_NAVDIRECTIONS', true)
         })
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
