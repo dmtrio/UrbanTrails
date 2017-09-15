@@ -91,8 +91,8 @@
 
   #hamburger {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 0px;
+    right: 6px;
     height: 48px;
     width: 48px;
   }

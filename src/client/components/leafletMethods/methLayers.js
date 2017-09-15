@@ -111,7 +111,6 @@ export default {
     context.otherCommendations.forEach((chunk) => {
       const coords = chunk.coordinates.split(',')
       const marker = L.marker([coords[0], coords[1]], { icon: mentionIcon })
-      console.log(chunk)
       marker.bindPopup(`Rider reported '${chunk.report_data}' at ${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) >= 12 ? `${Math.round(chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3) % 12)}pm` : `${chunk.created_at.slice(chunk.created_at.indexOf('T') + 1, chunk.created_at.indexOf('T') + 3)}am`}`)
       context.$data.otherCommendationsLayer.addLayer(marker)
     })

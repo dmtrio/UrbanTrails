@@ -9,14 +9,14 @@
 
     <div class="issuesDiv areaReport">
       <button v-on:click="postReport('POTHOLES', 'Pothole')" class="issues quadChoices">Potholes</button>
-      <button v-on:click="toReportType('bikelanesDiv')" class="issues quadChoices">Bad Bike Lanes</button>
+      <button v-on:click="toReportType('bikelanesDiv')" class="issues quadChoices">Bad Bike Lane</button>
       <button v-on:click="toReportType('trafficDiv')" class="issues quadChoices">Traffic</button>
       <button v-on:click="toReportType('otherDiv', 'OTHER_ISSUES')" class="issues quadChoices">Other</button>
     </div>
 
     <div class="bikelanesDiv areaReport">
       <button v-on:click="postReport('CRACKED_PAVEMENT', 'Cracked Pavement')" class="issues dualChoices">Cracked Pavement</button>
-      <button v-on:click="postReport('DIRTY_LANES', 'Dirty Bike Lane')" class="issues dualChoices">Dirty Bike Lane</button>
+      <button v-on:click="postReport('DIRTY_LANES', 'Dirty Bike Lane')" class="issues dualChoices longName">Dirty Bike Lane</button>
     </div>
 
     <div class="trafficDiv areaReport">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="commendationsDiv areaReport">
-      <button v-on:click="postReport('BIKE_FRIENDLY_BUSINESS', 'bikeBusiness')" class="commendations quadChoices">Bike Friendly Business</button>
+      <button v-on:click="postReport('BIKE_FRIENDLY_BUSINESS', 'bikeBusiness')" class="commendations quadChoices">Bike Friendly Shop</button>
       <button v-on:click="postReport('SCENIC_AREAS', 'scenicArea')"class="commendations quadChoices">Scenic Area</button>
       <button v-on:click="postReport('BIKE_RACKS', 'bikeRacks')" class="commendations quadChoices">Bike Racks</button>
       <button v-on:click="toReportType('otherDiv', 'OTHER_COMMENDATIONS')" class="commendations quadChoices">Other</button>
@@ -40,13 +40,14 @@
 
 <script type="text/javascript">
   export default {
+    props: ['mymap', 'tempMarker'],
     data() {
       return {};
     },
     mounted() {
     },
     methods: {
-      toReportType: (reportType, other) => {
+      toReportType(reportType, other) {
         document.getElementById('selected').removeAttribute('id')
         document.getElementsByClassName(reportType)[0].setAttribute('id', 'selected')
         if (other) document.getElementsByClassName('otherDiv')[0].setAttribute('data', other)
@@ -64,11 +65,14 @@
         this.$store.dispatch(`LOAD_${type}`, reportInfo)
         document.getElementById('selected').removeAttribute('id')
         document.getElementById('active').removeAttribute('id')
+        this.mymap.removeLayer(this.tempMarker)
+
       },
 
-      closeReport: () => {
+      closeReport() {
         document.getElementById('selected').removeAttribute('id')
         document.getElementById('active').removeAttribute('id')
+        this.mymap.removeLayer(this.tempMarker)
       }
     }
   }

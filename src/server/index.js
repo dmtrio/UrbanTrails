@@ -307,7 +307,6 @@ server.route({
   method: 'POST',
   path: '/report',
   handler: (request, reply) => {
-    console.log(request.payload.reportType)
     knex('reports').insert({ report_type: request.payload.reportType, report_data: request.payload.reportContent, coordinates: request.payload.coordinates, created_at: request.payload.created_at, userid: request.payload.userid })
       .then((report) => {
         reply(report)

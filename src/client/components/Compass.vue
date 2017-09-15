@@ -47,8 +47,8 @@
 <style>
   #compass{
     position: fixed;
-    top: 132px;
-    right: 20px;
+    top: 60px;
+    right: 14px;
     width: 48px;
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
