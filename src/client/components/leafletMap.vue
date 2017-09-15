@@ -249,6 +249,7 @@
             }
             if ( this.$data.enRoute && !this.$data.routePopup) {
               mLocation.trackCurrentWaypoint(position.coords, router)
+              console.log('this')
             }
 
           })

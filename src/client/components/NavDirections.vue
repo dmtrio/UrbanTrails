@@ -34,6 +34,9 @@
         }
       }
     },
+    computed: {
+      route: function() { return this.$store.getters.route },
+    }
   }
 </script>
 <style>
@@ -51,6 +54,7 @@
     width: 100%;
     text-align: center;
   }
+
   #routing-directions > div{
       display: inline-block;
       min-width: 300px;
