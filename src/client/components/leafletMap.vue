@@ -45,7 +45,7 @@
         isNotified: false,
         // routing popup & nav
         routePopup: false,
-        enRoute: false
+        enRoute: false,
       };
     },
     beforeCreate() {
@@ -240,16 +240,23 @@
         }).addTo(mymap)
 
         //map location
-
+        
         const store = this.$store
         const data = this.$data
+        const context = this
 
-        // this seems to be selected multiple times
+        //this seems to be selected multiple times
         router.on("routeselected", function (route) {
           router.hide()
           store.dispatch('FIND_ROUTE', route)
           data.enRoute = true
           data.routePopup = false
+          if (!store.state.reportOpen) {
+            store.commit('TOGGLE_NAVDIRECTIONS', true)
+          }
+          setTimeout(()=> {
+            context.locationLock()
+          }, 3000)
         })
 
         router.on("routingToggled", function() {
@@ -270,6 +277,7 @@
         function click (e) {
           this.closePanels()
           this.hideNavigation()
+          this.$store.commit('TOGGLE_REPORTOPEN', true)
           if (mymap.hasLayer(this.$data.tempMarker)) {
             mymap.removeLayer(this.$data.tempMarker)
           }
