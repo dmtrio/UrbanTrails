@@ -240,21 +240,7 @@
         }).addTo(mymap)
 
         //map location
-        if (navigator.geolocation) {
-          navigator.geolocation.watchPosition((position) => {
-            if ( !this.$data.enRoute ) {
-              if ( !this.$data.routePopup ) {
-                mLocation.setInitialWaypoint(position.coords, router)
-              }
-            }
-            if ( this.$data.enRoute && !this.$data.routePopup) {
-              mLocation.trackCurrentWaypoint(position.coords, router)
-              console.log('this')
-            }
-
-          })
-        }
-
+        
         const store = this.$store
         const data = this.$data
 
