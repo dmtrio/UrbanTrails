@@ -18,6 +18,8 @@ const state = {
   sidePanelOpen: false,
   // NavDirections
   NavDirectionsOpen: false,
+  // reporting open
+  reportOpen: false,
   // leafletMap
   kiosks: [],
   fixits: [],
@@ -222,6 +224,7 @@ const mutations = {
   TOGGLE_AUTHFAIL(state, obj) { state.authfail = obj },
   TOGGLE_SIDEPANEL(state) { state.sidePanelOpen = !state.sidePanelOpen },
   TOGGLE_NAVDIRECTIONS(state, bool) { state.NavDirectionsOpen = bool },
+  TOGGLE_REPORTOPEN(state, bool) { state.reportOpen = bool },
   TOGGLE_VIEW_SIGN_IN(state, bool) { if (!state.signedIn) state.viewSignIn = bool },
   TOGGLE_SIOU_ACTIVE(state, active) { state.SiouActive = active },
   SET_KIOSKS(state, { kiosks }) { state.kiosks = kiosks },
