@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import { Routing } from "leaflet-routing-machine"
+  import { Routing } from "./leaflet-routing-machine.js"
   import "leaflet-control-geocoder"
   import * as L from 'leaflet'
   import methods from './leafletMethods/methodSample.js'
@@ -25,7 +25,6 @@
         map: 'blah',
         mainLightLayer: null,
         mainDarkLayer: null,
-        //API data layer status
         trailsLayer: null,
         fixitsLayer: null,
         kiosksLayer: null,
@@ -41,8 +40,9 @@
         scenicAreasLayer : null,
         otherCommendationsLayer : null,
         kiosksClose: [],
-        notifiedKiosks: [],
-        isNotified: false
+        notifiedKiosks: {},
+        isNotified: false,
+        enRoute: false
       };
     },
     beforeCreate() {
@@ -51,7 +51,7 @@
       this.$store.dispatch('LOAD_KIOSKS')
       this.$store.dispatch('LOAD_TRAILS')
       this.$store.dispatch('LOAD_FIXITS')
-      //User reported issues
+
       this.$store.dispatch('LOAD_POTHOLES')
       this.$store.dispatch('LOAD_MILD_TRAFFIC')
       this.$store.dispatch('LOAD_HEAVY_TRAFFIC')
@@ -72,8 +72,8 @@
     watch: {
       kiosksClose: function() {
         this.kiosksClose.forEach(kiosk => {
-          if (!this.notifiedKiosks.includes(kiosk)) {
-            this.notifiedKiosks.push(kiosk)
+          if (!this.notifiedKiosks[kiosk]) {
+            this.notifiedKiosks[kiosk] = "notified"
             this.isNotified = true
             setTimeout(() => { this.isNotified = false }, 3000 )
           } else {
@@ -81,12 +81,16 @@
           }
         })
       },
+      route: function() {
+        
+      },
       location: function() {
+        let currentLocation = { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] } 
         this.kiosksClose = this.$store.getters.kiosks.filter((data) => {
           const lat = JSON.parse(data[11])
           const long = JSON.parse(data[12])
           return getDistance(
-            { latitude: this.$store.getters.location[0], longitude: this.$store.getters.location[1] },
+            currentLocation,
             { latitude: lat, longitude: long }
           ) < 200
         })
@@ -113,6 +117,7 @@
 
     },
     computed: {
+      route: function() { return this.$store.getters.route },
       location: function() { return this.$store.getters.location },
       //API data getters
       kiosks: function() { return this.$store.getters.kiosks },
@@ -206,7 +211,11 @@
         })
         let bingKey = 'Av5guhuRA2EPX3ahI-QuCJvUS0ORctt8aZuWVYh3Os-YAIXQ887T7Fj2mFkgwQOP'
         let mapboxKey = 'pk.eyJ1IjoidGlyb3kiLCJhIjoiY2o2d21xbHRiMXhqOTJ3bGFxZ3l2bm1sMSJ9.rIS4v4TvYEdQctZulEKzCg'
-          // end map creation
+        // end map creation
+        // geocoder: L.Control.Geocoder.bing(bingKey),
+        // geocoder: geoCodeItUp,
+        // google('AIzaSyBjMJWjY2zb7Q8aOMZWZlOhZTY_auGszj4'),
+
         this.$data.map = mymap
 
         let router = L.Routing.control({
@@ -217,15 +226,31 @@
           altLineOptions: {styles: [{color: 'gray'}]},
           reverseWaypoints: true,
           routeWhileDragging: true,
-          // geocoder: geoCodeItUp,
           geocoder: L.Control.Geocoder.mapbox(mapboxKey),
-          // geocoder: L.Control.Geocoder.bing(bingKey),
-// google('AIzaSyBjMJWjY2zb7Q8aOMZWZlOhZTY_auGszj4'),
           collapsible: true,
           show: false
         }).addTo(mymap)
-      //map location
 
+        //map location
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition((position) => {
+            if ( !this.$data.enRoute ) {
+              mLocation.setInitialWaypoint(position.coords, router)
+            } 
+          })
+        }
+        
+        const store = this.$store
+        const data = this.$data
+
+        router.on("routeselected", function (route) {
+          router.hide() 
+          store.dispatch('FIND_ROUTE', route)
+        })
+
+        router.on("routingToggled", function() {
+          data.enRoute = true
+        })
 
         let position = L.marker([30.269, -97.74]).bindPopup('Configuring your location...').addTo(mymap).openPopup()
         let area = L.circle([30.269, -97.74], 120).addTo(mymap)
@@ -248,10 +273,12 @@
         function click (e) {
           this.closePanels()
           let position = [e.latlng.lat, e.latlng.lng];
-          document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
-          var reports = document.getElementsByClassName('reporting');
-          reports[0].setAttribute('id', 'selected');
+          let reports = document.getElementsByClassName('reporting');
           reports[0].setAttribute('data', position);
+          document.getElementsByClassName('closure')[0].setAttribute('id', 'active')
+          if(document.getElementById('selected') === null){
+            reports[0].setAttribute('id', 'selected');
+          }
         }
 
         //Captures clicks on the map
@@ -272,8 +299,13 @@
   }
   #location-lock-btn {
     position: absolute;
-    top: 140px;
-    left: 0px;
+    top: 108px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
     z-index: 1050;
   }
-</style>
+  .leaflet-routing-alternatives-container{
+      display: none;
+}
+</style> 

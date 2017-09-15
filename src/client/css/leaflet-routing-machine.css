@@ -134,7 +134,7 @@
     background-color: white;
     margin: 0;
     margin-right: 3px;
-    float: right;
+    float: left;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
