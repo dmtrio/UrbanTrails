@@ -240,7 +240,7 @@
         }).addTo(mymap)
 
         //map location
-
+        
         const store = this.$store
         const data = this.$data
         const context = this
