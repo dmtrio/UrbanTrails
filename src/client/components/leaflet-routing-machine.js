@@ -2592,6 +2592,8 @@ if (typeof module === 'object' && module.exports) {
 	var Line = _dereq_('./line');
 	var Plan = _dereq_('./plan');
 	var OSRMv1 = _dereq_('./osrm-v1');
+  let toggle = true;
+
 
 	module.exports = Itinerary.extend({
 		options: {
@@ -2608,6 +2610,10 @@ if (typeof module === 'object' && module.exports) {
 		},
 
 		initialize: function(options) {
+      // this allows us to prevent rerendering as you walk
+      this.on('routingToggled', function(obj) {
+        toggle = obj.bool
+      })
 			L.Util.setOptions(this, options);
 
 			this._router = this.options.router || new OSRMv1(options);
@@ -2708,24 +2714,31 @@ if (typeof module === 'object' && module.exports) {
 		},
 
 		_routeSelected: function(e) {
-			var route = this._selectedRoute = e.route,
-				alternatives = this.options.showAlternatives && e.alternatives,
-				fitMode = this.options.fitSelectedRoutes,
-				fitBounds =
-					(fitMode === 'smart' && !this._waypointsVisible()) ||
-					(fitMode !== 'smart' && fitMode);
+        this.on('routeReceived', function(){
+          console.log('hi guys')
+        })
 
-			this._updateLines({route: route, alternatives: alternatives});
+        var route = this._selectedRoute = e.route,
+        alternatives = this.options.showAlternatives && e.alternatives,
+        fitMode = this.options.fitSelectedRoutes,
+        fitBounds =
+        (fitMode === 'smart' && !this._waypointsVisible()) ||
+        (fitMode !== 'smart' && fitMode);
 
-			if (fitBounds) {
-				this._map.fitBounds(this._line.getBounds());
-			}
+        this._updateLines({route: route, alternatives: alternatives});
 
-			if (this.options.waypointMode === 'snap') {
-				this._plan.off('waypointschanged', this._onWaypointsChanged, this);
-				this.setWaypoints(route.waypoints);
-				this._plan.on('waypointschanged', this._onWaypointsChanged, this);
-			}
+      if (toggle) {
+        if (fitBounds) {
+          this._map.fitBounds(this._line.getBounds());
+        }
+        toggle = false
+      }
+
+        if (this.options.waypointMode === 'snap') {
+          this._plan.off('waypointschanged', this._onWaypointsChanged, this);
+          this.setWaypoints(route.waypoints);
+          this._plan.on('waypointschanged', this._onWaypointsChanged, this);
+        }
 		},
 
 		_waypointsVisible: function() {
@@ -3542,8 +3555,8 @@ module.exports = L.Routing = {
 		_toggle: function() {
 			var collapsed = L.DomUtil.hasClass(this._container, 'leaflet-routing-container-hide');
 			this[collapsed ? 'show' : 'hide']();
-      this.fire('routingToggled')
-		},
+      this.fire('routingToggled', {bool: collapsed})
+  	},
 
 		_createAlternative: function(alt, i) {
 			var altDiv = L.DomUtil.create('div', 'leaflet-routing-alt ' +
@@ -3671,7 +3684,7 @@ module.exports = L.Routing = {
 	'use strict';
 
 	var L = (typeof window !== "undefined" ? window.L : typeof global !== "undefined" ? global.L : null);
-	
+
 	module.exports = L.LayerGroup.extend({
 		includes: L.Mixin.Events,
 
@@ -3705,7 +3718,7 @@ module.exports = L.Routing = {
 				this.options.styles,
 				this.options.addWaypoints);
 		},
-		
+
 		getBounds: function() {
 			return L.latLngBounds(this._route.coordinates);
 		},
@@ -4084,7 +4097,7 @@ module.exports = L.Routing = {
 
 		'es': spanish,
 		'sp': spanish,
-		
+
 		'nl': {
 			directions: {
 				N: 'noordelijke',
