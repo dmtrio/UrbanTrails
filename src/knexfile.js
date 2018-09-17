@@ -6,7 +6,7 @@ module.exports = {
       filename: './urban-trails-info.sqlite3'
     },
     migrations: {
-        directory: './migrations',
+      directory: './migrations',
     },
     useNullAsDefault: true
   },
@@ -16,7 +16,7 @@ module.exports = {
       filename: './prodbd.sqlite3'
     },
     migrations: {
-        directory: './migrations',
+      directory: './migrations',
     },
     useNullAsDefault: true
   }
