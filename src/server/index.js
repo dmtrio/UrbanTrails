@@ -7,7 +7,7 @@ const sessions = require('hapi-server-session')
 const knex = require('knex')({
   client: 'sqlite3',
   connection: {
-    filename: './src/urban-trails-info.sqlite3'
+    filename: path.join(__dirname, '../../src/urban-trails-info.sqlite3')
   },
   useNullAsDefault: true
 })

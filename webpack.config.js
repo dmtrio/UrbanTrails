@@ -38,6 +38,10 @@ module.exports = {
       {
         test: /\.sass$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader']
+      },
+			{
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        use: 'file-loader'
       }
     ]
   },
