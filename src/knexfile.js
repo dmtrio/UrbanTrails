@@ -5,16 +5,18 @@ module.exports = {
     connection: {
       filename: './urban-trails-info.sqlite3'
     },
+    migrations: {
+        directory: './migrations',
+    },
     useNullAsDefault: true
   },
   production: {
     client: 'sqlite3',
     connection: {
-      filename: './urban-trails-info.sqlite3'
+      filename: './prodbd.sqlite3'
     },
     migrations: {
         directory: './migrations',
-        tableName: 'users',
     },
     useNullAsDefault: true
   }

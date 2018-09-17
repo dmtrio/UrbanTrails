@@ -9,13 +9,16 @@ const knex = require('knex')({
   connection: {
     filename: path.join(__dirname, '../../src/urban-trails-info.sqlite3')
   },
+  migrations: {
+    directory: '../migrations',
+  },
   useNullAsDefault: true
 })
 // Create a server with a host and port
 const server = new Hapi.Server()
 
 server.connection({
-  host: 'localhost',
+  host: '0.0.0.0',
   port: 8000,
 })
 
